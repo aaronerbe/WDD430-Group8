@@ -1,18 +1,20 @@
-'use client';
-import { useParams } from 'next/navigation';
+import { fetchProductData } from '@/app/lib/data';
+import ProductDetail from "@/app/components/ProductDetail"
 
-export default function ProductDetailsPage() {
-    const { creatorId, productId } = useParams();
-
-    return (
-        <main>
-            <h1>Product Details</h1>
-            <p>Product ID: {productId}</p>
-            <p>Creator ID: {creatorId}</p>
-            <div>Image</div>
-            <div>Descriptions</div>
-            <div>Reviews</div>
-            <div>Other Products By Creator</div>
-        </main>
-    )
+interface Params {
+    params: {
+        productId: number; 
+    };
 }
+
+export default async function ProductDetailsPage({ params }: Params) {
+    const { productId } = params; // Extract productId from params
+
+    // Fetch product data using the productId
+    const productData = await fetchProductData(Number(productId));
+
+    return ProductDetail(productData);
+
+
+}
+

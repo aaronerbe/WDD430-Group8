@@ -38,7 +38,7 @@ const products = [
         name: 'Handmade Ceramic Mug',
         description: 'A beautifully handcrafted ceramic mug perfect for your morning coffee.',
         price: 25.00,
-        image_url: 'https://example.com/mug.jpg',
+        image_url: '/product-images/mug.jpg',
         category: 'Ceramics',
     },
     {
@@ -47,7 +47,7 @@ const products = [
         name: 'Wooden Coffee Table',
         description: 'A sturdy coffee table made from reclaimed wood.',
         price: 150.00,
-        image_url: 'https://example.com/table.jpg',
+        image_url: '/product-images/table.jpg',
         category: 'Furniture',
     },
     {
@@ -56,7 +56,7 @@ const products = [
         name: 'Leaf Pendant Necklace',
         description: 'A delicate leaf-shaped pendant made from sterling silver.',
         price: 60.00,
-        image_url: 'https://example.com/necklace.jpg',
+        image_url: '/product-images/necklace.jpg',
         category: 'Jewelry',
     },
     {
@@ -65,7 +65,7 @@ const products = [
         name: 'Leather Messenger Bag',
         description: 'A stylish and durable leather messenger bag.',
         price: 200.00,
-        image_url: 'https://example.com/bag.jpg',
+        image_url: '/product-images/bag.jpg',
         category: 'Leather Goods',
     },
 ];
