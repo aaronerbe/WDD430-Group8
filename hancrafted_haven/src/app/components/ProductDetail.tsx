@@ -2,7 +2,7 @@
 //import Rating from './Rating';
 //import ReviewSection from './ReviewSection';
 //import OtherProductsByCreator from './OtherProductsByCreator';
-import { Product } from '@/app/types/productTypes';
+import { Product, Image_ } from '@/app/types/productTypes';
 import Image from 'next/image';
 
 //interface ProductDetailProps {
@@ -11,21 +11,23 @@ import Image from 'next/image';
 
 
 
-const ProductDetail = (product: Product) => { 
-    const imageSrc = product.image_url || '/product-images/default_image.jpg'; 
+const ProductDetail = (product: Product, image: Image_[]) => { 
+    //TODO  Hardcoded image[0] to grab the first from teh array.  Need to develop a way to progress through the images by incrementing this number...  A button click for right/left arrows.  
+    const imageSrc = image[0].image_url || '/product-images/default_image.jpg'; 
 
     return (
         <div>
             <h1>{product.name}</h1> 
             {/* <ImageCarousel images={product.images} /> */}
-            <h2>Product ID: {product.seller_id}</h2>
+            <h2>Product ID: {product.creator_id}</h2>
             <p>Description:  {product.description}</p>
             <p>Price: ${product.price}</p>
+            <p>Image url:  {imageSrc}</p>
             <Image 
                 src={imageSrc}
                 alt={product.name}
-                width={500} // specify width
-                height={500} // specify height
+                width={500}
+                height={500}
             />
             <p>Category: {product.category}</p>
     
