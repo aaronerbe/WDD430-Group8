@@ -1,15 +1,17 @@
 import { sql } from '@vercel/postgres';
 import {Product, Image_} from '@/app/types/productTypes'
 
-export async function fetchProductData(productId: number): Promise<Product> {
+export async function fetchProductData(productId: number): Promise<Product | null> {
+
     try {
         // Fetching the product by id
         const result = await sql`SELECT id, creator_id, name, description, price, category FROM products WHERE id = ${productId}`;
 
         // Check if the product exists
         if (result.rows.length === 0) {
-            throw new Error('Product not found');
-            //todo need to gracefully handle this with default 401 page or something else
+            //throw new Error('Product not found');
+            //returns null if product doesn't exist.  then in page.tsx it'll use a redirect to /401 
+            return null;
         }
 
         // have to break out the query result into structured format
@@ -37,8 +39,8 @@ export async function fetchImagesData(productId: number): Promise<Image_[]> {
 
         // Check if the product exists
         if (result.rows.length === 0) {
-            throw new Error('Image not found');
-            //todo need to gracefully handle this with default 401 page or something else
+            //throw new Error('Image not found');
+            //do nothing and it should end up using default image (bunny)
         }
 
         // Map the query result into an array of Image_ objects

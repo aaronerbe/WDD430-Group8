@@ -252,235 +252,311 @@ const productImages = [
         image_url: '/product-images/mug_3.jpg',
     },
     {
-        id: '4', // Image for Wooden Coffee Table
-        product_id: products[1].id, // Wooden Coffee Table
+        id: '4', // Image for Ceramic Plate
+        product_id: products[1].id, // Ceramic Plate
+        image_url: '/product-images/plate_1.jpg',
+    },
+    {
+        id: '5', // Another image for Ceramic Plate
+        product_id: products[1].id, // Ceramic Plate
+        image_url: '/product-images/plate_2.jpg',
+    },
+    {
+        id: '6', // Image for Ceramic Plate (additional)
+        product_id: products[1].id, // Ceramic Plate
+        image_url: '/product-images/plate_3.jpg',
+    },
+    {
+        id: '7', // Image for Planter Pot
+        product_id: products[2].id, // Planter Pot
+        image_url: '/product-images/planter_pot_1.jpg',
+    },
+    {
+        id: '8', // Another image for Planter Pot
+        product_id: products[2].id, // Planter Pot
+        image_url: '/product-images/planter_pot_2.jpg',
+    },
+    {
+        id: '9', // Image for Planter Pot (additional)
+        product_id: products[2].id, // Planter Pot
+        image_url: '/product-images/planter_pot_3.jpg',
+    },
+    {
+        id: '10', // Image for Serving Bowl
+        product_id: products[3].id, // Serving Bowl
+        image_url: '/product-images/serving_bowl_1.jpg',
+    },
+    {
+        id: '11', // Another image for Serving Bowl
+        product_id: products[3].id, // Serving Bowl
+        image_url: '/product-images/serving_bowl_2.jpg',
+    },
+    {
+        id: '12', // Image for Serving Bowl (additional)
+        product_id: products[3].id, // Serving Bowl
+        image_url: '/product-images/serving_bowl_3.jpg',
+    },
+    {
+        id: '13', // Image for Vase
+        product_id: products[4].id, // Vase
+        image_url: '/product-images/vase_1.jpg',
+    },
+    {
+        id: '14', // Another image for Vase
+        product_id: products[4].id, // Vase
+        image_url: '/product-images/vase_2.jpg',
+    },
+    {
+        id: '15', // Image for Vase (additional)
+        product_id: products[4].id, // Vase
+        image_url: '/product-images/vase_3.jpg',
+    },
+    {
+        id: '16', // Image for Coasters
+        product_id: products[5].id, // Coasters
+        image_url: '/product-images/coasters_1.jpg',
+    },
+    {
+        id: '17', // Another image for Coasters
+        product_id: products[5].id, // Coasters
+        image_url: '/product-images/coasters_2.jpg',
+    },
+    {
+        id: '18', // Image for Coasters (additional)
+        product_id: products[5].id, // Coasters
+        image_url: '/product-images/coasters_3.jpg',
+    },
+    {
+        id: '19', // Image for Coffee Table
+        product_id: products[6].id, // Coffee Table
         image_url: '/product-images/table_1.jpg',
     },
     {
-        id: '5', // Another image for Wooden Coffee Table
-        product_id: products[1].id, // Wooden Coffee Table
+        id: '20', // Another image for Coffee Table
+        product_id: products[6].id, // Coffee Table
         image_url: '/product-images/table_2.jpg',
     },
     {
-        id: '6', // Image for Wooden Coffee Table (additional)
-        product_id: products[1].id, // Wooden Coffee Table
+        id: '21', // Image for Coffee Table (additional)
+        product_id: products[6].id, // Coffee Table
         image_url: '/product-images/table_3.jpg',
     },
     {
-        id: '7', // Image for Leaf Pendant Necklace
-        product_id: products[2].id, // Leaf Pendant Necklace
+        id: '22', // Image for shelf
+        product_id: products[7].id, // shelf
+        image_url: '/product-images/shelf_1.jpg',
+    },
+    {
+        id: '23', // Another image for shelf
+        product_id: products[7].id, // shelf
+        image_url: '/product-images/shelf_2.jpg',
+    },
+    {
+        id: '24', // Image for shelf (additional)
+        product_id: products[7].id, // shelf
+        image_url: '/product-images/shelf_3.jpg',
+    },
+    {
+        id: '25', // Image for Dining Table
+        product_id: products[8].id, // Dining Table
+        image_url: '/product-images/dining_table_1.jpg',
+    },
+    {
+        id: '26', // Another image for Dining Table
+        product_id: products[8].id, // Dining Table
+        image_url: '/product-images/dining_table_2.jpg',
+    },
+    {
+        id: '27', // Image for Dining Table (additional)
+        product_id: products[8].id, // Dining Table
+        image_url: '/product-images/dining_table_3.jpg',
+    },
+    {
+        id: '28', // Image for Barstool
+        product_id: products[9].id, // barstool
+        image_url: '/product-images/barstool_4.jpg',
+    },
+    {
+        id: '29', // Another image for barstool
+        product_id: products[9].id, // barstool
+        image_url: '/product-images/barstool_5.jpg',
+    },
+    {
+        id: '30', // Image for barstool (additional)
+        product_id: products[9].id, // barstool
+        image_url: '/product-images/barstool_6.jpg',
+    },
+
+    {
+        id: '31', // Image for Side Table
+        product_id: products[10].id, // Side Table
+        image_url: '/product-images/side_table_1.jpg',
+    },
+    {
+        id: '32', // Another image for Side Table
+        product_id: products[10].id, // Side Table
+        image_url: '/product-images/side_table_2.jpg',
+    },
+    {
+        id: '33', // Image for Side Table (additional)
+        product_id: products[10].id, // Side Table
+        image_url: '/product-images/side_table_3.jpg',
+    },
+    {
+        id: '34', // Image for Wooden Wall Art
+        product_id: products[11].id, // Wooden Wall Art
+        image_url: '/product-images/wooden_wall_art_1.jpg',
+    },
+    {
+        id: '35', // Another image for Wooden Wall Art
+        product_id: products[11].id, // Wooden Wall Art
+        image_url: '/product-images/wooden_wall_art_2.jpg',
+    },
+    {
+        id: '36', // Image for Wooden Wall Art (additional)
+        product_id: products[11].id, // Wooden Wall Art
+        image_url: '/product-images/wooden_wall_art_3.jpg',
+    },
+    {
+        id: '37', // Image for Silver Leaf Pendant Necklace
+        product_id: products[12].id, // Silver Leaf Pendant Necklace
         image_url: '/product-images/necklace_1.jpg',
     },
     {
-        id: '8', // Another image for Leaf Pendant Necklace
-        product_id: products[2].id, // Leaf Pendant Necklace
+        id: '38', // Another image for Silver Leaf Pendant Necklace
+        product_id: products[12].id, // Silver Leaf Pendant Necklace
         image_url: '/product-images/necklace_2.jpg',
     },
     {
-        id: '9', // Image for Leaf Pendant Necklace (additional)
-        product_id: products[2].id, // Leaf Pendant Necklace
+        id: '39', // Image for Silver Leaf Pendant Necklace (additional)
+        product_id: products[12].id, // Silver Leaf Pendant Necklace
         image_url: '/product-images/necklace_3.jpg',
     },
     {
-        id: '10', // Image for Leather Messenger Bag
-        product_id: products[3].id, // Leather Messenger Bag
-        image_url: '/product-images/bag_1.jpg',
+        id: '40', // Image for Gold Bracelet w/ Gemstone (Set of 2)
+        product_id: products[13].id, // Gold Bracelet w/ Gemstone
+        image_url: '/product-images/gold_bracelet_1.jpg',
     },
     {
-        id: '11', // Another image for Leather Messenger Bag
-        product_id: products[3].id, // Leather Messenger Bag
-        image_url: '/product-images/bag_2.jpg',
+        id: '41', // Another image for Gold Bracelet w/ Gemstone
+        product_id: products[13].id, // Gold Bracelet w/ Gemstone
+        image_url: '/product-images/gold_bracelet_2.jpg',
     },
     {
-        id: '12', // Image for Leather Messenger Bag (additional)
-        product_id: products[3].id, // Leather Messenger Bag
-        image_url: '/product-images/bag_3.jpg',
-    },
-
-    // Images for products by John Smith (Creator 2)
-    {
-        id: '13', // Image for Wooden Dining Chair
-        product_id: products[4].id, // Wooden Dining Chair
-        image_url: '/product-images/chair_1.jpg',
+        id: '42', // Image for Gold Bracelet w/ Gemstone (additional)
+        product_id: products[13].id, // Gold Bracelet w/ Gemstone
+        image_url: '/product-images/gold_bracelet_3.jpg',
     },
     {
-        id: '14', // Another image for Wooden Dining Chair
-        product_id: products[4].id, // Wooden Dining Chair
-        image_url: '/product-images/chair_2.jpg',
+        id: '43', // Image for Cu Wire Earings
+        product_id: products[14].id, // Cu Wire Earings
+        image_url: '/product-images/cu_wire_earings_1.jpg',
     },
     {
-        id: '15', // Image for Wooden Dining Chair (additional)
-        product_id: products[4].id, // Wooden Dining Chair
-        image_url: '/product-images/chair_3.jpg',
+        id: '44', // Another image for Cu Wire Earings
+        product_id: products[14].id, // Cu Wire Earings
+        image_url: '/product-images/cu_wire_earings_2.jpg',
     },
     {
-        id: '16', // Image for Reclaimed Wood Bookshelf
-        product_id: products[5].id, // Reclaimed Wood Bookshelf
-        image_url: '/product-images/bookshelf_1.jpg',
+        id: '45', // Image for Cu Wire Earings (additional)
+        product_id: products[14].id, // Cu Wire Earings
+        image_url: '/product-images/cu_wire_earings_3.jpg',
     },
     {
-        id: '17', // Another image for Reclaimed Wood Bookshelf
-        product_id: products[5].id, // Reclaimed Wood Bookshelf
-        image_url: '/product-images/bookshelf_2.jpg',
+        id: '46', // Image for Silver Ring w/ Turquise Stone
+        product_id: products[15].id, // Silver Ring w/ Turquise Stone
+        image_url: '/product-images/silver_ring_1.jpg',
     },
     {
-        id: '18', // Image for Reclaimed Wood Bookshelf (additional)
-        product_id: products[5].id, // Reclaimed Wood Bookshelf
-        image_url: '/product-images/bookshelf_3.jpg',
+        id: '47', // Another image for Silver Ring w/ Turquise Stone
+        product_id: products[15].id, // Silver Ring w/ Turquise Stone
+        image_url: '/product-images/silver_ring_2.jpg',
     },
     {
-        id: '19', // Image for Dining Table
-        product_id: products[6].id, // Dining Table
-        image_url: '/product-images/table_1.jpg',
+        id: '48', // Image for Silver Ring w/ Turquise Stone (additional)
+        product_id: products[15].id, // Silver Ring w/ Turquise Stone
+        image_url: '/product-images/silver_ring_3.jpg',
+    },
+    
+    {
+        id: '49', // Image for Sterling Silver Cuff Bracelet
+        product_id: products[16].id, // Sterling Silver Cuff Bracelet
+        image_url: '/product-images/sterling_silver_cuff_bracelet_1.jpg',
     },
     {
-        id: '20', // Another image for Dining Table
-        product_id: products[6].id, // Dining Table
-        image_url: '/product-images/table_2.jpg',
+        id: '50', // Image for Sterling Silver Cuff Bracelet (additional)
+        product_id: products[16].id, // Sterling Silver Cuff Bracelet
+        image_url: '/product-images/sterling_silver_cuff_bracelet_2.jpg',
     },
     {
-        id: '21', // Image for Dining Table (additional)
-        product_id: products[6].id, // Dining Table
-        image_url: '/product-images/table_3.jpg',
-    },
-
-    // Images for products by Emily Davis (Creator 3)
-    {
-        id: '22', // Image for Bracelet
-        product_id: products[7].id, // Bracelet
-        image_url: '/product-images/bracelet_1.jpg',
+        id: '51', // Image for Gold Vermeil Hoop Earrings
+        product_id: products[17].id, // Gold Vermeil Hoop Earrings
+        image_url: '/product-images/gold_vermeil_hoop_earrings_1.jpg',
     },
     {
-        id: '23', // Another image for Bracelet
-        product_id: products[7].id, // Bracelet
-        image_url: '/product-images/bracelet_2.jpg',
+        id: '52', // Image for Gold Vermeil Hoop Earrings (additional)
+        product_id: products[17].id, // Gold Vermeil Hoop Earrings
+        image_url: '/product-images/gold_vermeil_hoop_earrings_2.jpg',
     },
     {
-        id: '24', // Image for Bracelet (additional)
-        product_id: products[7].id, // Bracelet
-        image_url: '/product-images/bracelet_3.jpg',
+        id: '53', // Image for Eco-Friendly Yoga Mat
+        product_id: products[18].id, // Eco-Friendly Yoga Mat
+        image_url: '/product-images/eco_friendly_yoga_mat_1.jpg',
     },
     {
-        id: '25', // Image for Silver Hoop Earrings
-        product_id: products[8].id, // Silver Hoop Earrings
-        image_url: '/product-images/earrings_1.jpg',
+        id: '54', // Image for Eco-Friendly Yoga Mat (additional)
+        product_id: products[18].id, // Eco-Friendly Yoga Mat
+        image_url: '/product-images/eco_friendly_yoga_mat_2.jpg',
     },
     {
-        id: '26', // Another image for Silver Hoop Earrings
-        product_id: products[8].id, // Silver Hoop Earrings
-        image_url: '/product-images/earrings_2.jpg',
+        id: '55', // Image for Handcrafted Wooden Meditation Bench
+        product_id: products[19].id, // Handcrafted Wooden Meditation Bench
+        image_url: '/product-images/handcrafted_wooden_meditation_bench_1.jpg',
     },
     {
-        id: '27', // Image for Silver Hoop Earrings (additional)
-        product_id: products[8].id, // Silver Hoop Earrings
-        image_url: '/product-images/earrings_3.jpg',
+        id: '56', // Image for Handcrafted Wooden Meditation Bench (additional)
+        product_id: products[19].id, // Handcrafted Wooden Meditation Bench
+        image_url: '/product-images/handcrafted_wooden_meditation_bench_2.jpg',
     },
     {
-        id: '28', // Image for Necklace
-        product_id: products[9].id, // Necklace
-        image_url: '/product-images/necklace_4.jpg',
+        id: '57', // Image for Organic Cotton Gym Bag
+        product_id: products[20].id, // Organic Cotton Gym Bag
+        image_url: '/product-images/organic_cotton_gym_bag_1.jpg',
     },
     {
-        id: '29', // Another image for Necklace
-        product_id: products[9].id, // Necklace
-        image_url: '/product-images/necklace_5.jpg',
+        id: '58', // Image for Organic Cotton Gym Bag (additional)
+        product_id: products[20].id, // Organic Cotton Gym Bag
+        image_url: '/product-images/organic_cotton_gym_bag_2.jpg',
     },
     {
-        id: '30', // Image for Necklace (additional)
-        product_id: products[9].id, // Necklace
-        image_url: '/product-images/necklace_6.jpg',
-    },
-
-    // Images for products by Alex Johnson (Creator 4)
-    {
-        id: '31', // Image for Eco-Friendly Yoga Mat
-        product_id: products[10].id, // Eco-Friendly Yoga Mat
-        image_url: '/product-images/yoga_mat_1.jpg',
+        id: '59', // Image for Natural Coconut Shell Bowls (Set of 2)
+        product_id: products[21].id, // Natural Coconut Shell Bowls (Set of 2)
+        image_url: '/product-images/natural_coconut_shell_bowls_1.jpg',
     },
     {
-        id: '32', // Another image for Eco-Friendly Yoga Mat
-        product_id: products[10].id, // Eco-Friendly Yoga Mat
-        image_url: '/product-images/yoga_mat_2.jpg',
+        id: '60', // Image for Natural Coconut Shell Bowls (Set of 2) (additional)
+        product_id: products[21].id, // Natural Coconut Shell Bowls (Set of 2)
+        image_url: '/product-images/natural_coconut_shell_bowls_2.jpg',
     },
     {
-        id: '33', // Image for Eco-Friendly Yoga Mat (additional)
-        product_id: products[10].id, // Eco-Friendly Yoga Mat
-        image_url: '/product-images/yoga_mat_3.jpg',
+        id: '61', // Image for Bamboo Water Bottle
+        product_id: products[22].id, // Bamboo Water Bottle
+        image_url: '/product-images/bamboo_water_bottle_1.jpg',
     },
     {
-        id: '34', // Image for Handcrafted Wooden Meditation Bench
-        product_id: products[11].id, // Handcrafted Wooden Meditation Bench
-        image_url: '/product-images/meditation_bench_1.jpg',
+        id: '62', // Image for Bamboo Water Bottle (additional)
+        product_id: products[22].id, // Bamboo Water Bottle
+        image_url: '/product-images/bamboo_water_bottle_2.jpg',
     },
     {
-        id: '35', // Another image for Handcrafted Wooden Meditation Bench
-        product_id: products[11].id, // Handcrafted Wooden Meditation Bench
-        image_url: '/product-images/meditation_bench_2.jpg',
+        id: '63', // Image for Recycled Paper Journal
+        product_id: products[23].id, // Recycled Paper Journal
+        image_url: '/product-images/recycled_paper_journal_1.jpg',
     },
     {
-        id: '36', // Image for Handcrafted Wooden Meditation Bench (additional)
-        product_id: products[11].id, // Handcrafted Wooden Meditation Bench
-        image_url: '/product-images/meditation_bench_3.jpg',
-    },
-    {
-        id: '37', // Image for Organic Cotton Gym Bag
-        product_id: products[12].id, // Organic Cotton Gym Bag
-        image_url: '/product-images/gym_bag_1.jpg',
-    },
-    {
-        id: '38', // Another image for Organic Cotton Gym Bag
-        product_id: products[12].id, // Organic Cotton Gym Bag
-        image_url: '/product-images/gym_bag_2.jpg',
-    },
-    {
-        id: '39', // Image for Organic Cotton Gym Bag (additional)
-        product_id: products[12].id, // Organic Cotton Gym Bag
-        image_url: '/product-images/gym_bag_3.jpg',
-    },
-    {
-        id: '40', // Image for Natural Coconut Shell Bowls (Set of 2)
-        product_id: products[13].id, // Natural Coconut Shell Bowls
-        image_url: '/product-images/coconut_bowls_1.jpg',
-    },
-    {
-        id: '41', // Another image for Natural Coconut Shell Bowls
-        product_id: products[13].id, // Natural Coconut Shell Bowls
-        image_url: '/product-images/coconut_bowls_2.jpg',
-    },
-    {
-        id: '42', // Image for Natural Coconut Shell Bowls (additional)
-        product_id: products[13].id, // Natural Coconut Shell Bowls
-        image_url: '/product-images/coconut_bowls_3.jpg',
-    },
-    {
-        id: '43', // Image for Bamboo Water Bottle
-        product_id: products[13].id, // Bamboo Water Bottle
-        image_url: '/product-images/bamboo_bottle_1.jpg',
-    },
-    {
-        id: '44', // Another image for Bamboo Water Bottle
-        product_id: products[13].id, // Bamboo Water Bottle
-        image_url: '/product-images/bamboo_bottle_2.jpg',
-    },
-    {
-        id: '45', // Image for Bamboo Water Bottle (additional)
-        product_id: products[13].id, // Bamboo Water Bottle
-        image_url: '/product-images/bamboo_bottle_3.jpg',
-    },
-    {
-        id: '46', // Image for Recycled Paper Journal
-        product_id: products[14].id, // Recycled Paper Journal
-        image_url: '/product-images/journal_1.jpg',
-    },
-    {
-        id: '47', // Another image for Recycled Paper Journal
-        product_id: products[14].id, // Recycled Paper Journal
-        image_url: '/product-images/journal_2.jpg',
-    },
-    {
-        id: '48', // Image for Recycled Paper Journal (additional)
-        product_id: products[14].id, // Recycled Paper Journal
-        image_url: '/product-images/journal_3.jpg',
+        id: '64', // Image for Recycled Paper Journal (additional)
+        product_id: products[23].id, // Recycled Paper Journal
+        image_url: '/product-images/recycled_paper_journal_2.jpg',
     },
 ];
 

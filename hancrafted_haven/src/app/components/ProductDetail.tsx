@@ -13,7 +13,7 @@ import Image from 'next/image';
 
 const ProductDetail = (product: Product, image: Image_[]) => { 
     //TODO  Hardcoded image[0] to grab the first from teh array.  Need to develop a way to progress through the images by incrementing this number...  A button click for right/left arrows.  
-    const imageSrc = image[0].image_url || '/product-images/default_image.jpg'; 
+    const imageSrc = image?.[0]?.image_url || '/product-images/default_image.jpg'; 
 
     return (
         <div>
