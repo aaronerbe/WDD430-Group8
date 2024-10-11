@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import { db } from '@vercel/postgres';
-import { sellers, products, users, reviews, showcasedProducts, collections, collectionProducts } from '@/app/lib/seed-data';
+import { creators, products, users, reviews, showcasedProducts, collections, collectionProducts } from '@/app/lib/seed-data';
 
 export async function GET() {
     // Prevent seeding in production
@@ -27,7 +27,7 @@ export async function GET() {
         //DROPS EXISTING TABLES SO WE START FROM SCRATCH
         console.log('Dropping existing tables...');
         await client.sql`
-            DROP TABLE IF EXISTS collection_products, collections, showcased_products, reviews, products, users, sellers;
+            DROP TABLE IF EXISTS collection_products, collections, showcased_products, reviews, products, users, creators;
         `;
         console.log('Existing tables dropped.');
 
@@ -39,9 +39,9 @@ export async function GET() {
         //| | \ \  __/  | |____| | |  __/ (_| | ||  __/    | | (_| | |_) | |  __/\__ \
         //|_|  \_\___|   \_____|_|  \___|\__,_|\__\___|    |_|\__,_|_.__/|_|\___||___/
         console.log('Creating tables...');
-        // Create sellers Table
+        // Create creators Table
         await client.sql`
-            CREATE TABLE IF NOT EXISTS sellers (
+            CREATE TABLE IF NOT EXISTS creators (
                 id SERIAL PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 bio TEXT,
@@ -62,7 +62,7 @@ export async function GET() {
         await client.sql`
             CREATE TABLE IF NOT EXISTS products (
                 id SERIAL PRIMARY KEY,
-                seller_id INT NOT NULL REFERENCES sellers(id),
+                seller_id INT NOT NULL REFERENCES creators(id),
                 name VARCHAR(255) NOT NULL,
                 description TEXT,
                 price DECIMAL(10, 2) NOT NULL,
@@ -84,7 +84,7 @@ export async function GET() {
         await client.sql`
             CREATE TABLE IF NOT EXISTS showcased_products (
                 id SERIAL PRIMARY KEY,
-                seller_id INT NOT NULL REFERENCES sellers(id),
+                seller_id INT NOT NULL REFERENCES creators(id),
                 product_id INT NOT NULL REFERENCES products(id)
             );
         `;
@@ -92,7 +92,7 @@ export async function GET() {
         await client.sql`
             CREATE TABLE IF NOT EXISTS collections (
                 id SERIAL PRIMARY KEY,
-                seller_id INT NOT NULL REFERENCES sellers(id),
+                seller_id INT NOT NULL REFERENCES creators(id),
                 name VARCHAR(255) NOT NULL
             );
         `;
@@ -114,12 +114,12 @@ export async function GET() {
     //    ____) |  __/  __/ (_| | | |__| | (_| | || (_| |
     //   |_____/ \___|\___|\__,_| |_____/ \__,_|\__\__,_|
 
-    // Insert sellers
-    console.log('Inserting sellers...');
-    for (const seller of sellers) {
+    // Insert creators
+    console.log('Inserting creators...');
+    for (const seller of creators) {
         const hashedPassword = await bcrypt.hash(seller.password, 10);
         await client.sql`
-            INSERT INTO sellers (id, name, bio, email, password)
+            INSERT INTO creators (id, name, bio, email, password)
             VALUES (${seller.id}, ${seller.name}, ${seller.bio}, ${seller.email}, ${hashedPassword})
             ON CONFLICT (id) DO NOTHING;
         `;

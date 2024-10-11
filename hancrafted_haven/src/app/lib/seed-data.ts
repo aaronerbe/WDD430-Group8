@@ -1,6 +1,6 @@
 // This file contains seed data for the handcrafted_haven database
 
-const sellers = [
+const creators = [
     {
         id: '1', // Jane Doe
         name: 'Jane Doe',
@@ -34,7 +34,7 @@ const sellers = [
 const products = [
     {
         id: '1', // Handmade Ceramic Mug
-        seller_id: sellers[0].id,
+        seller_id: creators[0].id,
         name: 'Handmade Ceramic Mug',
         description: 'A beautifully handcrafted ceramic mug perfect for your morning coffee.',
         price: 25.00,
@@ -43,7 +43,7 @@ const products = [
     },
     {
         id: '2', // Wooden Coffee Table
-        seller_id: sellers[1].id,
+        seller_id: creators[1].id,
         name: 'Wooden Coffee Table',
         description: 'A sturdy coffee table made from reclaimed wood.',
         price: 150.00,
@@ -52,7 +52,7 @@ const products = [
     },
     {
         id: '3', // Leaf Pendant Necklace
-        seller_id: sellers[2].id,
+        seller_id: creators[2].id,
         name: 'Leaf Pendant Necklace',
         description: 'A delicate leaf-shaped pendant made from sterling silver.',
         price: 60.00,
@@ -61,7 +61,7 @@ const products = [
     },
     {
         id: '4', // Leather Messenger Bag
-        seller_id: sellers[3].id,
+        seller_id: creators[3].id,
         name: 'Leather Messenger Bag',
         description: 'A stylish and durable leather messenger bag.',
         price: 200.00,
@@ -138,22 +138,22 @@ const reviews = [
 const showcasedProducts = [
     {
         id: '1', // Showcased Product 1
-        seller_id: sellers[0].id,
+        seller_id: creators[0].id,
         product_id: products[0].id,
     },
     {
         id: '2', // Showcased Product 2
-        seller_id: sellers[1].id,
+        seller_id: creators[1].id,
         product_id: products[1].id,
     },
     {
         id: '3', // Showcased Product 3
-        seller_id: sellers[2].id,
+        seller_id: creators[2].id,
         product_id: products[2].id,
     },
     {
         id: '4', // Showcased Product 4
-        seller_id: sellers[3].id,
+        seller_id: creators[3].id,
         product_id: products[3].id,
     },
 ];
@@ -161,22 +161,22 @@ const showcasedProducts = [
 const collections = [
     {
         id: '1', // Morning Coffee Essentials
-        seller_id: sellers[0].id,
+        seller_id: creators[0].id,
         name: 'Morning Coffee Essentials',
     },
     {
         id: '2', // Sustainable Furniture
-        seller_id: sellers[1].id,
+        seller_id: creators[1].id,
         name: 'Sustainable Furniture',
     },
     {
         id: '3', // Nature-Inspired Jewelry
-        seller_id: sellers[2].id,
+        seller_id: creators[2].id,
         name: 'Nature-Inspired Jewelry',
     },
     {
         id: '4', // Luxury Leather Goods
-        seller_id: sellers[3].id,
+        seller_id: creators[3].id,
         name: 'Luxury Leather Goods',
     },
 ];
@@ -204,4 +204,4 @@ const collectionProducts = [
     },
 ];
 
-export { sellers, products, users, reviews, showcasedProducts, collections, collectionProducts };
+export { creators, products, users, reviews, showcasedProducts, collections, collectionProducts };
