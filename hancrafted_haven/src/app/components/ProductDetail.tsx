@@ -4,6 +4,7 @@
 //import OtherProductsByCreator from './OtherProductsByCreator';
 import { Product, Image_ } from '@/app/types/productTypes';
 import Image from 'next/image';
+import ImageCarousel from "@/app/components/ImageCarousel"
 
 //interface ProductDetailProps {
 //    product: Product; // Specify that product should conform to the Product interface
@@ -38,6 +39,11 @@ const ProductDetail = (product: Product, image: Image_[]) => {
 
             <h3>Other Products By Creator</h3>
             {/* <OtherProductsByCreator products={product.creator.otherProducts}/> */}
+
+            <div>
+            <p>TESTING CAROUSEL</p>
+                <ImageCarousel productId={product.id} />
+            </div>
         </div>
     );
 }

@@ -23,5 +23,7 @@ export default async function ProductDetailsPage({ params }: Params) {
     return ProductDetail(productData, imageData);
 
 
+
+
 }
 
