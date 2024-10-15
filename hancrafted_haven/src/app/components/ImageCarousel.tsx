@@ -38,25 +38,34 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
     };
 
     return (
-        <div>
+        <div className="flex flex-col items-center">
             {imageUrls.length > 0 ? (
-                <Image
-                    //src={imageUrls[currentIndex]}
-                    src={useDefaultImage ? defaultImageUrl : imageUrls[currentIndex]}
-                    alt={`Image ${currentIndex}`}
-                    width={500}
-                    height={500}
-                    onError={handleImageError}
-                />
+                <div className="w-[500px] h-[500px] relative aspect-w-1 aspect-h-1 overflow-hidden">
+                    <Image
+                        src={useDefaultImage ? defaultImageUrl : imageUrls[currentIndex]}
+                        alt={`Image ${currentIndex}`}
+                        layout="fill"
+                        objectFit="contain"
+                        onError={handleImageError}
+                    />
+                    {/* Left arrow button */}
+                    <button 
+                        onClick={handlePrevImage}
+                        className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-r focus:outline-none"
+                    >
+                        &#9664; {/* Left arrow symbol */}
+                    </button>
+                    {/* Right arrow button */}
+                    <button 
+                        onClick={handleNextImage}
+                        className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-l focus:outline-none"
+                    >
+                        &#9654; {/* Right arrow symbol */}
+                    </button>
+                </div>
             ) : (
                 <p>Loading...</p>
             )}
-            <div>
-                <button onClick={handleNextImage}>Next Image</button>
-            </div>
-            <div>
-                <button onClick={handlePrevImage}>Prev Image</button>
-            </div>
         </div>
     );
 };
