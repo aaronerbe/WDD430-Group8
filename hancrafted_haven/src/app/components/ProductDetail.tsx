@@ -12,9 +12,9 @@ import ImageCarousel from "@/app/components/ImageCarousel"
 
 
 
-const ProductDetail = (product: Product, image: Image_[]) => { 
+const ProductDetail = (product: Product, images: Image_[]) => { 
     //TODO  Hardcoded image[0] to grab the first from teh array.  Need to develop a way to progress through the images by incrementing this number...  A button click for right/left arrows.  
-    const imageSrc = image?.[0]?.image_url || '/product-images/default_image.jpg'; 
+    const imageSrc = images?.[0]?.image_url || '/product-images/default_image.jpg'; 
 
     return (
         <div>
@@ -41,8 +41,8 @@ const ProductDetail = (product: Product, image: Image_[]) => {
             {/* <OtherProductsByCreator products={product.creator.otherProducts}/> */}
 
             <div>
-            <p>TESTING CAROUSEL</p>
-                <ImageCarousel productId={product.id} />
+                <p>TESTING CAROUSEL</p>
+                <ImageCarousel images={images} />
             </div>
         </div>
     );

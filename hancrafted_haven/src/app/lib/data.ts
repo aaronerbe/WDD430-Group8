@@ -54,6 +54,6 @@ export async function fetchImagesData(productId: number): Promise<Image_[]> {
 
     } catch (error) {
         console.error('Database Error: ', error);
-        throw new Error('Failed to fetch image data.');
+        throw new Error('Failed to fetch image data. at data.ts');
     }
 }
