@@ -1,11 +1,11 @@
+// import NewProducts from "../ui/home/new-products";
+
 export default function HomePage() {
-     return (
-     <main>
-        <span>Home page</span>
-        <span></span><br />
-        <span>Login</span>
-     </main>
-    
-     )
-    }
-    
+  return (
+    <main>
+      <span>Home page</span>
+      {/* <NewProducts /> */}
+      <span>Login</span>
+    </main>
+  );
+}
