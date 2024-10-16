@@ -40,13 +40,14 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
     return (
         <div className="flex flex-col items-center">
             {imageUrls.length > 0 ? (
-                <div className="w-[500px] h-[500px] relative aspect-w-1 aspect-h-1 overflow-hidden">
+                <div className="w-[500px] h-[500px] relative aspect-w-1 aspect-h-1relative w-full max-w-full h-64 md:h-auto">
                     <Image
                         src={useDefaultImage ? defaultImageUrl : imageUrls[currentIndex]}
                         alt={`Image ${currentIndex}`}
                         layout="fill"
                         objectFit="contain"
                         onError={handleImageError}
+                        className=""
                     />
                     {/* Left arrow button */}
                     <button 

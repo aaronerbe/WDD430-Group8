@@ -13,3 +13,11 @@ export interface Image_ {
     product_id: number;
     image_url: string;
 }
+
+export interface Creator {
+    id: number;
+    name: string;
+    bio: string;
+    email: string;
+    password: string;
+}

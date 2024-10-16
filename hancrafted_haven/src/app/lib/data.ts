@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import {Product, Image_} from '@/app/types/productTypes'
+import {Product, Image_, Creator} from '@/app/types/productTypes'
 
 export async function fetchProductData(productId: number): Promise<Product | null> {
 
@@ -55,5 +55,35 @@ export async function fetchImagesData(productId: number): Promise<Image_[]> {
     } catch (error) {
         console.error('Database Error: ', error);
         throw new Error('Failed to fetch image data. at data.ts');
+    }
+}
+
+
+export async function fetchCreatorData(creatorId: number): Promise<Creator>{
+
+    try {
+        // Fetching the product by id
+        const result = await sql`SELECT id, name, bio, email, password FROM creators WHERE id = ${creatorId}`;
+
+        //// Check if the product exists
+        //if (result.rows.length === 0) {
+        //    //throw new Error('Product not found');
+        //    //returns null if product doesn't exist.  then in page.tsx it'll use a redirect to /401 
+        //    return null;
+        //}
+
+        // have to break out the query result into structured format
+        const creator: Creator = {
+            id: result.rows[0].id,
+            name: result.rows[0].name,
+            bio: result.rows[0].bio,
+            email: result.rows[0].email,
+            password: result.rows[0].password,
+        };
+
+        return creator; 
+    } catch (error) {
+        console.error('Database Error: ', error);
+        throw new Error('Failed to fetch creator data.');
     }
 }
