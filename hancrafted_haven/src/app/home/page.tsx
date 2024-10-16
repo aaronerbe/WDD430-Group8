@@ -1,10 +1,14 @@
-// import NewProducts from "../ui/home/new-products";
+import FeaturedProducts from "../ui/home/featured-categories";
+import Banner from "../ui/home/banner";
 
 export default function HomePage() {
   return (
     <main>
-      <span>Home page</span>
-      {/* <NewProducts /> */}
+      <div className="mb-4">
+        <Banner />
+      </div>
+
+      <FeaturedProducts />
       <span>Login</span>
     </main>
   );
