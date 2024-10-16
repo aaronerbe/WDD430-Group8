@@ -17,7 +17,7 @@ const ProductDetail = (product: Product, images: Image_[], creator: Creator) => 
     return (
         <div className="container max-w-[80%] md:max-w-[100%] mx-auto p-4">
             {/* Product Title Section */}
-            <div className="flex flex-col md:items-center md:flex-row gap-8 mb-12">
+            <div className="flex flex-col md:items-center md:flex-row gap-8 md:gap-4 mb-12">
                 <div>
                     <h1 className="text-4xl font-bold mb-2">{product.name}</h1>
                 </div>

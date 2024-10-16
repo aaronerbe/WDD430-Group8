@@ -38,9 +38,9 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
     };
 
     return (
-        <div className="flex flex-col items-center">
+    <div className="flex flex-col items-start">
             {imageUrls.length > 0 ? (
-                <div className="w-[500px] h-[500px] relative aspect-w-1 aspect-h-1relative w-full max-w-full h-64 md:h-auto">
+                <div className="min-h-[500px] relative aspect-w-1 aspect-h-1 w-full max-w-full md:h-auto">
                     <Image
                         src={useDefaultImage ? defaultImageUrl : imageUrls[currentIndex]}
                         alt={`Image ${currentIndex}`}
