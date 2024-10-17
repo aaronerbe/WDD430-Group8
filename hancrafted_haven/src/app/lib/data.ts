@@ -1,7 +1,5 @@
 import { sql } from "@vercel/postgres";
 import { Product, Image_ } from "@/app/types/productTypes";
-import { formatCurrency } from "./utils";
-import { FeaturedProductRaw } from "./definitions";
 
 export async function fetchProductData(
   productId: number

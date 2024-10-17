@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import Image from "next/image";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { fetchFeaturedCategories } from "@/app/lib/data";
 import { merriweather } from "@/app/ui/fonts";

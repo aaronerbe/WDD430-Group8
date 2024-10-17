@@ -12,7 +12,7 @@ export default async function ProductCard({ product }: { product: Product }) {
       <div className="px-6 py-4">
         <p className="text-gray-600 text-xs mb-2">
           Seller ID: {product.seller_id}
-        </p>
+        </p> 
 
         <h2 className="text-xl font-semibold text-gray-800 truncate">
           {product.name}
@@ -22,7 +22,7 @@ export default async function ProductCard({ product }: { product: Product }) {
 
         <p className="text-gray-800 font-semibold mt-4">${product.price}</p>
 
-        <p className="text-gray-500 text-xs mt-2">
+        <p className="text-gray-500 text-xs mt-2"> 
           Category: {product.category}
         </p>
       </div>
