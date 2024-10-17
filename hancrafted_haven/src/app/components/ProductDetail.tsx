@@ -2,8 +2,9 @@
 //import Rating from './Rating';
 //import ReviewSection from './ReviewSection';
 //import OtherProductsByCreator from './OtherProductsByCreator';
-import { Product, Image_, Creator } from '@/app/types/productTypes';
+import { Product, Image_, Creator, Review_} from '@/app/types/productTypes';
 import ImageCarousel from "@/app/components/ImageCarousel"
+import Review from "@/app/components/Review"
 import Image from 'next/image'; 
 
 //interface ProductDetailProps {
@@ -12,7 +13,7 @@ import Image from 'next/image';
 
 
 
-const ProductDetail = (product: Product, images: Image_[], creator: Creator) => { 
+const ProductDetail = (product: Product, images: Image_[], creator: Creator, reviews: Review_[]) => { 
 
     return (
         <div className="container max-w-[80%] md:max-w-[100%] mx-auto p-4">
@@ -54,7 +55,8 @@ const ProductDetail = (product: Product, images: Image_[], creator: Creator) => 
                         <h4 className="font-semibold mb-2">Review title</h4>
                         <p className="text-sm text-white-600">Review body</p>
                         <div className="flex items-center mt-4">
-                            <Image
+                            <Review reviews={reviews} />
+                            {/*<Image
                                 src="/product-images/default_image.jpg"
                                 alt="Reviewer name"
                                 className="w-8 h-8 rounded-full"
@@ -64,7 +66,7 @@ const ProductDetail = (product: Product, images: Image_[], creator: Creator) => 
                             <div className="ml-2">
                                 <p className="text-sm font-medium">Reviewer name</p>
                                 <p className="text-xs text-white-500">Date</p>
-                            </div>
+                            </div>*/}
                         </div>
                     </div>
                     {/* Repeat for additional reviews */}

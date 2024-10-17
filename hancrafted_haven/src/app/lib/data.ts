@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import {Product, Image_, Creator} from '@/app/types/productTypes'
+import {Product, Image_, Creator, Review_} from '@/app/types/productTypes'
 
 export async function fetchProductData(productId: number): Promise<Product | null> {
 
@@ -65,13 +65,6 @@ export async function fetchCreatorData(creatorId: number): Promise<Creator>{
         // Fetching the product by id
         const result = await sql`SELECT id, name, bio, email, password FROM creators WHERE id = ${creatorId}`;
 
-        //// Check if the product exists
-        //if (result.rows.length === 0) {
-        //    //throw new Error('Product not found');
-        //    //returns null if product doesn't exist.  then in page.tsx it'll use a redirect to /401 
-        //    return null;
-        //}
-
         // have to break out the query result into structured format
         const creator: Creator = {
             id: result.rows[0].id,
@@ -85,5 +78,26 @@ export async function fetchCreatorData(creatorId: number): Promise<Creator>{
     } catch (error) {
         console.error('Database Error: ', error);
         throw new Error('Failed to fetch creator data.');
+    }
+}
+
+export async function fetchReviewData(productId: number): Promise<Review_[]>{
+
+    try {
+        // Fetching the product by id
+        const result = await sql`SELECT id, product_id, user_id, rating, comment FROM reviews WHERE product_id = ${productId}`;
+
+        const reviews: Review_[] = result.rows.map(row => ({
+            id: row.id,
+            product_id: row.product_id,
+            user_id: row.user_id,
+            rating: row.rating,
+            comment: row.comment,
+        }));
+
+        return reviews; 
+    } catch (error) {
+        console.error('Database Error: ', error);
+        throw new Error('Failed to fetch review data.');
     }
 }
