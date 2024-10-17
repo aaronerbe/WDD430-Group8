@@ -588,245 +588,662 @@ const users = [
         password: 'hashedpassword234',
     },
     {
+        id: '4', // Emily Adams
+        name: 'Emily Adams',
+        email: 'emily.adams@email.com',
+        password: 'hashedpassword567',
+    },
+    {
         id: '5', // Diana Black
         name: 'Diana Black',
         email: 'diana.black@email.com',
         password: 'hashedpassword345',
     },
+    {
+        id: '6', // Frank Johnson
+        name: 'Frank Johnson',
+        email: 'frank.johnson@email.com',
+        password: 'hashedpassword678',
+    },
+    {
+        id: '7', // Grace Lee
+        name: 'Grace Lee',
+        email: 'grace.lee@email.com',
+        password: 'hashedpassword890',
+    },
+    {
+        id: '8', // Henry Smith
+        name: 'Henry Smith',
+        email: 'henry.smith@email.com',
+        password: 'hashedpassword012',
+    },
+    {
+        id: '9', // Isabella Martinez
+        name: 'Isabella Martinez',
+        email: 'isabella.martinez@email.com',
+        password: 'hashedpassword345',
+    },
+    {
+        id: '10', // Jack Davis
+        name: 'Jack Davis',
+        email: 'jack.davis@email.com',
+        password: 'hashedpassword456',
+    },
 ];
+
 
 // Reviews array
 const reviews = [
-    // Reviews for products by Jane Doe (Creator 1)
     {
         id: '1',
-        product_id: products[0].id, // Handmade Ceramic Mug
+        product_id: '1',
         user_id: users[0].id, // User 1
         rating: 5,
-        comment: 'Absolutely love this mug! It’s perfect for my morning coffee.',
+        comment: "This mug is simply beautiful! The craftsmanship is exceptional, and I love the nature-inspired patterns. It's my favorite for morning coffee.",
     },
     {
         id: '2',
-        product_id: products[0].id, // Handmade Ceramic Mug
+        product_id: '1',
         user_id: users[1].id, // User 2
         rating: 4,
-        comment: 'Great quality and design, but it could be a bit larger.',
+        comment: "The quality is outstanding, and the design is unique. I just wish it was slightly larger for those days when I need an extra cup.",
     },
     {
         id: '3',
-        product_id: products[0].id, // Handmade Ceramic Mug
+        product_id: '1',
         user_id: users[2].id, // User 3
-        rating: 5,
-        comment: 'Beautifully crafted and feels great to hold!',
+        rating: 3,
+        comment: "The mug is lovely, but the handle feels a bit too small for my hand. Still, it's a beautiful addition to my collection.",
     },
     {
         id: '4',
-        product_id: products[0].id, // Handmade Ceramic Mug
+        product_id: '1',
         user_id: users[3].id, // User 4
         rating: 5,
-        comment: 'The perfect gift for coffee lovers!',
+        comment: "Absolutely love it! The handcrafted details make it feel like a piece of art. It's perfect for a cozy tea session.",
     },
     {
         id: '5',
-        product_id: products[1].id, // Wooden Coffee Table
-        user_id: users[0].id, // User 1
-        rating: 5,
-        comment: 'Stunning table! Fits perfectly in my living room.',
+        product_id: '1',
+        user_id: users[4].id, // User 5
+        rating: 2,
+        comment: "The design is nice, but I noticed a small chip on the rim after a few uses. A bit disappointing for the price.",
     },
     {
         id: '6',
-        product_id: products[1].id, // Wooden Coffee Table
-        user_id: users[1].id, // User 2
+        product_id: '1',
+        user_id: users[5].id, // User 6
         rating: 4,
-        comment: 'Very sturdy, but the finish had a small scratch.',
+        comment: "Lovely mug with a beautiful glaze. It feels sturdy and well-made, though it could be a tad bigger.",
     },
     {
         id: '7',
-        product_id: products[1].id, // Wooden Coffee Table
-        user_id: users[2].id, // User 3
+        product_id: '1',
+        user_id: users[6].id, // User 7
         rating: 5,
-        comment: 'Excellent craftsmanship and design!',
+        comment: "I’m in love with this mug! The organic design is stunning, and it’s perfect for both hot and cold drinks. Highly recommend.",
     },
     {
         id: '8',
-        product_id: products[1].id, // Wooden Coffee Table
-        user_id: users[3].id, // User 4
-        rating: 5,
-        comment: 'Love this table! It’s a centerpiece in my home.',
+        product_id: '1',
+        user_id: users[7].id, // User 8
+        rating: 3,
+        comment: "It's a nice mug, but the colors are slightly different than in the pictures. Still, the craftsmanship is impressive.",
     },
     {
         id: '9',
-        product_id: products[2].id, // Leaf Pendant Necklace
-        user_id: users[0].id, // User 1
-        rating: 5,
-        comment: 'This necklace is gorgeous! I get compliments all the time.',
+        product_id: '1',
+        user_id: users[8].id, // User 9
+        rating: 4,
+        comment: "Great quality and the perfect size for my morning coffee. The hand-painted patterns make it stand out.",
     },
     {
         id: '10',
-        product_id: products[2].id, // Leaf Pendant Necklace
-        user_id: users[1].id, // User 2
-        rating: 5,
-        comment: 'Love this necklace! It goes with everything.',
+        product_id: '1',
+        user_id: users[9].id, // User 10
+        rating: 1,
+        comment: "The mug cracked after just a week of use. Very disappointed, considering the price I paid.",
     },
     {
         id: '11',
-        product_id: products[2].id, // Leaf Pendant Necklace
-        user_id: users[2].id, // User 3
-        rating: 4,
-        comment: 'Very beautiful, but it’s a bit fragile.',
+        product_id: '2',
+        user_id: users[0].id, // User 1
+        rating: 5,
+        comment: "The floral design is absolutely stunning. It’s a beautiful addition to my dining table and doubles as a decorative piece when not in use.",
     },
     {
         id: '12',
-        product_id: products[2].id, // Leaf Pendant Necklace
-        user_id: users[3].id, // User 4
-        rating: 5,
-        comment: 'Perfect for special occasions!',
+        product_id: '2',
+        user_id: users[1].id, // User 2
+        rating: 4,
+        comment: "I love the artistic details and the quality of the plate. It’s a bit heavy, but that just adds to the durability. Perfect for special occasions.",
     },
     {
         id: '13',
-        product_id: products[3].id, // Leather Messenger Bag
-        user_id: users[0].id, // User 1
-        rating: 4,
-        comment: 'Great bag, but I wish it had more compartments.',
+        product_id: '2',
+        user_id: users[2].id, // User 3
+        rating: 3,
+        comment: "The design is gorgeous, but the plate arrived with a small scratch. It’s not too noticeable, so I still use it as a serving dish.",
     },
     {
         id: '14',
-        product_id: products[3].id, // Leather Messenger Bag
-        user_id: users[1].id, // User 2
+        product_id: '2',
+        user_id: users[3].id, // User 4
         rating: 5,
-        comment: 'The quality is outstanding! Very happy with my purchase.',
+        comment: "I purchased two of these, and they are my favorite serving plates. The hand-painted floral pattern is even more beautiful in person.",
     },
     {
         id: '15',
-        product_id: products[3].id, // Leather Messenger Bag
-        user_id: users[2].id, // User 3
-        rating: 5,
-        comment: 'This bag is perfect for my daily commute.',
+        product_id: '2',
+        user_id: users[4].id, // User 5
+        rating: 2,
+        comment: "It’s a nice plate, but I expected the colors to be a bit more vibrant based on the pictures. Still decent quality.",
     },
     {
         id: '16',
-        product_id: products[3].id, // Leather Messenger Bag
-        user_id: users[3].id, // User 4
-        rating: 5,
-        comment: 'Fantastic bag! Holds all my essentials.',
+        product_id: '2',
+        user_id: users[5].id, // User 6
+        rating: 4,
+        comment: "The plate is well-made and has a lovely design. I just wish it was a little larger for serving bigger dishes.",
     },
-
-    // Reviews for products by John Smith (Creator 2)
     {
         id: '17',
-        product_id: products[4].id, // Wooden Dining Chair
-        user_id: users[0].id, // User 1
+        product_id: '2',
+        user_id: users[6].id, // User 7
         rating: 5,
-        comment: 'Extremely comfortable and stylish chairs!',
+        comment: "Absolutely love this plate! It brings a touch of elegance to my meals. The craftsmanship is top-notch, and it feels very sturdy.",
     },
     {
         id: '18',
-        product_id: products[4].id, // Wooden Dining Chair
-        user_id: users[1].id, // User 2
-        rating: 5,
-        comment: 'Perfect height for my dining table.',
+        product_id: '2',
+        user_id: users[7].id, // User 8
+        rating: 3,
+        comment: "It’s a nice plate, but it chipped a bit after a couple of uses. The floral design is lovely, though.",
     },
     {
         id: '19',
-        product_id: products[4].id, // Wooden Dining Chair
-        user_id: users[2].id, // User 3
+        product_id: '2',
+        user_id: users[8].id, // User 9
         rating: 4,
-        comment: 'Good quality, but the color was not as expected.',
+        comment: "Great for both serving and as a decorative piece. The floral design adds a nice touch, and it’s durable enough for everyday use.",
     },
     {
         id: '20',
-        product_id: products[4].id, // Wooden Dining Chair
-        user_id: users[3].id, // User 4
-        rating: 5,
-        comment: 'These chairs are just what I needed for my dining room!',
-    },
+        product_id: '2',
+        user_id: users[9].id, // User 10
+        rating: 1,
+        comment: "The plate arrived broken, and I had to go through the hassle of returning it. Disappointed with the packaging.",
+    },    
     {
         id: '21',
-        product_id: products[5].id, // Reclaimed Wood Bookshelf
-        user_id: users[0].id, // User 1
-        rating: 4,
-        comment: 'Beautiful bookshelf, but the assembly was challenging.',
+        product_id: products[2].id, // Ceramic Planter Pot
+        user_id: users[2].id, // User 3
+        rating: 5,
+        comment: 'Absolutely love this planter! The matte finish is beautiful, and the drainage system keeps my plants healthy. It’s exactly what I needed for my indoor garden.',
     },
     {
         id: '22',
-        product_id: products[5].id, // Reclaimed Wood Bookshelf
-        user_id: users[1].id, // User 2
-        rating: 5,
-        comment: 'Love the rustic look! Perfect for my collection.',
+        product_id: products[2].id, // Ceramic Planter Pot
+        user_id: users[3].id, // User 4
+        rating: 4,
+        comment: 'Great quality and craftsmanship. The only downside is that it’s slightly smaller than I expected, but it still works well for my succulents.',
     },
     {
         id: '23',
-        product_id: products[6].id, // Dining Table
-        user_id: users[2].id, // User 3
-        rating: 4,
-        comment: 'Nice table, but it was a bit wobbly at first.',
+        product_id: products[2].id, // Ceramic Planter Pot
+        user_id: users[4].id, // User 5
+        rating: 5,
+        comment: 'This planter has quickly become my favorite! It looks amazing on my windowsill and is the perfect home for my new fern. Highly recommend!',
     },
     {
         id: '24',
-        product_id: products[6].id, // Dining Table
-        user_id: users[3].id, // User 4
-        rating: 5,
-        comment: 'Looks great and fits well in my dining area.',
+        product_id: products[3].id, // Rustic Ceramic Serving Bowl
+        user_id: users[0].id, // User 1
+        rating: 4,
+        comment: 'Beautiful bowl with a rustic charm. It’s a bit heavy, but the textured glaze gives it such character. Ideal for serving large salads or pasta dishes.',
     },
-
-    // Reviews for products by Emily Davis (Creator 3)
     {
         id: '25',
-        product_id: products[7].id, // Bracelet
-        user_id: users[0].id, // User 1
+        product_id: products[3].id, // Rustic Ceramic Serving Bowl
+        user_id: users[1].id, // User 2
         rating: 5,
-        comment: 'Such a beautiful bracelet! It feels so elegant.',
+        comment: 'The perfect centerpiece for our dining table. It has a lovely, handmade feel, and the unique glazing makes each meal feel special.',
     },
     {
         id: '26',
-        product_id: products[7].id, // Bracelet
-        user_id: users[1].id, // User 2
-        rating: 5,
-        comment: 'This bracelet goes with everything! Highly recommend.',
+        product_id: products[3].id, // Rustic Ceramic Serving Bowl
+        user_id: users[3].id, // User 4
+        rating: 3,
+        comment: 'The bowl is beautiful, but I wish it was a bit deeper. It works well for serving, but not as great for storing leftovers in the fridge.',
     },
     {
         id: '27',
-        product_id: products[7].id, // Bracelet
-        user_id: users[2].id, // User 3
-        rating: 4,
-        comment: 'Pretty bracelet, but a bit smaller than I expected.',
+        product_id: products[4].id, // Handmade Ceramic Vase
+        user_id: users[4].id, // User 5
+        rating: 5,
+        comment: 'This vase is a showstopper! The subtle pattern created by the glazing adds such a nice touch. It looks great with or without flowers.',
     },
     {
         id: '28',
-        product_id: products[7].id, // Bracelet
-        user_id: users[3].id, // User 4
-        rating: 5,
-        comment: 'Perfect for stacking with other bracelets!',
+        product_id: products[4].id, // Handmade Ceramic Vase
+        user_id: users[2].id, // User 3
+        rating: 4,
+        comment: 'Lovely vase, though it’s a bit narrower than I expected. It’s great for displaying tall flowers, but I wouldn’t recommend it for larger bouquets.',
     },
     {
         id: '29',
-        product_id: products[8].id, // Silver Hoop Earrings
-        user_id: users[0].id, // User 1
+        product_id: products[4].id, // Handmade Ceramic Vase
+        user_id: users[1].id, // User 2
         rating: 5,
-        comment: 'These are my new favorite earrings!',
+        comment: 'Perfect for our living room decor. The vase has a smooth, elegant finish and really stands out on the shelf. Worth every penny.',
     },
     {
         id: '30',
-        product_id: products[8].id, // Silver Hoop Earrings
-        user_id: users[1].id, // User 2
-        rating: 4,
-        comment: 'Nice earrings, but I wish they were a bit thicker.',
+        product_id: products[5].id, // Textured Ceramic Coasters (Set of 4)
+        user_id: users[0].id, // User 1
+        rating: 5,
+        comment: 'These coasters are fantastic! The textured design adds a unique touch, and they do a great job of protecting my furniture from water rings.',
     },
     {
         id: '31',
-        product_id: products[8].id, // Silver Hoop Earrings
-        user_id: users[2].id, // User 3
-        rating: 5,
-        comment: 'So versatile! I wear them every day.',
+        product_id: products[5].id, // Textured Ceramic Coasters (Set of 4)
+        user_id: users[3].id, // User 4
+        rating: 4,
+        comment: 'I love the handmade look of these coasters. They’re a bit rough around the edges, but that adds to their charm.',
     },
     {
         id: '32',
-        product_id: products[8].id, // Silver Hoop Earrings
+        product_id: products[5].id, // Textured Ceramic Coasters (Set of 4)
+        user_id: users[4].id, // User 5
+        rating: 3,
+        comment: 'The coasters are nice, but they’re a bit smaller than I expected. They work well for small glasses but are too small for larger mugs.',
+    },
+    {
+        id: '33',
+        product_id: products[5].id, // Textured Ceramic Coasters (Set of 4)
+        user_id: users[2].id, // User 3
+        rating: 5,
+        comment: 'Perfect set of coasters! The handmade textures make them stand out, and they blend nicely with my rustic-themed living room.',
+    },
+    {
+        id: '34',
+        product_id: products[6].id, // Reclaimed Wood Coffee Table
+        user_id: users[2].id, // User 3
+        rating: 5,
+        comment: 'This coffee table is stunning! The reclaimed wood adds so much character, and it feels solid and well-made. It’s a perfect fit for our living room.',
+    },
+    {
+        id: '35',
+        product_id: products[6].id, // Reclaimed Wood Coffee Table
+        user_id: users[0].id, // User 1
+        rating: 4,
+        comment: 'Beautiful table with a lot of character. I just wish it was slightly larger for our space. Nonetheless, it’s a great piece that draws a lot of compliments.',
+    },
+    {
+        id: '36',
+        product_id: products[6].id, // Reclaimed Wood Coffee Table
+        user_id: users[4].id, // User 5
+        rating: 5,
+        comment: 'Absolutely love the rustic look of this table! It’s exactly what I was looking for to complete our living room decor.',
+    },
+    {
+        id: '37',
+        product_id: products[7].id, // Handcrafted Wooden Bookshelf
+        user_id: users[1].id, // User 2
+        rating: 5,
+        comment: 'The craftsmanship on this bookshelf is top-notch. It has a beautiful finish and is the perfect size for our study. Great quality, worth every penny!',
+    },
+    {
+        id: '38',
+        product_id: products[7].id, // Handcrafted Wooden Bookshelf
+        user_id: users[3].id, // User 4
+        rating: 4,
+        comment: 'Beautiful and functional bookshelf. The only issue was that it was a bit heavier than I expected, but it’s very sturdy and looks amazing in our living room.',
+    },
+    {
+        id: '39',
+        product_id: products[7].id, // Handcrafted Wooden Bookshelf
+        user_id: users[0].id, // User 1
+        rating: 5,
+        comment: 'Love this bookshelf! The wood has a beautiful grain, and the minimalist design fits perfectly with our modern decor. The eco-friendly finish is a bonus.',
+    },
+    {
+        id: '40',
+        product_id: products[8].id, // Rustic Wooden Dining Table
+        user_id: users[2].id, // User 3
+        rating: 5,
+        comment: 'This dining table is gorgeous! It’s perfect for family dinners and has a sturdy feel. The rustic look gives it a timeless appeal.',
+    },
+    {
+        id: '41',
+        product_id: products[8].id, // Rustic Wooden Dining Table
+        user_id: users[4].id, // User 5
+        rating: 4,
+        comment: 'The table is beautiful, but it arrived with a small scratch on the surface. Otherwise, it’s a stunning piece and adds a lot of warmth to our dining area.',
+    },
+    {
+        id: '42',
+        product_id: products[8].id, // Rustic Wooden Dining Table
+        user_id: users[1].id, // User 2
+        rating: 5,
+        comment: 'We’ve been using this dining table for a few weeks now, and we absolutely love it. It’s sturdy, spacious, and the natural grain gives it a unique character.',
+    },
+    {
+        id: '43',
+        product_id: products[9].id, // Solid Oak Bar Stool
+        user_id: users[3].id, // User 4
+        rating: 4,
+        comment: 'Comfortable bar stool with a nice finish. It’s well-made, but the seat could be a bit more cushioned for longer sitting.',
+    },
+    {
+        id: '44',
+        product_id: products[9].id, // Solid Oak Bar Stool
+        user_id: users[0].id, // User 1
+        rating: 5,
+        comment: 'These bar stools are perfect for our kitchen island. They’re solid and the wood has a nice, smooth finish. Definitely recommend them!',
+    },
+    {
+        id: '45',
+        product_id: products[9].id, // Solid Oak Bar Stool
+        user_id: users[2].id, // User 3
+        rating: 5,
+        comment: 'Beautifully crafted and sturdy. The bar stools fit our rustic-themed kitchen perfectly. Very happy with the purchase.',
+    },
+    {
+        id: '46',
+        product_id: products[10].id, // Reclaimed Wood Side Table
+        user_id: users[4].id, // User 5
+        rating: 5,
+        comment: 'This side table is lovely! The reclaimed wood gives it a rustic charm, and the size is perfect for our small living room.',
+    },
+    {
+        id: '47',
+        product_id: products[10].id, // Reclaimed Wood Side Table
+        user_id: users[1].id, // User 2
+        rating: 4,
+        comment: 'Great little side table, but it could use a bit more surface area. Otherwise, it looks great next to our couch.',
+    },
+    {
+        id: '48',
+        product_id: products[10].id, // Reclaimed Wood Side Table
         user_id: users[3].id, // User 4
         rating: 5,
-        comment: 'Excellent quality and design!',
+        comment: 'Perfect size for our small space. The wood grain is stunning, and the table feels sturdy. Love it!',
     },
-];
+    {
+        id: '49',
+        product_id: products[11].id, // Wooden Wall Art
+        user_id: users[0].id, // User 1
+        rating: 5,
+        comment: 'This piece of wall art is beautiful! The geometric design adds a lot of character to our living room. Truly a unique piece.',
+    },
+    {
+        id: '50',
+        product_id: products[11].id, // Wooden Wall Art
+        user_id: users[2].id, // User 3
+        rating: 4,
+        comment: 'The craftsmanship is impressive, but I thought it would be a bit larger. Still, it adds a nice touch of rustic charm to our hallway.',
+    },
+    {
+        id: '51',
+        product_id: products[11].id, // Wooden Wall Art
+        user_id: users[4].id, // User 5
+        rating: 5,
+        comment: 'Absolutely love this piece! The intricate design and the natural wood give it such a warm and inviting feel. It’s a great addition to our home.',
+    },
+    {
+        id: '52',
+        product_id: products[12].id, // Sterling Silver Leaf Pendant Necklace
+        user_id: users[1].id, // User 2
+        rating: 5,
+        comment: 'This necklace is absolutely beautiful. The leaf pendant is delicate and the silver shines so nicely. It’s become my go-to necklace for everyday wear.',
+    },
+    {
+        id: '53',
+        product_id: products[12].id, // Sterling Silver Leaf Pendant Necklace
+        user_id: users[3].id, // User 4
+        rating: 4,
+        comment: 'Lovely piece, but the chain is a little shorter than I expected. The leaf pendant is exquisite, though. It makes a great gift for nature lovers.',
+    },
+    {
+        id: '54',
+        product_id: products[12].id, // Sterling Silver Leaf Pendant Necklace
+        user_id: users[0].id, // User 1
+        rating: 5,
+        comment: 'I bought this necklace as a gift and my friend loved it. The quality of the silver is excellent, and the leaf design is so charming.',
+    },
+    {
+        id: '55',
+        product_id: products[13].id, // Gold Plated Bracelet with Gemstones
+        user_id: users[2].id, // User 3
+        rating: 5,
+        comment: 'This bracelet is gorgeous. The gemstones are vibrant, and the gold plating looks high-quality. It adds a touch of elegance to any outfit.',
+    },
+    {
+        id: '56',
+        product_id: products[13].id, // Gold Plated Bracelet with Gemstones
+        user_id: users[4].id, // User 5
+        rating: 4,
+        comment: 'Beautiful bracelet, but the clasp could be a little more secure. Otherwise, it’s stunning and goes well with my other jewelry.',
+    },
+    {
+        id: '57',
+        product_id: products[13].id, // Gold Plated Bracelet with Gemstones
+        user_id: users[0].id, // User 1
+        rating: 5,
+        comment: 'I love this bracelet! The gemstones add just the right amount of color, and it’s very comfortable to wear. I’ve gotten many compliments on it.',
+    },
+    {
+        id: '58',
+        product_id: products[14].id, // Copper Wire Wrapped Earrings
+        user_id: users[3].id, // User 4
+        rating: 5,
+        comment: 'These earrings are so unique and beautiful. The copper wire adds a rustic touch, and the spiral design is eye-catching. Perfect for casual outfits.',
+    },
+    {
+        id: '59',
+        product_id: products[14].id, // Copper Wire Wrapped Earrings
+        user_id: users[1].id, // User 2
+        rating: 4,
+        comment: 'The earrings look great, but I wish they were a little bit larger. The craftsmanship is excellent, though, and they don’t irritate my ears at all.',
+    },
+    {
+        id: '60',
+        product_id: products[14].id, // Copper Wire Wrapped Earrings
+        user_id: users[4].id, // User 5
+        rating: 5,
+        comment: 'Love these earrings! They are lightweight and comfortable, and the copper has a beautiful warm glow. They’re perfect for everyday wear.',
+    },
+    {
+        id: '61',
+        product_id: products[15].id, // Handmade Silver Ring with Turquoise Stone
+        user_id: users[2].id, // User 3
+        rating: 5,
+        comment: 'This ring is stunning. The turquoise stone adds a pop of color, and the silver band is polished to perfection. I love wearing it as a statement piece.',
+    },
+    {
+        id: '62',
+        product_id: products[15].id, // Handmade Silver Ring with Turquoise Stone
+        user_id: users[0].id, // User 1
+        rating: 4,
+        comment: 'The ring is beautiful, but I had to get it resized because it was a bit too big for my finger. The turquoise stone is vibrant and catches the light nicely.',
+    },
+    {
+        id: '63',
+        product_id: products[15].id, // Handmade Silver Ring with Turquoise Stone
+        user_id: users[3].id, // User 4
+        rating: 5,
+        comment: 'I’m in love with this ring! The turquoise stone is gorgeous, and the silver band feels sturdy yet comfortable. It’s a great addition to my jewelry collection.',
+    },
+    {
+        id: '64',
+        product_id: products[16].id, // Sterling Silver Cuff Bracelet
+        user_id: users[4].id, // User 5
+        rating: 5,
+        comment: 'The cuff bracelet is bold and stylish. The textured finish gives it a unique look, and I love how it fits perfectly on my wrist.',
+    },
+    {
+        id: '65',
+        product_id: products[16].id, // Sterling Silver Cuff Bracelet
+        user_id: users[2].id, // User 3
+        rating: 4,
+        comment: 'The bracelet is lovely, but it’s a bit heavy for my taste. However, the adjustable size is great for getting the perfect fit.',
+    },
+    {
+        id: '66',
+        product_id: products[16].id, // Sterling Silver Cuff Bracelet
+        user_id: users[1].id, // User 2
+        rating: 5,
+        comment: 'This cuff bracelet is amazing! It’s bold without being too flashy, and it pairs well with both casual and formal outfits. Love it!',
+    },
+    {
+        id: '67',
+        product_id: products[17].id, // Gold Vermeil Hoop Earrings
+        user_id: users[0].id, // User 1
+        rating: 5,
+        comment: 'These hoop earrings are perfect! They’re lightweight and have a beautiful gold finish. I wear them almost every day, and they still look brand new.',
+    },
+    {
+        id: '68',
+        product_id: products[17].id, // Gold Vermeil Hoop Earrings
+        user_id: users[3].id, // User 4
+        rating: 4,
+        comment: 'Nice earrings, but they could be a bit thicker for my preference. The gold vermeil is high-quality, and they haven’t tarnished at all.',
+    },
+    {
+        id: '69',
+        product_id: products[17].id, // Gold Vermeil Hoop Earrings
+        user_id: users[2].id, // User 3
+        rating: 5,
+        comment: 'These are my new favorite earrings! They’re the perfect size, and the gold finish is gorgeous. They add a touch of elegance to any outfit.',
+    },
+    {
+        id: '70',
+        product_id: products[18].id, // Eco-Friendly Yoga Mat
+        user_id: users[4].id, // User 5
+        rating: 4,
+        comment: 'The mat is comfortable and provides excellent grip. The eco-friendly aspect is a huge plus, but it could use a bit more cushioning for longer sessions.',
+    },
+    {
+        id: '71',
+        product_id: products[18].id, // Eco-Friendly Yoga Mat
+        user_id: users[2].id, // User 3
+        rating: 5,
+        comment: 'Love this yoga mat! The natural rubber provides great support, and I feel good knowing it’s made from sustainable materials. Perfect for my daily practice.',
+    },
+    {
+        id: '72',
+        product_id: products[18].id, // Eco-Friendly Yoga Mat
+        user_id: users[0].id, // User 1
+        rating: 3,
+        comment: 'The mat is decent, but it has a slight rubber smell that took a while to go away. The grip is great, but it’s a bit thinner than I expected.',
+    },
+    {
+        id: '73',
+        product_id: products[19].id, // Handcrafted Wooden Meditation Bench
+        user_id: users[1].id, // User 2
+        rating: 5,
+        comment: 'This bench is beautifully crafted and very comfortable for meditation. The slight tilt really helps with maintaining posture, making it perfect for longer sessions.',
+    },
+    {
+        id: '74',
+        product_id: products[19].id, // Handcrafted Wooden Meditation Bench
+        user_id: users[3].id, // User 4
+        rating: 4,
+        comment: 'The bench is sturdy and well-made, but it could be a bit wider for more comfort. Overall, a great addition to my meditation space.',
+    },
+    {
+        id: '75',
+        product_id: products[19].id, // Handcrafted Wooden Meditation Bench
+        user_id: users[0].id, // User 1
+        rating: 5,
+        comment: 'I love this bench! It’s lightweight and easy to move around. The craftsmanship is top-notch, and it’s perfect for meditation, both indoors and outdoors.',
+    },
+    {
+        id: '76',
+        product_id: products[20].id, // Organic Cotton Gym Bag
+        user_id: users[2].id, // User 3
+        rating: 3,
+        comment: 'The bag is stylish and made from good materials, but it doesn’t have enough pockets for my liking. It’s great for light use, but not for serious gym-goers.',
+    },
+    {
+        id: '77',
+        product_id: products[20].id, // Organic Cotton Gym Bag
+        user_id: users[4].id, // User 5
+        rating: 5,
+        comment: 'This gym bag is fantastic! The organic cotton is high-quality, and the compartments are very useful for organizing my gear. The eco-friendly materials make it even better.',
+    },
+    {
+        id: '78',
+        product_id: products[20].id, // Organic Cotton Gym Bag
+        user_id: users[1].id, // User 2
+        rating: 4,
+        comment: 'Good quality gym bag, though it could use a bit more padding in the shoulder strap. Otherwise, the design is great, and the material feels durable.',
+    },
+    {
+        id: '79',
+        product_id: products[21].id, // Natural Coconut Shell Bowls (Set of 2)
+        user_id: users[3].id, // User 4
+        rating: 5,
+        comment: 'These bowls are amazing! They add a touch of nature to my table setting, and they’re perfect for serving snacks. I love the natural look and feel.',
+    },
+    {
+        id: '80',
+        product_id: products[21].id, // Natural Coconut Shell Bowls (Set of 2)
+        user_id: users[0].id, // User 1
+        rating: 2,
+        comment: 'The bowls look nice, but they’re smaller than I expected. Not very practical for serving anything other than small snacks.',
+    },
+    {
+        id: '81',
+        product_id: products[21].id, // Natural Coconut Shell Bowls (Set of 2)
+        user_id: users[2].id, // User 3
+        rating: 4,
+        comment: 'Beautiful bowls, but they need a bit more polishing to get a smoother finish. Still, they make a great eco-friendly addition to my kitchen.',
+    },
+    {
+        id: '82',
+        product_id: products[22].id, // Bamboo Water Bottle
+        user_id: users[1].id, // User 2
+        rating: 5,
+        comment: 'This water bottle is fantastic! The bamboo exterior looks great, and it keeps my drinks cold for hours. I love the silicone sleeve for added grip.',
+    },
+    {
+        id: '83',
+        product_id: products[22].id, // Bamboo Water Bottle
+        user_id: users[3].id, // User 4
+        rating: 3,
+        comment: 'It’s a nice-looking bottle, but it’s a bit heavy to carry around all day. The bamboo finish is lovely, though.',
+    },
+    {
+        id: '84',
+        product_id: products[22].id, // Bamboo Water Bottle
+        user_id: users[4].id, // User 5
+        rating: 4,
+        comment: 'Great bottle for everyday use. The bamboo is unique, and it does keep drinks cold. The only downside is that it’s a bit on the bulky side.',
+    },
+    //{
+    //    id: '85',
+    //    product_id: products[23].id, // Recycled Paper Journal
+    //    user_id: users[0].id, // User 1
+    //    rating: 5,
+    //    comment: 'This journal is beautiful and well-made. I love that it’s made from recycled materials, and the hand-stitched binding gives it a special touch. Perfect for daily use.',
+    //},
+    //{
+    //    id: '86',
+    //    product_id: products[23].id, // Recycled Paper Journal
+    //    user_id: users[2].id, // User 3
+    //    rating: 3,
+    //    comment: 'The journal is good, but the pages are a bit thin. If you use ink, it tends to bleed through. Still, it’s a great eco-friendly option.',
+    //},
+    //{
+    //    id: '87',
+    //    product_id: products[23].id, // Recycled Paper Journal
+    //    user_id: users[1].id, // User 2
+    //    rating: 5,
+    //    comment: 'I love everything about this journal – the recycled paper, the unique cover, and the sturdy design. It’s perfect for jotting down notes or sketching ideas.',
+    //}
+]
 
 
 // Collections Table
