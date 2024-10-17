@@ -2,7 +2,7 @@
 //import Rating from './Rating';
 //import ReviewSection from './ReviewSection';
 //import OtherProductsByCreator from './OtherProductsByCreator';
-import { Product, Image_, Creator, Review_} from '@/app/types/productTypes';
+import { Product, Image_, User, Review_} from '@/app/types/productTypes';
 import ImageCarousel from "@/app/components/ImageCarousel"
 import Review from "@/app/components/Review"
 import {StarAvg} from "@/app/components/Star"
@@ -14,7 +14,7 @@ import Image from 'next/image';
 
 
 
-const ProductDetail = (product: Product, images: Image_[], creator: Creator, reviews: Review_[]) => { 
+const ProductDetail = (product: Product, images: Image_[], user: User, reviews: Review_[]) => { 
 
     return (
         <div className="container lg:max-w-[80%] md:max-w-[80%] sm:max-w-[80%] mx-auto p-4">
@@ -36,7 +36,7 @@ const ProductDetail = (product: Product, images: Image_[], creator: Creator, rev
                 </div>
                 {/* Name/Description/Stars Section */}
                 <div className="flex-1">
-                    <p className="text-3xl font-semibold text-white mb-8">{creator.name}</p>
+                    <p className="text-3xl font-semibold text-white mb-8">{user.name}</p>
                     <div>
                         <p className="text-gray-300 mb-8">{product.description}</p>
                     </div>

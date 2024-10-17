@@ -1,6 +1,6 @@
 export interface Product {
     id: number;
-    creator_id: number;
+    user_id: number;
     name: string;
     description: string
     price: number;
@@ -14,13 +14,31 @@ export interface Image_ {
     image_url: string;
 }
 
-export interface Creator {
+// Define the enum for user types
+export enum UserType {
+    Admin = 'admin',
+    Creator = 'creator',
+    User = 'user',
+}
+export interface User {
     id: number;
     name: string;
     bio: string;
     email: string;
     password: string;
+    type: UserType;
 }
+
+//!NOTE When you create or manipulate a User object, you would do it like this:
+//const newUser: User = {
+//    id: 1,
+//    name: 'Alice',
+//    bio: 'I love coding!',
+//    email: 'alice@example.com',
+//    password: 'securepassword',
+//    type: UserType.Creator, // Use the enum
+//};
+
 
 export interface Review_ {
     id: number;

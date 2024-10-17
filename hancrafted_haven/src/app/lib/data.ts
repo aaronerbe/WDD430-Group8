@@ -1,11 +1,11 @@
 import { sql } from '@vercel/postgres';
-import {Product, Image_, Creator, Review_} from '@/app/types/productTypes'
+import {Product, Image_, User, Review_} from '@/app/types/productTypes'
 
 export async function fetchProductData(productId: number): Promise<Product | null> {
 
     try {
         // Fetching the product by id
-        const result = await sql`SELECT id, creator_id, name, description, price, category FROM products WHERE id = ${productId}`;
+        const result = await sql`SELECT id, user_id, name, description, price, category FROM products WHERE id = ${productId}`;
 
         // Check if the product exists
         if (result.rows.length === 0) {
@@ -17,7 +17,7 @@ export async function fetchProductData(productId: number): Promise<Product | nul
         // have to break out the query result into structured format
         const product: Product = {
             id: result.rows[0].id,
-            creator_id: result.rows[0].creator_id,
+            user_id: result.rows[0].user_id,
             name: result.rows[0].name,
             description: result.rows[0].description,
             price: result.rows[0].price,
@@ -59,25 +59,26 @@ export async function fetchImagesData(productId: number): Promise<Image_[]> {
 }
 
 
-export async function fetchCreatorData(creatorId: number): Promise<Creator>{
+export async function fetchUserData(userId: number): Promise<User>{
 
     try {
         // Fetching the product by id
-        const result = await sql`SELECT id, name, bio, email, password FROM creators WHERE id = ${creatorId}`;
+        const result = await sql`SELECT id, name, bio, email, password FROM users WHERE id = ${userId}`;
 
         // have to break out the query result into structured format
-        const creator: Creator = {
+        const user: User = {
             id: result.rows[0].id,
             name: result.rows[0].name,
             bio: result.rows[0].bio,
             email: result.rows[0].email,
             password: result.rows[0].password,
+            type: result.rows[0].type
         };
 
-        return creator; 
+        return user; 
     } catch (error) {
         console.error('Database Error: ', error);
-        throw new Error('Failed to fetch creator data.');
+        throw new Error('Failed to fetch user data.');
     }
 }
 
