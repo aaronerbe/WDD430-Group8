@@ -5,6 +5,7 @@
 import { Product, Image_, Creator, Review_} from '@/app/types/productTypes';
 import ImageCarousel from "@/app/components/ImageCarousel"
 import Review from "@/app/components/Review"
+import {StarAvg} from "@/app/components/Star"
 import Image from 'next/image'; 
 
 //interface ProductDetailProps {
@@ -40,8 +41,9 @@ const ProductDetail = (product: Product, images: Image_[], creator: Creator, rev
                         <p className="text-gray-300 mb-8">{product.description}</p>
                     </div>
                     <div className="flex items-center">
-                        <span className="text-yellow-400">★★★★★</span>
-                        <span className="ml-2 text-white">(123)</span>
+                        <StarAvg reviews={reviews} />
+                        {/*<span className="text-yellow-400">★★★★★</span>
+                        <span className="ml-2 text-white">(123)</span>*/}
                     </div>
                 </div>
             </div>
@@ -49,28 +51,16 @@ const ProductDetail = (product: Product, images: Image_[], creator: Creator, rev
 
             {/* Reviews Section */}
             <div className="mb-12">
-                <h3 className="text-2xl font-bold mb-4">Latest Reviews</h3>
+                {/*<h3 className="text-2xl font-bold mb-4">Latest Reviews</h3>*/}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="border p-4 rounded-md shadow-md">
-                        <h4 className="font-semibold mb-2">Review title</h4>
-                        <p className="text-sm text-white-600">Review body</p>
                         <div className="flex items-center mt-4">
                             <Review reviews={reviews} />
-                            {/*<Image
-                                src="/product-images/default_image.jpg"
-                                alt="Reviewer name"
-                                className="w-8 h-8 rounded-full"
-                                width="500"
-                                height="500"
-                            />
-                            <div className="ml-2">
-                                <p className="text-sm font-medium">Reviewer name</p>
-                                <p className="text-xs text-white-500">Date</p>
-                            </div>*/}
                         </div>
                     </div>
-                    {/* Repeat for additional reviews */}
                 </div>
+                {/*<Review reviews={reviews} />*/}
+
             </div>
 
             {/* Other Products Section */}

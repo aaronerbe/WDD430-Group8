@@ -1,15 +1,20 @@
 'use client';
 import React, { useState } from 'react';
 import { Review_ } from '@/app/types/productTypes';
+import Star from '@/app/components/Star'
 
 interface ReviewProps {
     reviews: Review_[]; // Pass the reviews array as a prop
 }
 
 const Review: React.FC<ReviewProps> = ({ reviews }) => {
+    
     const [currentPage, setCurrentPage] = useState(0);
-    const reviewsPerPage = 2; // Number of reviews to display per page
-
+    const reviewsPerPage = 3; // Number of reviews to display per page
+    
+    if (!reviews || reviews.length === 0) {
+        return <div>No Reviews Yet</div>;
+    }
     // Calculate the reviews to display based on the current page
     const displayedReviews = reviews.slice(currentPage * reviewsPerPage, (currentPage + 1) * reviewsPerPage);
 
@@ -27,10 +32,13 @@ const Review: React.FC<ReviewProps> = ({ reviews }) => {
 
     return (
         <div>
+            <h3 className="text-2xl font-bold mb-4">Latest Reviews</h3>
+
             {displayedReviews.map((review) => (
                 <div key={review.id} className="review border p-4 mb-4 rounded-md shadow-md">
                     <p className="font-semibold">{review.comment}</p>
                     <p className="text-sm text-gray-500">Rating: {review.rating}</p>
+                    <Star rating={review.rating} />
                 </div>
             ))}
 
