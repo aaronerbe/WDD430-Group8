@@ -1,4 +1,3 @@
-import { merriweather } from "@/app/ui/fonts";
 import HHLogo from "../hh-logo";
 
 export default function Banner() {
