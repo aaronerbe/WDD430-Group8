@@ -1,7 +1,7 @@
-import { fetchProductData, fetchImagesData, fetchCreatorData, fetchReviewData } from '@/app/lib/data';
+import { fetchProductData, fetchImagesData, fetchUserData, fetchReviewData } from '@/app/lib/data';
 import ProductDetail from "@/app/components/ProductDetail"
 import {redirect} from 'next/navigation'
-import { Product, Image_, Creator, Review_ } from '@/app/types/productTypes'; 
+import { Product, Image_, User, Review_ } from '@/app/types/productTypes'; 
 
 interface Params {
     params: {
@@ -20,7 +20,7 @@ export default async function ProductDetailsPage({ params }: Params) {
             //dashboard project had a way to do custom 404s
         }
     //get Creator Data
-    const creatorData: Creator = await fetchCreatorData(Number(productData?.creator_id))
+    const creatorData: User = await fetchUserData(Number(productData?.user_id))
     //get Image Data
     const imageData: Image_[] = await fetchImagesData(productId);
     //get Review Data

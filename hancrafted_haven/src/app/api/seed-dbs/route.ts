@@ -1,14 +1,12 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import { db } from '@vercel/postgres';
-import {
-    creators,
-    products,
-    users,
-    reviews,
-    collections,
-    collectionProducts,
-    productImages, // Added for the product images table
+import {users, 
+    products, 
+    productImages, 
+    reviews, 
+    collections, 
+    collectionProducts
 } from '@/app/lib/seed-data';
 
 export async function GET() {
@@ -43,32 +41,25 @@ export async function GET() {
         await client.sql`
             DROP TABLE IF EXISTS users CASCADE;
         `;
-        await client.sql`
-            DROP TABLE IF EXISTS creators CASCADE;
+        await client.sql`DROP TYPE IF EXISTS user_type CASCADE;
         `;
         console.log('Existing tables dropped.');
 
         // Create tables
         console.log('Creating tables...');
         
-        // Create creators table
+        // Create users table
         await client.sql`
-            CREATE TABLE IF NOT EXISTS creators (
+            CREATE TYPE user_type AS ENUM ('admin', 'creator', 'user');
+        `;
+        await client.sql`        
+            CREATE TABLE IF NOT EXISTS users (
                 id SERIAL PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 bio TEXT,
                 email TEXT NOT NULL UNIQUE,
-                password TEXT NOT NULL
-            );
-        `;
-
-        // Create users table
-        await client.sql`
-            CREATE TABLE IF NOT EXISTS users (
-                id SERIAL PRIMARY KEY,
-                name VARCHAR(255) NOT NULL,
-                email TEXT NOT NULL UNIQUE,
-                password TEXT NOT NULL
+                password TEXT NOT NULL,
+                type user_type NOT NULL
             );
         `;
 
@@ -76,7 +67,7 @@ export async function GET() {
         await client.sql`
             CREATE TABLE IF NOT EXISTS products (
                 id SERIAL PRIMARY KEY,
-                creator_id INT NOT NULL REFERENCES creators(id),
+                user_id INT NOT NULL REFERENCES users(id),
                 name VARCHAR(255) NOT NULL,
                 description TEXT,
                 price DECIMAL(10, 2) NOT NULL,
@@ -108,7 +99,7 @@ export async function GET() {
         await client.sql`
             CREATE TABLE IF NOT EXISTS collections (
                 id SERIAL PRIMARY KEY,
-                creator_id INT NOT NULL REFERENCES creators(id),
+                user_id INT NOT NULL REFERENCES users(id),
                 title VARCHAR(255) NOT NULL,
                 description TEXT
             );
@@ -128,25 +119,19 @@ export async function GET() {
         // Insert data into tables
         console.log('Inserting data...');
 
-        // Insert creators
-        console.log('Inserting creators...');
-        for (const creator of creators) {
-            const hashedPassword = await bcrypt.hash(creator.password, 10);
-            await client.sql`
-                INSERT INTO creators (id, name, bio, email, password)
-                VALUES (${creator.id}, ${creator.name}, ${creator.bio}, ${creator.email}, ${hashedPassword})
-                ON CONFLICT (id) DO NOTHING;
-            `;
-            console.log(`Inserted creator: ${creator.name}`);
-        }
-
         // Insert users
         console.log('Inserting users...');
         for (const user of users) {
             const hashedPassword = await bcrypt.hash(user.password, 10);
             await client.sql`
-                INSERT INTO users (id, name, email, password)
-                VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
+                INSERT INTO users (id, name, bio, email, password, type) 
+                VALUES (
+                    ${user.id}, 
+                    ${user.name}, 
+                    ${user.bio},  
+                    ${user.email}, 
+                    ${hashedPassword}, 
+                    ${user.type}) 
                 ON CONFLICT (id) DO NOTHING;
             `;
             console.log(`Inserted user: ${user.name}`);
@@ -156,8 +141,8 @@ export async function GET() {
         console.log('Inserting products...');
         for (const product of products) {
             await client.sql`
-                INSERT INTO products (id, creator_id, name, description, price, category)
-                VALUES (${product.id}, ${product.creator_id}, ${product.name}, ${product.description}, ${product.price}, ${product.category})
+                INSERT INTO products (id, user_id, name, description, price, category)
+                VALUES (${product.id}, ${product.user_id}, ${product.name}, ${product.description}, ${product.price}, ${product.category})
                 ON CONFLICT (id) DO NOTHING;
             `;
             console.log(`Inserted product: ${product.name}`);
@@ -189,8 +174,8 @@ export async function GET() {
         console.log('Inserting collections...');
         for (const collection of collections) {
             await client.sql`
-                INSERT INTO collections (id, creator_id, title, description)
-                VALUES (${collection.id}, ${collection.creator_id}, ${collection.title}, ${collection.description})
+                INSERT INTO collections (id, user_id, title, description)
+                VALUES (${collection.id}, ${collection.user_id}, ${collection.title}, ${collection.description})
                 ON CONFLICT (id) DO NOTHING;
             `;
             console.log(`Inserted collection: ${collection.title}`);
