@@ -10,24 +10,24 @@ interface Params {
 }
 
 export default async function ProductDetailsPage({ params }: Params) {
-    //todo:  move data fetch to the component and just call the component for cleaner code
-    const { productId } = params; // Extract productId from params
+    //todo:  move data fetch to the component and just call the component for cleaner code?
     // Fetch product data using the productId
+    const { productId } = params; // Extract productId from params
     const productData: Product | null = await fetchProductData(Number(productId));
-    if (!productData) {
-        redirect('/401');
-        // TODO: find a better way to handle if the product page doesn't exist
-        return null; // Ensure to return null to prevent rendering
-    }
+        if (!productData) {
+            redirect('/');
+            // TODO: find a better way to handle if the product page doesn't exist
+            //dashboard project had a way to do custom 404s
+        }
     //get Creator Data
     const creatorData: Creator = await fetchCreatorData(Number(productData?.creator_id))
     //get Image Data
     const imageData: Image_[] = await fetchImagesData(productId);
+    //get Review Data
     const reviewData: Review_[] = await fetchReviewData(productId)
 
 
-    //return <ProductDetail product={productData} images={imageData} />;
-
+    //render product details
     return ProductDetail(productData, imageData, creatorData, reviewData);
 
 

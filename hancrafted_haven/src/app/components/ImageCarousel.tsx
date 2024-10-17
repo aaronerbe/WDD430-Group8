@@ -15,10 +15,10 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
     //useState<string[]>([]) sets an empty array as initial state
     const [useDefaultImage, setUseDefaultImage] = useState(false);
 
-        //may need to change this?
-    //setImageUrls is function used to update state of imageUrls
-    //const [imageUrls, setImageUrls] = useState<string[]>([]);
-    
+    if (!images || images.length === 0) {
+        return <div>No Images</div>;
+    }
+
     const imageUrls = images.map(image => image.image_url);
     const defaultImageUrl = '/product-images/default_image.jpg';
 
@@ -44,14 +44,16 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
                     <Image
                         src={useDefaultImage ? defaultImageUrl : imageUrls[currentIndex]}
                         alt={`Image ${currentIndex}`}
-                        layout="fill"
-                        objectFit="contain"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        style={{ objectFit: 'contain' }}
                         onError={handleImageError}
-                        className=""
+                        priority
                     />
                     {/* Left arrow button */}
                     <button 
                         onClick={handlePrevImage}
+                        aria-label="Previous Image"
                         className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-r focus:outline-none"
                     >
                         &#9664; {/* Left arrow symbol */}
@@ -59,6 +61,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
                     {/* Right arrow button */}
                     <button 
                         onClick={handleNextImage}
+                        aria-label="Next Image"
                         className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-l focus:outline-none"
                     >
                         &#9654; {/* Right arrow symbol */}

@@ -17,7 +17,7 @@ import Image from 'next/image';
 const ProductDetail = (product: Product, images: Image_[], creator: Creator, reviews: Review_[]) => { 
 
     return (
-        <div className="container max-w-[80%] md:max-w-[100%] mx-auto p-4">
+        <div className="container lg:max-w-[80%] md:max-w-[80%] sm:max-w-[80%] mx-auto p-4">
             {/* Product Title Section */}
             <div className="flex flex-col md:items-center md:flex-row gap-8 md:gap-4 mb-12">
                 <div>
