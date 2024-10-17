@@ -101,3 +101,17 @@ export async function fetchReviewData(productId: number): Promise<Review_[]>{
         throw new Error('Failed to fetch review data.');
     }
 }
+
+
+export async function fetchFeaturedCategories() {
+  try {
+    const featuredCategories = await sql`
+    SELECT DISTINCT category
+    FROM products`;
+
+    return featuredCategories;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch the featured categories.");
+  }
+}
