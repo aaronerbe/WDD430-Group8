@@ -1,10 +1,12 @@
 'use client';
 import { useState } from 'react';
+import {NewRating} from './StarRating'
 
 interface AddReviewFormProps {
     onSubmit: (rating: number, comment: string) => void;
     onCancel: () => void; // Callback to handle cancel
 }
+
 
 export default function AddReviewForm({ onSubmit, onCancel }: AddReviewFormProps) {
     //const [state (current value of state), setState (function used to update state variable)] = useState(initialState);
@@ -26,7 +28,7 @@ export default function AddReviewForm({ onSubmit, onCancel }: AddReviewFormProps
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                 <label className="flex flex-col">
                     <span className="text-gray-700">Rating:</span>
-                    <input
+                    {/*<input
                         type="number"
                         value={rating}
                         onChange={(e) => setRating(Number(e.target.value))}
@@ -34,6 +36,10 @@ export default function AddReviewForm({ onSubmit, onCancel }: AddReviewFormProps
                         max="5"
                         required
                         className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />*/}
+                    <NewRating
+                        initialRating={rating}
+                        onRate={(newRating) => setRating(newRating)}
                     />
                 </label>
                 <label className="flex flex-col">

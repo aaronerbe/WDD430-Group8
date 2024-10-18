@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Review_ } from '@/app/types/productTypes';
-import Star from '@/app/components/Star'
+import StarRating from '@/app/components/StarRating'
 
 interface ReviewProps {
     reviews: Review_[]; // Pass the reviews array as a prop
@@ -13,7 +13,12 @@ const Review: React.FC<ReviewProps> = ({ reviews }) => {
     const reviewsPerPage = 3; // Number of reviews to display per page
     
     if (!reviews || reviews.length === 0) {
-        return <div>No Reviews Yet</div>;
+        return(
+            <div className="text-center p-4">
+                <h4 className="text-lg font-semibold pt-14 mb-5">No Reviews Yet</h4>
+                <p>Be the first to leave a review!</p>
+            </div>
+        )
     }
     // Calculate the reviews to display based on the current page
     const displayedReviews = reviews.slice(currentPage * reviewsPerPage, (currentPage + 1) * reviewsPerPage);
@@ -37,6 +42,7 @@ const Review: React.FC<ReviewProps> = ({ reviews }) => {
 
 
             <div className="reviewButtons flex justify-between mt-6 mb-10">
+                
                 <button 
                     onClick={handlePrev} 
                     disabled={currentPage === 0}
@@ -59,12 +65,17 @@ const Review: React.FC<ReviewProps> = ({ reviews }) => {
             <div className="reviewCards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {displayedReviews.map((review) => (
                     <div key={review.id} className="review border p-4 rounded-md shadow-md min-h-[200px]">
-                        {/*<p className="text-sm text-gray-500">Rating: {review.rating}</p>*/}
-                        <Star rating={review.rating} />
                         <p className="font-semibold">{review.comment}</p>
+                        <p className="text-sm text-gray-500">Rating: {review.rating}</p>
+                        <StarRating initialRating={review.rating} />
                     </div>
                 ))}
             </div>
+            {/*maths logic to show number of reviews*/}
+            <p className="text-sm mt-4">
+                {`Showing ${Math.min((currentPage + 1) * reviewsPerPage, reviews.length)} of ${reviews.length} reviews`}
+            </p>
+
 
             
 
