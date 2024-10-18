@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 
 const ImageUpload: React.FC = () => {
   //   const [image, setImage] = useState<File | null>(null);
