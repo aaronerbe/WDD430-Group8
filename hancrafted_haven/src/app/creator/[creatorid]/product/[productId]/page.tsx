@@ -30,8 +30,6 @@ export default async function ProductDetailsPage({ params }: Params) {
     
 
     console.table(otherProductData)
-    
-
 
     //render product details
     //return ProductDetail(productData, imageData, creatorData, reviewData);

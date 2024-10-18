@@ -2,8 +2,8 @@ import { sql } from '@vercel/postgres';
 import {Product, Image_, User, Review_} from '@/app/types/productTypes'
 
 export async function fetchProductData(productId: number): Promise<Product | null> {
-
     try {
+        console.log('Connecting to:', process.env.POSTGRES_URL);
         // Fetching the product by id
         const result = await sql`SELECT id, user_id, name, description, price, category FROM products WHERE id = ${productId}`;
 
@@ -78,7 +78,6 @@ export async function fetchUserData(userId: number): Promise<User>{
 }
 
 export async function fetchReviewData(productId: number): Promise<Review_[]>{
-
     try {
         // Fetching the product by id
         const result = await sql`SELECT id, product_id, user_id, rating, comment FROM reviews WHERE product_id = ${productId}`;
@@ -146,17 +145,30 @@ export async function fetchOtherProductsByUser(userId: number): Promise<Product[
 }
 
 export async function addReview(productId: number, userId: number, productRating: number, userComment: string) {
-    try {
-        // Fetching the product by id
-        const result = await sql`
-            INSERT INTO reviews (product_id, user_id, rating, comment)
-            VALUES (${productId}, ${userId}, ${productRating}, ${userComment})
-            RETURNING id, product_id, user_id, rating, comment;
-        `;
+    console.log('Inserting review:', { productId, userId, productRating, userComment });
+    console.log('Connecting to:', process.env.POSTGRES_URL);
+    console.log('Environment Variables:', process.env);
 
-        return result; 
+    try {
+        // Perform the insert operation
+        const result = await sql`
+            INSERT INTO reviews (
+                product_id, 
+                user_id, 
+                rating, 
+                comment
+            )
+            VALUES (
+                ${productId}, 
+                ${userId}, 
+                ${productRating}, 
+                ${userComment}
+            )
+            RETURNING *;
+        `;
+        console.log('Insert result:', result); 
     } catch (error) {
         console.error('Database Error: ', error);
-        throw new Error('Failed to create review.');
+        throw new Error('Failed to create review '); 
     }
 }
