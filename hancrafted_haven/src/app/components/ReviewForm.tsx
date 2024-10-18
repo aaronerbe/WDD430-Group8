@@ -7,7 +7,10 @@ interface AddReviewFormProps {
 }
 
 export default function AddReviewForm({ onSubmit, onCancel }: AddReviewFormProps) {
+    //const [state (current value of state), setState (function used to update state variable)] = useState(initialState);
+    //set state of rating as number 0-5.  initial setting is 0
     const [rating, setRating] = useState<number>(0);
+    //set state of comments as string.  initial setting is empty
     const [comment, setComment] = useState<string>('');
 
     const handleSubmit = (e: React.FormEvent) => {
