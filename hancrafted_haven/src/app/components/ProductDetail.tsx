@@ -2,7 +2,7 @@
 import { Product, Image_, User, Review_ } from '@/app/types/productTypes';
 import ImageCarousel from '@/app/components/ImageCarousel';
 import Review from '@/app/components/Review';
-import { StarAvg } from '@/app/components/Star';
+import { StarAvg } from '@/app/components/StarRating';
 import AddReviewForm from '@/app/components/ReviewForm';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -129,7 +129,7 @@ const ProductDetail = ({
                                 <span className="text-white-700">Add Review</span>
                             </button>
                         </div>
-                        <div className="absolute z-20 left-1/2 transform -translate-x-1/2 top-0" 
+                        <div className="reviewFormContainer absolute z-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-0" 
                             style={{
                                 opacity: isFormOpen ? 1 : 0, 
                                 pointerEvents: isFormOpen ? 'auto' : 'none'
