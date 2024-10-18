@@ -118,11 +118,19 @@ const users = [
         type: 'user'
     },
     {
-        id: '100',
+        id: '14',
         name: 'User',
         bio: "placeholder user for dashboard project",
         email: 'user@nextmail.com',
         password: '123456', // This should be hashed in production
+        type: 'admin'
+    },
+    {
+        id: '15',
+        name: 'Aaron Erbe',
+        bio: "admin",
+        email: 'a-aron@fakemail.com',
+        password: '123456!aA', // This should be hashed in production
         type: 'admin'
     },
 ];

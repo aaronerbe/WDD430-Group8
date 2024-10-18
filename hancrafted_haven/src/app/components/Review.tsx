@@ -32,32 +32,43 @@ const Review: React.FC<ReviewProps> = ({ reviews }) => {
 
     return (
         <div>
-            <h3 className="text-2xl font-bold mb-4">Latest Reviews</h3>
 
-            {displayedReviews.map((review) => (
-                <div key={review.id} className="review border p-4 mb-4 rounded-md shadow-md">
-                    <p className="font-semibold">{review.comment}</p>
-                    <p className="text-sm text-gray-500">Rating: {review.rating}</p>
-                    <Star rating={review.rating} />
-                </div>
-            ))}
+            <h3 className="reviewTitle text-2xl font-bold mb-5 pt-14">Latest Reviews</h3>
 
-            <div className="flex justify-between mt-4">
+
+            <div className="reviewButtons flex justify-between mt-6 mb-10">
                 <button 
                     onClick={handlePrev} 
                     disabled={currentPage === 0}
-                    className={`px-4 py-2 text-white bg-blue-500 rounded ${currentPage === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`px-4 py-2 text-white bg-blue-700 transition-transform rounded ${currentPage === 0 ? 'opacity-20' : ' hover:bg-blue-500'}`}
                 >
                     Previous
                 </button>
                 <button 
                     onClick={handleNext} 
                     disabled={(currentPage + 1) * reviewsPerPage >= reviews.length}
-                    className={`px-4 py-2 text-white bg-blue-500 rounded ${ (currentPage + 1) * reviewsPerPage >= reviews.length ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`px-4 py-2 text-white bg-blue-700 transition-transform rounded ${ 
+                        (currentPage + 1) * reviewsPerPage >= reviews.length ? 'opacity-20 ' : 'hover:bg-blue-500' 
+                    }`}
                 >
                     Next
                 </button>
             </div>
+
+            
+            <div className="reviewCards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {displayedReviews.map((review) => (
+                    <div key={review.id} className="review border p-4 rounded-md shadow-md min-h-[200px]">
+                        {/*<p className="text-sm text-gray-500">Rating: {review.rating}</p>*/}
+                        <Star rating={review.rating} />
+                        <p className="font-semibold">{review.comment}</p>
+                    </div>
+                ))}
+            </div>
+
+            
+
+
         </div>
     );
 };

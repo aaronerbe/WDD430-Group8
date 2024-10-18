@@ -192,6 +192,23 @@ export async function GET() {
             console.log(`Inserted collection product for collection ID: ${collectionProduct.collection_id} and product ID: ${collectionProduct.product_id}`);
         }
 
+        // Reset the sequence for the tables.  needed so autoincrement id doesn't try to start over w/ 1 and conflict
+        await client.sql`
+            SELECT setval('users_id_seq', (SELECT COALESCE(MAX(id), 1) FROM users), false);
+        `;
+        await client.sql`
+            SELECT setval('products_id_seq', (SELECT COALESCE(MAX(id), 1) FROM products), false);
+        `;
+        await client.sql`
+            SELECT setval('product_images_id_seq', (SELECT COALESCE(MAX(id), 1) FROM product_images), false);
+        `;
+        await client.sql`
+            SELECT setval('reviews_id_seq', (SELECT COALESCE(MAX(id), 1) FROM reviews), false);
+        `;
+        await client.sql`
+            SELECT setval('collections_id_seq', (SELECT COALESCE(MAX(id), 1) FROM collections), false);
+        `;    
+
         // Commit transaction
         await client.sql`COMMIT`;
 
