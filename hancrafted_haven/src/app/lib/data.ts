@@ -36,28 +36,23 @@ export async function fetchImagesData(productId: number): Promise<Image_[]> {
     try {
         // Fetching the product by id
         const result = await sql`SELECT id, product_id, image_url FROM product_images WHERE product_id = ${productId}`;
-
         // Check if the product exists
         if (result.rows.length === 0) {
             //throw new Error('Image not found');
             //do nothing and it should end up using default image (bunny)
         }
-
         // Map the query result into an array of Image_ objects
         const images: Image_[] = result.rows.map(row => ({
             id: row.id,
             product_id: row.product_id,
             image_url: row.image_url,
         }));
-
         return images; 
-
     } catch (error) {
         console.error('Database Error: ', error);
         throw new Error('Failed to fetch image data. at data.ts');
     }
 }
-
 
 export async function fetchUserData(userId: number): Promise<User>{
 
@@ -87,7 +82,6 @@ export async function fetchReviewData(productId: number): Promise<Review_[]>{
     try {
         // Fetching the product by id
         const result = await sql`SELECT id, product_id, user_id, rating, comment FROM reviews WHERE product_id = ${productId}`;
-
         const reviews: Review_[] = result.rows.map(row => ({
             id: row.id,
             product_id: row.product_id,
@@ -95,14 +89,12 @@ export async function fetchReviewData(productId: number): Promise<Review_[]>{
             rating: row.rating,
             comment: row.comment,
         }));
-
         return reviews; 
     } catch (error) {
         console.error('Database Error: ', error);
         throw new Error('Failed to fetch review data.');
     }
 }
-
 
 export async function fetchFeaturedCategories() {
   try {
@@ -115,4 +107,56 @@ export async function fetchFeaturedCategories() {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch the featured categories.");
   }
+}
+
+export async function fetchOtherProductsByUser(userId: number): Promise<Product[] | null>{
+    try {
+        // Fetching the product by id
+        const result = await sql`
+            SELECT id, 
+            user_id, 
+            name, 
+            description, 
+            price, 
+            category 
+            FROM products WHERE user_id = ${userId}`;
+
+        // Check if the product exists
+        if (result.rows.length === 0) {
+            //throw new Error('Product not found');
+            //returns null if product doesn't exist.  then in page.tsx it'll use a redirect to /401 
+            return null;
+        }
+
+        // have to break out the query result into structured format
+        const products: Product[] = result.rows.map(row => ({
+            id: row.id,
+            user_id: row.user_id,
+            name: row.name,
+            description: row.description,
+            price: row.price,
+            category: row.category
+        }));
+
+        return products; 
+    } catch (error) {
+        console.error('Database Error: ', error);
+        throw new Error('Failed to fetch product data.');
+    }
+}
+
+export async function addReview(productId: number, userId: number, productRating: number, userComment: string) {
+    try {
+        // Fetching the product by id
+        const result = await sql`
+            INSERT INTO reviews (product_id, user_id, rating, comment)
+            VALUES (${productId}, ${userId}, ${productRating}, ${userComment})
+            RETURNING id, product_id, user_id, rating, comment;
+        `;
+
+        return result; 
+    } catch (error) {
+        console.error('Database Error: ', error);
+        throw new Error('Failed to create review.');
+    }
 }

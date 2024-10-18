@@ -1,4 +1,4 @@
-import { fetchProductData, fetchImagesData, fetchUserData, fetchReviewData } from '@/app/lib/data';
+import { fetchProductData, fetchImagesData, fetchUserData, fetchReviewData, fetchOtherProductsByUser} from '@/app/lib/data';
 import ProductDetail from "@/app/components/ProductDetail"
 import {redirect} from 'next/navigation'
 import { Product, Image_, User, Review_ } from '@/app/types/productTypes'; 
@@ -26,9 +26,23 @@ export default async function ProductDetailsPage({ params }: Params) {
     //get Review Data
     const reviewData: Review_[] = await fetchReviewData(productId)
 
+    const otherProductData: Product[] | null = await fetchOtherProductsByUser(creatorData.id)
+    
+
+    console.table(otherProductData)
+    
+
 
     //render product details
-    return ProductDetail(productData, imageData, creatorData, reviewData);
+    //return ProductDetail(productData, imageData, creatorData, reviewData);
+    return (
+        <ProductDetail 
+            product={productData} 
+            images={imageData} 
+            user={creatorData} 
+            reviews={reviewData} 
+        />
+    );
 
 
 
