@@ -11,11 +11,11 @@ export default function Landing() {
       className="relative h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/hh-landing.jpg')" }}
     >
-      <div className="flex flex-col w-full items-start  bg-gray-200 bg-opacity-50 backdrop-blur-md p-4">
-        <div className="ml-12">
+      <div className="flex flex-col w-full items-start bg-zinc-950 bg-opacity-50 backdrop-blur-md p-4">
+        <div className="ml-12 mb-[-10px]">
           <HHLogo />
         </div>
-        <div className="ml-[106px] text-lg font-thin italic ms-22">
+        <div className="ml-[106px] text-lg font-thin italic ms-22 text-neutral-200">
           <span>Discover Unique Creations, Handcrafted with Love.</span>
         </div>
       </div>
