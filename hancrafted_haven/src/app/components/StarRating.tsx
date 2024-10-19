@@ -2,11 +2,9 @@ import {Review_} from '@/app/types/productTypes'
 import React, {useState} from 'react'
 import Star from './Star'
 
-
-
-interface StarProps{
-    rating: number;
-}
+//interface StarProps{
+//    rating: number;
+//}
 interface StarAvgProps{
     reviews: Review_[]
 }
