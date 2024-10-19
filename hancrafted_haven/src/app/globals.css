@@ -25,16 +25,3 @@ body {
     text-wrap: balance;
   }
 }
-
-.star:hover {
-  animation: fillAnimation 0.3s forwards;
-}
-
-@keyframes fillAnimation {
-  from {
-      fill: none;
-  }
-  to {
-      fill: #FFD700;
-  }
-}
