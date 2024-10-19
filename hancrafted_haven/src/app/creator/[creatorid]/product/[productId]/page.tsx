@@ -1,4 +1,4 @@
-import { fetchProductData, fetchImagesData, fetchUserData, fetchReviewData, fetchOtherProductsByUser} from '@/app/lib/data';
+import { fetchProductData, fetchImagesData, fetchUserData, fetchReviewData, fetchProductsByUser} from '@/app/lib/data';
 import ProductDetail from "@/app/components/ProductDetail"
 import { Product, Image_, User, Review_ } from '@/app/types/productTypes'; 
 import {notFound} from 'next/navigation'
@@ -21,13 +21,13 @@ export default async function ProductDetailsPage({ params }: Params) {
         //if (!productData) {return notFound()};
         const imageData: Image_[] = await fetchImagesData(productId);
         const reviewData: Review_[] = await fetchReviewData(productId)
+        
         // If productData doesn't exist, redirect to the custom 404 page
-        //if (!productData) <div>Product not found.</div>;
         if (!productData) {
             notFound();
         }      
         const creatorData: User = await fetchUserData(productData.user_id)
-        const otherProductData: Product[] | null = await fetchOtherProductsByUser(creatorData.id)
+        const otherProductData: Product[] = await fetchProductsByUser(creatorData.id)
         
         
         console.table(otherProductData)
@@ -39,6 +39,7 @@ export default async function ProductDetailsPage({ params }: Params) {
             images={imageData} 
             user={creatorData} 
             reviews={reviewData} 
+            products={otherProductData}
             />
         );
     }catch (error) {

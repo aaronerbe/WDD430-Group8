@@ -95,7 +95,7 @@ export async function fetchFeaturedCategories() {
   }
 }
 
-export async function fetchOtherProductsByUser(userId: number): Promise<Product[] | null>{
+export async function fetchProductsByUser(userId: number): Promise<Product[]>{
     try {
         // Fetching the product by id
         const result = await sql`
@@ -108,9 +108,9 @@ export async function fetchOtherProductsByUser(userId: number): Promise<Product[
             FROM products WHERE user_id = ${userId}`;
 
         // Check if the product exists
-        if (result.rows.length === 0) {
-            return null;
-        }
+        //if (result.rows.length === 0) {
+        //    return null;
+        //}
 
         // have to break out the query result into structured format
         const products: Product[] = result.rows.map(row => ({
