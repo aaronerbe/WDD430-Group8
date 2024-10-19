@@ -6,7 +6,7 @@ import { StarAvg } from '@/app/components/StarRating';
 import AddReviewForm from '@/app/components/ReviewForm';
 import Products from '@/app/components/ProductCard'
 //import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const ProductDetail = ({
     product,
