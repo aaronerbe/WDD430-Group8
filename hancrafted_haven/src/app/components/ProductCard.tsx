@@ -1,6 +1,6 @@
 'use client';
-import React, { useState } from 'react';
-import { Product, User } from '@/app/types/productTypes';
+//import React, { useState } from 'react';
+import { Product } from '@/app/types/productTypes';
 import Image from 'next/image'
 
 interface ProductsProps {

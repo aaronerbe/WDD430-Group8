@@ -5,7 +5,7 @@ import Review from '@/app/components/Review';
 import { StarAvg } from '@/app/components/StarRating';
 import AddReviewForm from '@/app/components/ReviewForm';
 import Products from '@/app/components/ProductCard'
-import Image from 'next/image';
+//import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 const ProductDetail = ({
@@ -23,13 +23,13 @@ const ProductDetail = ({
 }) => { 
     const [isFormOpen, setIsFormOpen] = useState(false);
     //useState to track if 'products' exist or not
-    const [isProducts, setIsProducts] = useState(false);
-    //if Product updates, recheck if products has content
-    useEffect(() =>{
-        if (products){
-            setIsProducts(true);
-        }
-    },[product])
+    //const [isProducts, setIsProducts] = useState(false);
+    ////if Product updates, recheck if products has content
+    //useEffect(() =>{
+    //    if (products){
+    //        setIsProducts(true);
+    //    }
+    //},[product])
 
     const authenticatedUserId: number = 15 //todo hardcoded right now.  Need this to pass in auth user for addReview
     //todo  will also use this to hide or show the Add Review button.
