@@ -91,14 +91,14 @@ const ProductDetail = ({
                     </div>
                     {/* Name/Description/Stars Section */}
                     <div className="flex-1">
-                        <p className="text-3xl font-semibold text-white mb-8">{user.name}</p>
+                        <p className="text-3xl font-semibold  mb-8">{user.name}</p>
                         <div>
-                            <p className="text-gray-300 mb-8">{product.description}</p>
+                            <p className="mb-8">{product.description}</p>
                         </div>
                         <div className="flex items-center">
                             <StarAvg reviews={reviews} />
                             {/*<span className="text-yellow-400">★★★★★</span>
-                            <span className="ml-2 text-white">(123)</span>*/}
+                            <span className="ml-2 ">(123)</span>*/}
                         </div>
                     </div>
                 </div>
@@ -116,8 +116,8 @@ const ProductDetail = ({
                                 onClick={() => setIsFormOpen(true)}
                                 className="flex flex-col items-center border border-gray-300 rounded-md p-2 hover:bg-gray-100 transition duration-150 ease-in-out z-index-0"
                             >
-                                <span className="text-white-700 text-4xl">+</span>
-                                <span className="text-white-700">Add Review</span>
+                                <span className="-700 text-4xl">+</span>
+                                <span className="-700">Add Review</span>
                             </button>
                         </div>
                         <div className="reviewFormContainer absolute z-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-0" 

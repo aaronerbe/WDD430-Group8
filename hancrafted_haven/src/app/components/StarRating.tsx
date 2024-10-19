@@ -122,7 +122,7 @@ export const StarAvg: React.FC<StarAvgProps> = ({ reviews }) => {
         <p className="mr-2">Average Rating:</p> 
             <div className="flex items-center mt-2">
                 <StarRating initialRating={averageRating} />
-                <span className="ml-2 text-gray-300">({reviews.length})</span> 
+                <span className="ml-2">({reviews.length})</span> 
             </div>
         </div>
     );
