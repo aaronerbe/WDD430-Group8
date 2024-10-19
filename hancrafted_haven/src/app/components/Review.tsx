@@ -66,7 +66,7 @@ const Review: React.FC<ReviewProps> = ({ reviews }) => {
                 {displayedReviews.map((review) => (
                     <div key={review.id} className="review border p-4 rounded-md shadow-md min-h-[200px]">
                         <p className="font-semibold">{review.comment}</p>
-                        <p className="text-sm text-gray-500">Rating: {review.rating}</p>
+                        <p className="text-sm">Rating: {review.rating}</p>
                         <StarRating initialRating={review.rating} />
                     </div>
                 ))}

@@ -22,6 +22,7 @@ export enum UserType {
 export interface User {
     id: number;
     name: string;
+    profile: string;
     bio: string;
     email: string;
     password: string;
