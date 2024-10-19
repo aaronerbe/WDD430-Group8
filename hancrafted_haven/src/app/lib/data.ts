@@ -1,19 +1,11 @@
 import { sql } from '@vercel/postgres';
 import {Product, Image_, User, Review_} from '@/app/types/productTypes'
+//import {redirect} from 'next/navigation'
 
-export async function fetchProductData(productId: number): Promise<Product | null> {
+export async function fetchProductData(productId: number): Promise<Product> {
     try {
-        console.log('Connecting to:', process.env.POSTGRES_URL);
         // Fetching the product by id
         const result = await sql`SELECT id, user_id, name, description, price, category FROM products WHERE id = ${productId}`;
-
-        // Check if the product exists
-        if (result.rows.length === 0) {
-            //throw new Error('Product not found');
-            //returns null if product doesn't exist.  then in page.tsx it'll use a redirect to /401 
-            return null;
-        }
-
         // have to break out the query result into structured format
         const product: Product = {
             id: result.rows[0].id,
@@ -36,11 +28,6 @@ export async function fetchImagesData(productId: number): Promise<Image_[]> {
     try {
         // Fetching the product by id
         const result = await sql`SELECT id, product_id, image_url FROM product_images WHERE product_id = ${productId}`;
-        // Check if the product exists
-        if (result.rows.length === 0) {
-            //throw new Error('Image not found');
-            //do nothing and it should end up using default image (bunny)
-        }
         // Map the query result into an array of Image_ objects
         const images: Image_[] = result.rows.map(row => ({
             id: row.id,
@@ -108,7 +95,7 @@ export async function fetchFeaturedCategories() {
   }
 }
 
-export async function fetchOtherProductsByUser(userId: number): Promise<Product[] | null>{
+export async function fetchProductsByUser(userId: number): Promise<Product[]>{
     try {
         // Fetching the product by id
         const result = await sql`
@@ -121,11 +108,9 @@ export async function fetchOtherProductsByUser(userId: number): Promise<Product[
             FROM products WHERE user_id = ${userId}`;
 
         // Check if the product exists
-        if (result.rows.length === 0) {
-            //throw new Error('Product not found');
-            //returns null if product doesn't exist.  then in page.tsx it'll use a redirect to /401 
-            return null;
-        }
+        //if (result.rows.length === 0) {
+        //    return null;
+        //}
 
         // have to break out the query result into structured format
         const products: Product[] = result.rows.map(row => ({
@@ -146,8 +131,6 @@ export async function fetchOtherProductsByUser(userId: number): Promise<Product[
 
 export async function addReview(productId: number, userId: number, productRating: number, userComment: string) {
     console.log('Inserting review:', { productId, userId, productRating, userComment });
-    console.log('Connecting to:', process.env.POSTGRES_URL);
-    console.log('Environment Variables:', process.env);
 
     try {
         // Perform the insert operation
