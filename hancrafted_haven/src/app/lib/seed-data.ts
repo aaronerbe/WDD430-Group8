@@ -7,6 +7,7 @@ const users = [
     // Placeholder user for dashboard
     {
         id: '0', // Jane Doe
+        profile: '/profile-images/jane_doe.jpg',
         name: 'Jane Doe',
         bio: "A passionate potter creating one-of-a-kind ceramics using traditional techniques and natural clay. Jane finds inspiration from her travels and creates pieces with unique designs that tell a story.",
         email: 'jane.doe@email.com',
@@ -15,6 +16,7 @@ const users = [
     },
     {
         id: '1', // John Smith
+        profile: '/profile-images/john_smith.jpg',
         name: 'John Smith',
         bio: "Crafting sustainable wooden furniture for modern homes. John’s creations are made from reclaimed wood, and each piece is carefully handcrafted to ensure quality and environmental sustainability.",
         email: 'john.smith@email.com',
@@ -23,6 +25,7 @@ const users = [
     },
     {
         id: '2', // Emily Davis
+        profile: '/profile-images/emily_davis.jpg',
         name: 'Emily Davis',
         bio: "Handmade jewelry inspired by nature. Emily uses materials like sterling silver and gemstones to create delicate designs that reflect the beauty of the natural world.",
         email: 'emily.davis@email.com',
@@ -31,6 +34,7 @@ const users = [
     },
     {
         id: '3', // Michael Johnson
+        profile: '/profile-images/michael_johnson.jpg',
         name: 'Michael Johnson',
         bio: "Unique leather goods crafted by hand. Michael’s work is characterized by high-quality leather and meticulous attention to detail, ensuring durability and timeless elegance.",
         email: 'michael.johnson@email.com',
@@ -39,6 +43,7 @@ const users = [
     },
     {
         id: '4', // Alice Brown
+        profile: '/profile-images/alice_brown.jpg',
         name: 'Alice Brown',
         bio: "user",
         email: 'alice.brown@email.com',
@@ -47,6 +52,7 @@ const users = [
     },
     {
         id: '5', // Bob Green
+        profile: '/profile-images/bob_green.jpg',
         name: 'Bob Green',
         bio: "user",
         email: 'bob.green@email.com',
@@ -55,6 +61,7 @@ const users = [
     },
     {
         id: '6', // Charlie White
+        profile: '/profile-images/charlie_white.jpg',
         name: 'Charlie White',
         bio: "user",
         email: 'charlie.white@email.com',
@@ -63,6 +70,7 @@ const users = [
     },
     {
         id: '7', // Emily Adams
+        profile: '/profile-images/emily_adams.jpg',
         name: 'Emily Adams',
         bio: "user",
         email: 'emily.adams@email.com',
@@ -71,6 +79,7 @@ const users = [
     },
     {
         id: '8', // Diana Black
+        profile: '/profile-images/diana_black.jpg',
         name: 'Diana Black',
         bio: "user",
         email: 'diana.black@email.com',
@@ -79,6 +88,7 @@ const users = [
     },
     {
         id: '9', // Frank Johnson
+        profile: '/profile-images/frank_johnson.jpg',
         name: 'Frank Johnson',
         bio: "user",
         email: 'frank.johnson@email.com',
@@ -87,6 +97,7 @@ const users = [
     },
     {
         id: '10', // Grace Lee
+        profile: '/profile-images/grace_lee.jpg',
         name: 'Grace Lee',
         bio: "user",
         email: 'grace.lee@email.com',
@@ -95,6 +106,7 @@ const users = [
     },
     {
         id: '11', // Henry Smith
+        profile: '/profile-images/henry_smith.jpg',
         name: 'Henry Smith',
         bio: "user",
         email: 'henry.smith@email.com',
@@ -103,6 +115,7 @@ const users = [
     },
     {
         id: '12', // Isabella Martinez
+        profile: '/profile-images/isabella_martinez.jpg',
         name: 'Isabella Martinez',
         bio: "user",
         email: 'isabella.martinez@email.com',
@@ -111,6 +124,7 @@ const users = [
     },
     {
         id: '13', // Jack Davis
+        profile: '/profile-images/jack_davis.jpg',
         name: 'Jack Davis',
         bio: "user",
         email: 'jack.davis@email.com',
@@ -119,6 +133,7 @@ const users = [
     },
     {
         id: '14',
+        profile: '/profile-images/user.jpg',
         name: 'User',
         bio: "placeholder user for dashboard project",
         email: 'user@nextmail.com',
@@ -127,6 +142,7 @@ const users = [
     },
     {
         id: '15',
+        profile: '/profile-images/aaron_erbe.jpg',
         name: 'Aaron Erbe',
         bio: "admin",
         email: 'a-aron@fakemail.com',

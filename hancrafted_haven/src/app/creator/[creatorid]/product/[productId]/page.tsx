@@ -17,7 +17,6 @@ export default async function ProductDetailsPage({ params }: Params) {
     try{
         //FETCH DATA (server side) and pass it to the component (client side)
         const productData: Product = await fetchProductData(productId);
-        console.log(productData)
         //if (!productData) {return notFound()};
         const imageData: Image_[] = await fetchImagesData(productId);
         const reviewData: Review_[] = await fetchReviewData(productId)
@@ -28,9 +27,6 @@ export default async function ProductDetailsPage({ params }: Params) {
         }      
         const creatorData: User = await fetchUserData(productData.user_id)
         const otherProductData: Product[] = await fetchProductsByUser(creatorData.id)
-        
-        
-        console.table(otherProductData)
         
         //render product details
         return (
