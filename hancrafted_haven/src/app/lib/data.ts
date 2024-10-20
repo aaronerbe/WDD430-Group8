@@ -6,16 +6,23 @@ export async function fetchProductData(productId: number): Promise<Product> {
     try {
         // Fetching the product by id
         const result = await sql`
-            SELECT id, user_id, name, description, price, category FROM products 
-            WHERE id = ${productId}
-        `;
-
+            SELECT 
+                id, 
+                user_id, 
+                name, 
+                description, 
+                price, 
+                category 
+            FROM products 
+            WHERE id = ${productId}`;
+        // have to break out the query result into structured format
         const product: Product = {
             id: result.rows[0].id,
             user_id: result.rows[0].user_id,
             name: result.rows[0].name,
             description: result.rows[0].description,
             price: result.rows[0].price,
+            //image_url: result.rows[0].image_url,
             category: result.rows[0].category,
         };
 
@@ -77,11 +84,13 @@ export async function addProduct(userId: number, name: string, description: stri
 
 export async function fetchImagesData(productId: number): Promise<Image_[]> {
     try {
+        // Fetching the product by id
         const result = await sql`
-            SELECT id, 
-            product_id, 
-            image_url 
-            FROM productImages 
+            SELECT 
+                id, 
+                product_id, 
+                image_url 
+            FROM product_images 
             WHERE product_id = ${productId}`;
         // Map the query result into an array of Image_ objects
         const images: Image_[] = result.rows.map(row => ({
@@ -92,7 +101,7 @@ export async function fetchImagesData(productId: number): Promise<Image_[]> {
         return images; 
     } catch (error) {
         console.error('Database Error: ', error);
-        throw new Error('Failed to fetch image data');
+        throw new Error('Failed to fetch image data. at data.ts');
     }
 }
 
@@ -158,14 +167,17 @@ export async function addImages(productId: number, addImageUrl: string[]){
 }
 
 export async function fetchUserData(userId: number): Promise<User>{
-
     try {
         // Fetching the product by id
         const result = await sql`
-            SELECT id, name, profile, bio, email, password, type
+            SELECT 
+                id, 
+                name, 
+                bio, 
+                email, 
+                password 
             FROM users 
-            WHERE id = ${userId}
-        `;
+            WHERE id = ${userId}`;
 
         // have to break out the query result into structured format
         const user: User = {
