@@ -200,7 +200,15 @@ export async function fetchUserData(userId: number): Promise<User>{
 export async function fetchReviewData(productId: number): Promise<Review_[]>{
     try {
         // Fetching the product by id
-        const result = await sql`SELECT id, product_id, user_id, rating, comment FROM reviews WHERE product_id = ${productId}`;
+        const result = await sql`
+            SELECT 
+                id, 
+                product_id, 
+                user_id, 
+                rating, 
+                comment 
+            FROM reviews 
+            WHERE product_id = ${productId}`;
         const reviews: Review_[] = result.rows.map(row => ({
             id: row.id,
             product_id: row.product_id,
@@ -209,6 +217,22 @@ export async function fetchReviewData(productId: number): Promise<Review_[]>{
             comment: row.comment,
         }));
         return reviews; 
+    } catch (error) {
+        console.error('Database Error: ', error);
+        throw new Error('Failed to fetch review data.');
+    }
+}
+
+export async function checkExistingReview(productId: number, userId: number): Promise<boolean>{
+    try {
+        //check if any reviews for the product from the user
+        const result = await sql`
+            SELECT 1
+            FROM reviews
+            WHERE product_id = ${productId} AND user_id = ${userId}
+            LIMIT 1
+        `;
+        return result.rows.length > 0;
     } catch (error) {
         console.error('Database Error: ', error);
         throw new Error('Failed to fetch review data.');
