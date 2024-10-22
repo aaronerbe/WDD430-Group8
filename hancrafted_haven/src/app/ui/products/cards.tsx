@@ -3,15 +3,16 @@ import { Product } from "@/app/lib/definitions";
 export default async function ProductCard({ product }: { product: Product }) {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white p-6">
-      <img
+      {/* AERBE - commenting out.  Once the definition.ts file was updated to reflect image_url isn't inside of product, it broke this.  image_url needs to come from product_images table. */}
+      {/*<img
         className="w-full h-48 object-cover rounded-lg mb-4"
         src={product.image_url}
         alt={product.name}
-      />
+      />*/}
 
       <div className="px-6 py-4">
         <p className="text-gray-600 text-xs mb-2">
-          Seller ID: {product.seller_id}
+          Seller ID: {product.user_id}
         </p> 
 
         <h2 className="text-xl font-semibold text-gray-800 truncate">

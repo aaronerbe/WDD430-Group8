@@ -1,5 +1,5 @@
 
-//import { Product, Image_, User, Review_} from '@/app/types/productTypes';
+//import { Product, Image_, User, Review_} from '@/app/lib/definitions';
 //import ImageCarousel from "@/app/components/ImageCarousel"
 //import Review from "@/app/components/Review"
 //import {StarAvg} from "@/app/components/Star"

@@ -1,11 +1,10 @@
 'use client'
-import { Product, Image_, User, Review_ } from '@/app/types/productTypes';
-import ImageCarousel from '@/app/components/ImageCarousel';
-import Review from '@/app/components/Review';
-import { StarAvg } from '@/app/components/StarRating';
-import AddReviewForm from '@/app/components/ReviewForm';
-import Products from '@/app/components/ProductCard'
-//import Image from 'next/image';
+import { Product, Image_, User, Review_ } from '@/app/lib/definitions';
+import ImageCarousel from '@/app/ui/images/ImageCarousel';
+import Review from '@/app/ui/reviews/Review';
+import { StarAvg } from '@/app/ui/reviews/StarRating';
+import AddReviewForm from '@/app/ui/reviews/ReviewForm';
+import Products from '@/app/ui/products/ProductCard'
 import { useState } from 'react';
 
 const ProductDetail = ({
@@ -22,20 +21,11 @@ const ProductDetail = ({
     products: Product[];  //null incase there are no other products
 }) => { 
     const [isFormOpen, setIsFormOpen] = useState(false);
-    //useState to track if 'products' exist or not
-    //const [isProducts, setIsProducts] = useState(false);
-    ////if Product updates, recheck if products has content
-    //useEffect(() =>{
-    //    if (products){
-    //        setIsProducts(true);
-    //    }
-    //},[product])
-
-    const authenticatedUserId: number = 15 //todo hardcoded right now.  Need this to pass in auth user for addReview
-    //todo  will also use this to hide or show the Add Review button.
+    const authenticatedUserId: number = 15 //! todo hardcoded right now.  Need this to pass in auth user for addReview
+    //! todo  will also use this to hide or show the Add Review button.
 
     //Had to do this since this is a client side and cannot access the env variables to be able to write to the db.  Calls an api instead which handles it for us.
-    //TODO need to work out a way to prevent a user from submitting multiple reviews for a product.  if it has one, hide the 'add review' button.  could instead to 'edit review'??
+    //! TODO need to work out a way to prevent a user from submitting multiple reviews for a product.  if it has one, hide the 'add review' button.  could instead to 'edit review'??
     const handleAddReview = async (rating: number, comment: string) => {
         try {
             const response = await fetch('/api/addReview', {

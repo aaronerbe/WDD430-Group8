@@ -1,6 +1,6 @@
 import { fetchProductData, fetchImagesData, fetchUserData, fetchReviewData, fetchProductsByUser} from '@/app/lib/data';
-import ProductDetail from "@/app/components/ProductDetail"
-import { Product, Image_, User, Review_ } from '@/app/types/productTypes'; 
+import ProductDetail from "@/app/ui/products/ProductDetail"
+import { Product, Image_, User, Review_ } from '@/app/lib/definitions';
 import {notFound} from 'next/navigation'
 //import {redirect} from 'next/navigation'
 

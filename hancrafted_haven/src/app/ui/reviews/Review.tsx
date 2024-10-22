@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import { Review_ } from '@/app/types/productTypes';
-import StarRating from '@/app/components/StarRating'
+import { Review_ } from '@/app/lib/definitions';
+import StarRating from '@/app/ui/reviews/StarRating'
 
 interface ReviewProps {
     reviews: Review_[]; // Pass the reviews array as a prop

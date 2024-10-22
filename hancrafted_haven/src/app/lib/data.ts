@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import {Product, Image_, User, Review_} from '@/app/types/productTypes'
+import {Product, Image_, User, Review_} from '@/app/lib/definitions';
 //import {redirect} from 'next/navigation'
 
 export async function fetchProductData(productId: number): Promise<Product> {
@@ -258,11 +258,11 @@ export async function fetchProductsByUser(userId: number): Promise<Product[]>{
 }
 
 export async function addReview(productId: number, userId: number, productRating: number, userComment: string) {
-    console.log('Inserting review:', { productId, userId, productRating, userComment });
+    //console.log('Inserting review:', { productId, userId, productRating, userComment });
 
     try {
         // Perform the insert operation
-        const result = await sql`
+        await sql`
             INSERT INTO reviews (
                 product_id, 
                 user_id, 
@@ -277,7 +277,6 @@ export async function addReview(productId: number, userId: number, productRating
             )
             RETURNING *;
         `;
-        console.log('Insert result:', result); 
     } catch (error) {
         console.error('Database Error: ', error);
         throw new Error('Failed to create review '); 
