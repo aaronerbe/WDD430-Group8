@@ -1,6 +1,6 @@
-import { fetchProductData, fetchImagesData, fetchUserData, fetchReviewData, fetchProductsByUser} from '@/app/lib/data';
-import ProductDetail from "@/app/components/ProductDetail"
-import { Product, Image_, User, Review_ } from '@/app/types/productTypes'; 
+import { fetchProductData, fetchImagesData, fetchUserData, fetchReviewData, fetchProductsByUser, checkExistingReview} from '@/app/lib/data';
+import ProductDetail from "@/app/ui/products/ProductDetail"
+import { Product, Image_, User, Review_ } from '@/app/lib/definitions';
 import {notFound} from 'next/navigation'
 //import {redirect} from 'next/navigation'
 
@@ -13,6 +13,8 @@ interface Params {
 
 export default async function ProductDetailsPage({ params }: Params) {
     const { productId } = params;
+    //! hardcoding authenticated user until we have that and can extract it
+    const authUser: number = 15;
 
     try{
         //FETCH DATA (server side) and pass it to the component (client side)
@@ -20,6 +22,7 @@ export default async function ProductDetailsPage({ params }: Params) {
         //if (!productData) {return notFound()};
         const imageData: Image_[] = await fetchImagesData(productId);
         const reviewData: Review_[] = await fetchReviewData(productId)
+        const reviewCheck: boolean = await checkExistingReview(productId, authUser)
         
         // If productData doesn't exist, redirect to the custom 404 page
         if (!productData) {
@@ -36,6 +39,8 @@ export default async function ProductDetailsPage({ params }: Params) {
             user={creatorData} 
             reviews={reviewData} 
             products={otherProductData}
+            authUser={authUser}
+            reviewCheck={reviewCheck}
             />
         );
     }catch (error) {

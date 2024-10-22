@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import {NewRating} from './StarRating'
+import {NewRating} from '@/app/ui/reviews/StarRating'
 
 interface AddReviewFormProps {
     onSubmit: (rating: number, comment: string) => void;

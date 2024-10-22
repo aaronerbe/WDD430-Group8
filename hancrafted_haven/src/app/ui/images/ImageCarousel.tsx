@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image'; 
 import React, { useState } from 'react';
-import { Image_ } from '@/app/types/productTypes';
+import { Image_ } from '@/app/lib/definitions';
 
 interface ImageCarouselProps {
     images: Image_[];

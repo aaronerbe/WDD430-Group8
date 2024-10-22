@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import {Product, Image_, User, Review_} from '@/app/types/productTypes'
+import {Product, Image_, User, Review_} from '@/app/lib/definitions';
 //import {redirect} from 'next/navigation'
 
 export async function fetchProductData(productId: number): Promise<Product> {
@@ -200,7 +200,15 @@ export async function fetchUserData(userId: number): Promise<User>{
 export async function fetchReviewData(productId: number): Promise<Review_[]>{
     try {
         // Fetching the product by id
-        const result = await sql`SELECT id, product_id, user_id, rating, comment FROM reviews WHERE product_id = ${productId}`;
+        const result = await sql`
+            SELECT 
+                id, 
+                product_id, 
+                user_id, 
+                rating, 
+                comment 
+            FROM reviews 
+            WHERE product_id = ${productId}`;
         const reviews: Review_[] = result.rows.map(row => ({
             id: row.id,
             product_id: row.product_id,
@@ -209,6 +217,22 @@ export async function fetchReviewData(productId: number): Promise<Review_[]>{
             comment: row.comment,
         }));
         return reviews; 
+    } catch (error) {
+        console.error('Database Error: ', error);
+        throw new Error('Failed to fetch review data.');
+    }
+}
+
+export async function checkExistingReview(productId: number, userId: number): Promise<boolean>{
+    try {
+        //check if any reviews for the product from the user
+        const result = await sql`
+            SELECT 1
+            FROM reviews
+            WHERE product_id = ${productId} AND user_id = ${userId}
+            LIMIT 1
+        `;
+        return result.rows.length > 0;
     } catch (error) {
         console.error('Database Error: ', error);
         throw new Error('Failed to fetch review data.');
@@ -258,11 +282,11 @@ export async function fetchProductsByUser(userId: number): Promise<Product[]>{
 }
 
 export async function addReview(productId: number, userId: number, productRating: number, userComment: string) {
-    console.log('Inserting review:', { productId, userId, productRating, userComment });
+    //console.log('Inserting review:', { productId, userId, productRating, userComment });
 
     try {
         // Perform the insert operation
-        const result = await sql`
+        await sql`
             INSERT INTO reviews (
                 product_id, 
                 user_id, 
@@ -277,7 +301,6 @@ export async function addReview(productId: number, userId: number, productRating
             )
             RETURNING *;
         `;
-        console.log('Insert result:', result); 
     } catch (error) {
         console.error('Database Error: ', error);
         throw new Error('Failed to create review '); 
