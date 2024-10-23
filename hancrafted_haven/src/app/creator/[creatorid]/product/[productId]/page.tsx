@@ -8,7 +8,7 @@ import {
   fetchSingleImageData
 } from "@/app/lib/data";
 import ProductDetail from "@/app/ui/products/ProductDetail";
-import { Product, Image_, User, Review_ } from "@/app/lib/definitions";
+import { Product, Image_, User } from "@/app/lib/definitions";
 import { notFound } from "next/navigation";
 //import {redirect} from 'next/navigation'
 import OtherProducts from '@/app/ui/products/OtherProducts'

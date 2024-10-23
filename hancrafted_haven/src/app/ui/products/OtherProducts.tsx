@@ -1,10 +1,10 @@
 import { Product, Image_ } from "@/app/lib/definitions";
-import Image from "next/image";
+//import Image from "next/image";
 import ProductCard from '@/app/ui/products/cards'
 
-interface ProductsProps {
-  products: Product[]; // Pass the reviews array as a prop
-}
+//interface ProductsProps {
+//  products: Product[]; // Pass the reviews array as a prop
+//}
 
 //keeping it generic so you can pass whatever filtered products you want (e.g. by creator, by category, etc)
 

@@ -4,7 +4,7 @@ import ImageCarousel from '@/app/ui/images/ImageCarousel';
 import Review from '@/app/ui/reviews/Review';
 import { StarAvg } from '@/app/ui/reviews/StarRating';
 import AddReviewForm from '@/app/ui/reviews/ReviewForm';
-import Products from '@/app/ui/products/ProductCard'
+//import Products from '@/app/ui/products/ProductCard'
 import { useState } from 'react';
 
 const ProductDetail = ({
