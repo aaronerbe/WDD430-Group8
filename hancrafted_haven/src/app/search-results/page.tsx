@@ -1,6 +1,6 @@
 import React from "react";
 import ProductCard from '../ui/products/cards';
-import { fetchSearchResults, fetchSingleImageData, fetchProductsByUser } from '../lib/data';
+import { fetchSearchResults, fetchSingleImageData } from '../lib/data';
 
 export default async function SearchResultsPage({ searchParams }: { searchParams?: { query: string } }) {
     const query = searchParams?.query || '';
