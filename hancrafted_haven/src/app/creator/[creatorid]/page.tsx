@@ -14,9 +14,9 @@ const CreatorPage = async () => {
     return productImage[0];
   };
 
-  const images = await Promise.all(
-    userProducts.map((product) => getImage(product.id))
-  );
+  // const images = await Promise.all(
+  //   userProducts.map((product) => getImage(product.id))
+  // );
 
   return (
     <div className="container">
