@@ -13,10 +13,6 @@ import { UserCircleIcon } from "@heroicons/react/24/outline";
 import SmHHLogo from "../sm-hh-logo";
 import MobileNavLinks from "./mobile-nav-links";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Navbar() {
   return (
     <Disclosure as="nav" className="bg-white">
