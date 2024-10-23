@@ -12,7 +12,7 @@ const ProductDetail = ({
     images,
     user,
     reviews,
-    products,
+    //products,
     authUser,
     reviewCheck
 }: {
@@ -20,7 +20,7 @@ const ProductDetail = ({
     images: Image_[]; 
     user: User; 
     reviews: Review_[];
-    products: Product[];  //null incase there are no other products
+    //products: Product[];  //null incase there are no other products
     authUser: number;       //! hardcoded from page.tsx for addReview 
     reviewCheck: boolean    //! check is valid but uses hardcoded authUser from page.tsx
 }) => { 
@@ -62,7 +62,7 @@ const ProductDetail = ({
                 <div className="fixed inset-0 bg-black bg-opacity-80 z-10" />
             )}
 
-            <div className="container lg:max-w-[80%] md:max-w-[80%] sm:max-w-[80%] mx-auto p-4 relative">
+            <div className="container mx-auto p-4 relative">
 
                 {/* Product Title Section */}
                 <div className="flex flex-col md:items-center md:flex-row gap-8 md:gap-4 mb-12">
@@ -117,33 +117,8 @@ const ProductDetail = ({
                             }}>
                             {isFormOpen && (<AddReviewForm onSubmit={handleAddReview} onCancel={handleCancel} />)}
                         </div>
-
                         <Review reviews={reviews} />
-
                     </div>
-
-
-
-                </div>
-
-
-                {/* useState to decide if I call the OtherProducts component or not */}
-                {/* Other Products Section */}
-                <div>
-                    <h3 className="text-2xl font-bold mb-4">Other Products By Creator</h3>
-                    <Products products={products} />
-                    {/*<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        <div className="border p-4 rounded-md shadow-md">
-                            <Image
-                                src="/product-images/default_image.jpg"
-                                alt="Product Title"
-                                className="w-full h-32 object-cover mb-2 rounded"
-                                width="500"
-                                height="500"
-                            />
-                            <p className="font-semibold">Title</p>
-                        </div>
-                    </div>*/}
                 </div>
             </div>
         </div>
