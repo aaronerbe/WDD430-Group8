@@ -9,7 +9,6 @@ export default function HomePage() {
       </div>
 
       <FeaturedProducts />
-      <span>Login</span>
     </main>
   );
 }
