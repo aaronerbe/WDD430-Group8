@@ -58,7 +58,7 @@ const ProductDetail = ({
     };
 
     return (
-        <div className="relative">
+        <div className="relative w-full">
             {/* Overlay to dim when review form is up*/}
             {isFormOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-80 z-10" />
@@ -100,21 +100,23 @@ const ProductDetail = ({
                 </div>
 
                 {/* Reviews Section */}
-                <div className="mb-20 mt-20">
-                    <div className="relative">
+                <div className="mb-20 mt-20 w-full">
+                    <div className="relative w-full">
                         <div 
                             className="addReviewButton absolute right-0 top-0 py-0 transition-opacity duration-150 ease-in-out" 
                             style={{
                                 opacity: isFormOpen ? 0 : 1, 
                                 pointerEvents: isFormOpen ? 'none' : 'auto' 
                             }}>
-                            {!isFormOpen && !reviewCheck && <button //will only show the button if form isn't open and reviewCheck confirms authUser hasn't already submitted a review.
-                                onClick={() => setIsFormOpen(true)}
-                                className="flex flex-col items-center border border-gray-300 rounded-md p-2 hover:bg-gray-100 transition duration-150 ease-in-out z-index-0"
-                            >
-                                <span className="-700 text-4xl">+</span>
-                                <span className="-700">Add Review</span>
-                            </button>}
+                            {!isFormOpen && !reviewCheck && 
+                                <button //will only show the button if form isn't open and reviewCheck confirms authUser hasn't already submitted a review and there's actaully reviews
+                                    onClick={() => setIsFormOpen(true)}
+                                    className="flex flex-col items-center border border-gray-300 rounded-md p-2 hover:bg-gray-100 transition duration-150 ease-in-out z-index-0"
+                                >
+                                    <span className="-700 text-4xl">+</span>
+                                    <span className="-700">Add Review</span>
+                                </button>
+                            }
                         </div>
                         <div className="reviewFormContainer absolute z-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-0" 
                             style={{

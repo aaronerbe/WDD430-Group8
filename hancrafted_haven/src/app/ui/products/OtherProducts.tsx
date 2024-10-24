@@ -24,11 +24,18 @@ const OtherProducts = ({
         //</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">                    
                 {products.map(product => {
-                        const matchingImage = images.find(
-                            image => image.product_id === product.id
+                        const foundImage = images.find(
+                            image => image.product_id === product.id 
                         );
                         
-                        if(!matchingImage) return null;
+                        //if(!matchingImage) return null;
+
+                        const matchingImage = foundImage || {
+                            id: -1, // a dummy id for default image 'object'
+                            product_id: product.id,
+                            image_url: '/product-images/default_image.jpg',
+                        };
+                        //console.log(matchingImage)
                         return(
                             <ProductCard
                                 key={product.id}
