@@ -3,7 +3,6 @@
 // import { useState } from "react";
 // import Link from "next/link";
 // import { MagnifyingGlassIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-=======
 import Link from "next/link";
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import Search from '@/app/ui/search';
