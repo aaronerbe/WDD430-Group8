@@ -12,6 +12,8 @@ import NavLinks from "./nav-links";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import SmHHLogo from "../sm-hh-logo";
 import MobileNavLinks from "./mobile-nav-links";
+import { Suspense } from "react";
+
 
 export default function Navbar() {
   return (
@@ -43,7 +45,9 @@ export default function Navbar() {
               </div>
             </div>
             <div className="flex flex-shrink-0 items-center">
-              <Search placeholder="Search for a product..." />
+              <Suspense fallback={<div>Loading...</div>}>
+                <Search placeholder="Find a product..." />
+              </Suspense>
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
