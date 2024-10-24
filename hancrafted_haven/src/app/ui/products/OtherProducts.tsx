@@ -35,7 +35,7 @@ const OtherProducts = ({
                             product_id: product.id,
                             image_url: '/product-images/default_image.jpg',
                         };
-                        console.log(matchingImage)
+                        //console.log(matchingImage)
                         return(
                             <ProductCard
                                 key={product.id}
