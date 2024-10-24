@@ -4,15 +4,16 @@ import ImageCarousel from '@/app/ui/images/ImageCarousel';
 import Review from '@/app/ui/reviews/Review';
 import { StarAvg } from '@/app/ui/reviews/StarRating';
 import AddReviewForm from '@/app/ui/reviews/ReviewForm';
-import Products from '@/app/ui/products/ProductCard'
+//import Products from '@/app/ui/products/ProductCard'
 import { useState } from 'react';
+import Link from 'next/link'
 
 const ProductDetail = ({
     product,
     images,
     user,
     reviews,
-    products,
+    //products,
     authUser,
     reviewCheck
 }: {
@@ -20,11 +21,12 @@ const ProductDetail = ({
     images: Image_[]; 
     user: User; 
     reviews: Review_[];
-    products: Product[];  //null incase there are no other products
+    //products: Product[];  //null incase there are no other products
     authUser: number;       //! hardcoded from page.tsx for addReview 
     reviewCheck: boolean    //! check is valid but uses hardcoded authUser from page.tsx
 }) => { 
-    console.log('user has reviewed check: ', reviewCheck)
+    //console.log('user has reviewed check: ', reviewCheck)
+    console.log(user.id)
     const [isFormOpen, setIsFormOpen] = useState(false);
     
     //Had to do this since this is a client side and cannot access the env variables to be able to write to the db.  Calls an api instead which handles it for us.
@@ -62,7 +64,7 @@ const ProductDetail = ({
                 <div className="fixed inset-0 bg-black bg-opacity-80 z-10" />
             )}
 
-            <div className="container lg:max-w-[80%] md:max-w-[80%] sm:max-w-[80%] mx-auto p-4 relative">
+            <div className="container mx-auto p-4 relative">
 
                 {/* Product Title Section */}
                 <div className="flex flex-col md:items-center md:flex-row gap-8 md:gap-4 mb-12">
@@ -81,7 +83,11 @@ const ProductDetail = ({
                     </div>
                     {/* Name/Description/Stars Section */}
                     <div className="flex-1">
-                        <p className="text-3xl font-semibold  mb-8">{user.name}</p>
+                        <p className="text-3xl font-semibold  mb-8">
+                            <Link href={`/creator/${user.id}`}>
+                                {user.name}
+                            </Link>
+                        </p>
                         <div>
                             <p className="mb-8">{product.description}</p>
                         </div>
@@ -117,33 +123,8 @@ const ProductDetail = ({
                             }}>
                             {isFormOpen && (<AddReviewForm onSubmit={handleAddReview} onCancel={handleCancel} />)}
                         </div>
-
                         <Review reviews={reviews} />
-
                     </div>
-
-
-
-                </div>
-
-
-                {/* useState to decide if I call the OtherProducts component or not */}
-                {/* Other Products Section */}
-                <div>
-                    <h3 className="text-2xl font-bold mb-4">Other Products By Creator</h3>
-                    <Products products={products} />
-                    {/*<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        <div className="border p-4 rounded-md shadow-md">
-                            <Image
-                                src="/product-images/default_image.jpg"
-                                alt="Product Title"
-                                className="w-full h-32 object-cover mb-2 rounded"
-                                width="500"
-                                height="500"
-                            />
-                            <p className="font-semibold">Title</p>
-                        </div>
-                    </div>*/}
                 </div>
             </div>
         </div>
