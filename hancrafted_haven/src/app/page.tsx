@@ -1,7 +1,27 @@
+import Banner from "./ui/home/banner";
+import FeaturedProducts from "./ui/home/featured-categories";
+import FullCatalog from "./ui/home/full-catalog";
+import { Suspense } from 'react';
+
+export default function HomePage() {
+  return (
+    <main>
+      <div className="mb-4">
+        <Banner />
+      </div>
+
+      <FeaturedProducts />
+      <Suspense fallback={<div>Loading...</div>}>
+        <FullCatalog />
+      </Suspense>
+    </main>
+  );
+}
+
 //commenting out import to satisfy compile error on vercel
 //unused import statement.
 //import Image from "next/image";
-import Link from "next/link";
+/* import Link from "next/link";
 import HHLogo from "./ui/hh-logo";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 
@@ -30,4 +50,4 @@ export default function Landing() {
       </div>
     </main>
   );
-}
+} */

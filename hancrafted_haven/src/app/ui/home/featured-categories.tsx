@@ -41,7 +41,7 @@ export default async function FeaturedCategories() {
       </div>
       <div className="flex flex-col w-full m-0">
         <div className="overflow-x-auto">
-          <div className="flex gap-12 mx-8">
+          <div className="flex justify-center gap-8 mx-8">
             {featuredCategories.rows.map((category, i) => {
               const [bgColor, textColor] = colorCombos[i % colorCombos.length];
 
@@ -49,7 +49,7 @@ export default async function FeaturedCategories() {
                 <div
                   key={category.category}
                   className={clsx(
-                    "flex items-center justify-center rounded-full min-w-32 h-32",
+                    "flex items-center justify-center rounded-full min-w-32",
                     {
                       [bgColor]: true,
                     }
