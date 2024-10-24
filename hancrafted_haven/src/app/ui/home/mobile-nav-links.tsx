@@ -23,9 +23,9 @@ const MobileNavLinks = () => {
             as="a"
             href={link.href}
             className={clsx(
-              "flex gap-2 rounded-md p-3 text-sm font-medium text-slate-900 hover:bg-gray-100 hover:text-slate-900 md:flex-none md:justify-start md:p-2 md:px-3",
+              "flex gap-2 rounded-md p-3 text-sm font-medium text-slate-900 hover:bg-slate-200 hover:text-slate-900 md:flex-none md:justify-start md:p-2 md:px-3",
               {
-                "bg-gray-100 text-slate-900": pathname === link.href,
+                "bg-slate-200 text-slate-900": pathname === link.href,
               }
             )}
           >

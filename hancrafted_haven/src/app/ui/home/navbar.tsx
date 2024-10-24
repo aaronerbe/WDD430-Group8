@@ -50,7 +50,7 @@ export default function Navbar() {
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
               <div>
-                <MenuButton className="relative flex rounded-full text-sm focus:outline-none">
+                <MenuButton className="relative flex rounded-full text-sm focus:outline-none ">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
                   <UserCircleIcon className="h-8 w-8" />
@@ -63,7 +63,7 @@ export default function Navbar() {
                 <MenuItem>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
                   >
                     Your Profile
                   </a>
@@ -71,7 +71,7 @@ export default function Navbar() {
                 <MenuItem>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
                   >
                     Settings
                   </a>
@@ -79,7 +79,7 @@ export default function Navbar() {
                 <MenuItem>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
                   >
                     Sign out
                   </a>
