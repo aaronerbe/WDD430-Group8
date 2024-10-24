@@ -397,3 +397,34 @@ export async function fetchSearchResults(query: string): Promise<Product[]> {
       throw new Error('Failed to fetch product data.');
   }
 }
+
+export async function fetchUserCreatorData(){
+  try {
+      // Fetching the product by id
+      const result = await sql`
+          SELECT 
+              id, 
+              name, 
+              bio, 
+              email, 
+              password 
+          FROM users 
+          WHERE type = 'creator'`;
+
+      // have to break out the query result into structured format
+      const user: User = {
+          id: result.rows[0].id,
+          name: result.rows[0].name,
+          profile: result.rows[0].profile,
+          bio: result.rows[0].bio,
+          email: result.rows[0].email,
+          password: result.rows[0].password,
+          type: result.rows[0].type
+      };
+
+      return user; 
+  } catch (error) {
+      console.error('Database Error: ', error);
+      throw new Error('Failed to fetch user data.');
+  }
+}
