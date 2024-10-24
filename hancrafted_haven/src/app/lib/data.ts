@@ -376,11 +376,11 @@ export async function fetchSearchResults(query: string): Promise<Product[]> {
             category 
         FROM products
         WHERE
-        name LIKE ${`%${query}%`} OR
-        description LIKE ${`%${query}%`} OR
-        category LIKE ${`%${query}%`}`
-/*         product.id::text LIKE ${`%${query}%`} OR
-        product.user_id::text LIKE ${`%${query}%`} OR */
+        name ILIKE ${`%${query}%`} OR
+        price::text ILIKE ${`%${query}%`} OR
+        category ILIKE ${`%${query}%`}`
+/*         product.id::text ILIKE ${`%${query}%`} OR
+        product.user_id::text ILIKE ${`%${query}%`} OR */
 
     const products: Product[] = result.rows.map((row) => ({
         id: row.id,
