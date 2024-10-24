@@ -13,6 +13,7 @@ import { notFound } from "next/navigation";
 //import {redirect} from 'next/navigation'
 import OtherProducts from '@/app/ui/products/OtherProducts'
 import "@/app/creator/[creatorid]/creatorstyle.css";
+import Link from 'next/link';
 
 interface Params {
   params: {
@@ -71,7 +72,11 @@ export default async function ProductDetailsPage({ params }: Params) {
         />
         {/* if no 'other products', skips the title.  The component handles returning null if it's empty as well */}
         {!otherProductData || 
-        <h3 className="col-span-full text-2xl font-bold mb-4">Other Products By {creatorData.name}</h3>
+        <h3 className="col-span-full text-2xl font-bold mb-4">Other Products By 
+        {/*{creatorData.name}*/}
+        
+          <Link href={`/creator/${creatorData.id}`}> {creatorData.name}</Link>
+        </h3>
         }
         
         <OtherProducts

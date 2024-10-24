@@ -6,6 +6,7 @@ import { StarAvg } from '@/app/ui/reviews/StarRating';
 import AddReviewForm from '@/app/ui/reviews/ReviewForm';
 //import Products from '@/app/ui/products/ProductCard'
 import { useState } from 'react';
+import Link from 'next/link'
 
 const ProductDetail = ({
     product,
@@ -24,7 +25,8 @@ const ProductDetail = ({
     authUser: number;       //! hardcoded from page.tsx for addReview 
     reviewCheck: boolean    //! check is valid but uses hardcoded authUser from page.tsx
 }) => { 
-    console.log('user has reviewed check: ', reviewCheck)
+    //console.log('user has reviewed check: ', reviewCheck)
+    console.log(user.id)
     const [isFormOpen, setIsFormOpen] = useState(false);
     
     //Had to do this since this is a client side and cannot access the env variables to be able to write to the db.  Calls an api instead which handles it for us.
@@ -81,7 +83,11 @@ const ProductDetail = ({
                     </div>
                     {/* Name/Description/Stars Section */}
                     <div className="flex-1">
-                        <p className="text-3xl font-semibold  mb-8">{user.name}</p>
+                        <p className="text-3xl font-semibold  mb-8">
+                            <Link href={`/creator/${user.id}`}>
+                                {user.name}
+                            </Link>
+                        </p>
                         <div>
                             <p className="mb-8">{product.description}</p>
                         </div>
