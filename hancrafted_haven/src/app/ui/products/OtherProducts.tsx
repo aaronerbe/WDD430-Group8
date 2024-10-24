@@ -1,6 +1,6 @@
 import { Product, Image_ } from "@/app/lib/definitions";
 //import Image from "next/image";
-import ProductCard from '@/app/ui/products/cards'
+import ProductCard from "@/app/ui/products/cards";
 
 //interface ProductsProps {
 //  products: Product[]; // Pass the reviews array as a prop

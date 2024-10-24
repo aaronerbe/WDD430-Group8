@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useDebouncedCallback } from 'use-debounce';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { Suspense } from 'react';
+import { useDebouncedCallback } from "use-debounce";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
 
 
 export default function Search({ placeholder }: { placeholder: string }) {
@@ -13,9 +13,9 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
     if (term) {
-      params.set('query', term);
+      params.set("query", term);
     } else {
-      params.delete('query');
+      params.delete("query");
     }
     replace(`/search-results?${params.toString()}`);
   }, 300);
@@ -26,15 +26,14 @@ export default function Search({ placeholder }: { placeholder: string }) {
         Search
       </label>
       <Suspense fallback={<div>Loading...</div>}>
-          <input
-            className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-            placeholder={placeholder}
-            onChange={(e) => {
-              handleSearch(e.target.value);
+        <input
+          className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+          placeholder={placeholder}
+          onChange={(e) => {
+            handleSearch(e.target.value);
           }}
-          defaultValue={searchParams.get('query')?.toString()}
+          defaultValue={searchParams.get("query")?.toString()}
         />
-      
       </Suspense>
       <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
     </div>
