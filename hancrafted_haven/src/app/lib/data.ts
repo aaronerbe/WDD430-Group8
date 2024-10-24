@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import {Product, Image_, User, Review_} from '@/app/types/productTypes'
+import {Product, Image_, User, Review_} from '@/app/types/productTypes';
 //import {redirect} from 'next/navigation'
 
 export async function fetchProductData(productId: number): Promise<Product> {
