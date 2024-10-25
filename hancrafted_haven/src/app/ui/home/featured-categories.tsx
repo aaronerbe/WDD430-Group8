@@ -22,7 +22,7 @@ export default function FeaturedCategories() {
       <div className="flex flex-col w-full m-0">
         <div className="overflow-x-auto">
           <div className="flex justify-center gap-4 m-4">
-            {categories.map((category, i) => {
+            {categories.map((category) => {
               return (
                 <a
                   key={category}
