@@ -16,7 +16,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     } else {
       params.delete("query");
     }
-    replace(`/search-results?${params.toString()}`);
+    replace(`/products?${params.toString()}`);
   }, 300);
 
   return (
