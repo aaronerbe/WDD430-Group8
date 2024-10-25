@@ -26,7 +26,7 @@ export default function FeaturedCategories() {
               return (
                 <a
                   key={category}
-                  href={`search-results?query=${category}`}
+                  href={`products?query=${category}`}
                   className="flex items-center justify-center rounded-full min-w-32 p-2 bg-gray-800 text-slate-50 border border-transparent transition-transform duration-700 ease-in-out transform hover:bg-slate-50 hover:text-gray-800 hover:border-black hover:-translate-y-1"
                 >
                   <p className="text-lg font-semibold">{category}</p>

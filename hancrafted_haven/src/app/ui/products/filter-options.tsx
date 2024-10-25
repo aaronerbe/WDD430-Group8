@@ -51,7 +51,7 @@ const FilterOptions: React.FC = () => {
       params.delete("query");
     }
 
-    replace(`/search-results?${params.toString()}`);
+    replace(`/products?${params.toString()}`);
   }, 300);
 
   const handleOptionSelect = (option: Option) => {
