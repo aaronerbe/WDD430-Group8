@@ -61,7 +61,7 @@ export default async function ProductDetailsPage({ params }: Params) {
     
     //render product details
     return (
-      <div className="container">
+      <div className="container mx-auto">
         <ProductDetail
           product={productData}
           images={imageData}

@@ -220,7 +220,8 @@ export async function fetchUserData(userId: number): Promise<User> {
     // Fetching the product by id
     const result = await sql`
             SELECT 
-                id, 
+                id,
+                profile, 
                 name, 
                 bio, 
                 email, 
