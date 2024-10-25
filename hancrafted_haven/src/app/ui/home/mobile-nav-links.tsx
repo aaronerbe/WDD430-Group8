@@ -1,14 +1,11 @@
 "use client";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import {
-  DisclosureButton,
-  DisclosurePanel,
-} from "@headlessui/react";
+import { DisclosureButton, DisclosurePanel } from "@headlessui/react";
 
 const links = [
   { name: "Home", href: "/home" },
-  { name: "Categories", href: "/categories" },
+  { name: "Products", href: "/search-results" },
 ];
 
 const MobileNavLinks = () => {
