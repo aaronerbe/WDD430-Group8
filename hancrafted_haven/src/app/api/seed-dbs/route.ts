@@ -55,6 +55,7 @@ export async function GET() {
         await client.sql`        
             CREATE TABLE IF NOT EXISTS users (
                 id SERIAL PRIMARY KEY,
+                profile TEXT,
                 name VARCHAR(255) NOT NULL,
                 bio TEXT,
                 email TEXT NOT NULL UNIQUE,
@@ -122,11 +123,13 @@ export async function GET() {
         // Insert users
         console.log('Inserting users...');
         for (const user of users) {
+            //console.log(user.profile)
             const hashedPassword = await bcrypt.hash(user.password, 10);
             await client.sql`
-                INSERT INTO users (id, name, bio, email, password, type) 
+                INSERT INTO users (id, profile, name, bio, email, password, type) 
                 VALUES (
                     ${user.id}, 
+                    ${user.profile},
                     ${user.name}, 
                     ${user.bio},  
                     ${user.email}, 
