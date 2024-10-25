@@ -6,8 +6,6 @@ import { fetchProductsByUser, fetchSingleImageData, fetchUserData, fetchCollecti
 //import Link from 'next/link';
 import CreatorCard from '@/app/ui/creator/CreatorCard'
 
-
-
 interface Params {
   params: {
     creatorid: number;
@@ -16,24 +14,30 @@ interface Params {
 
 
 export default async function CreatorPage({ params }: Params) {
+  const authUser = true;  //just setting this for now for a trigger to make edit in place work.
+
   const {creatorid} = params;
   const userProducts = await fetchProductsByUser(Number(creatorid));
   const creatorData = await fetchUserData(creatorid)
   const collectionDesc = await fetchCollectionDesc(creatorid)
   const collectionProducts = await fetchCollectionProducts(collectionDesc.id)
-  console.log(collectionProducts)
+  //console.log(collectionProducts)
 
   const getImage = async (productId: number) => {
     const productImage = await fetchSingleImageData(productId);
     return productImage[0];
   };
 
+
   return (
     <div className="container mx-auto">
       {/* Creator Bio */}
-      <CreatorCard 
-        creatorData={creatorData}
-      />
+      <div className="relative">
+        <CreatorCard 
+          creatorData={creatorData}
+          authUser={authUser}
+        />
+      </div>
 
       <br /> <br />
       {/* Products By Creator */}
@@ -50,8 +54,6 @@ export default async function CreatorPage({ params }: Params) {
       </div>
 
       {/* Curated Products */}
-
-      {/* Products By Creator */}
       <h3 className="col-span-full text-2xl font-bold mb-4">
           {collectionDesc.title}
       </h3>
