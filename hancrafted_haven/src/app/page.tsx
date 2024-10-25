@@ -1,7 +1,5 @@
 import Banner from "./ui/home/banner";
 import FeaturedProducts from "./ui/home/featured-categories";
-import FullCatalog from "./ui/home/full-catalog";
-import { Suspense } from 'react';
 
 export default function HomePage() {
   return (
@@ -11,9 +9,6 @@ export default function HomePage() {
       </div>
 
       <FeaturedProducts />
-      <Suspense fallback={<div>Loading...</div>}>
-        <FullCatalog />
-      </Suspense>
     </main>
   );
 }
