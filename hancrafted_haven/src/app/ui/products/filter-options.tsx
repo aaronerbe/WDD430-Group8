@@ -42,20 +42,17 @@ const FilterOptions: React.FC = () => {
     Price: null,
   });
 
-  const handleFilter = useDebouncedCallback(
-    (term: string | null, _type: string) => {
-      const params = new URLSearchParams(searchParams);
+  const handleFilter = useDebouncedCallback((term: string | null) => {
+    const params = new URLSearchParams(searchParams);
 
-      if (term) {
-        params.set("query", term);
-      } else {
-        params.delete("query");
-      }
+    if (term) {
+      params.set("query", term);
+    } else {
+      params.delete("query");
+    }
 
-      replace(`/search-results?${params.toString()}`);
-    },
-    300
-  );
+    replace(`/search-results?${params.toString()}`);
+  }, 300);
 
   const handleOptionSelect = (option: Option) => {
     setSelectedOptions((prev) => {
@@ -69,9 +66,9 @@ const FilterOptions: React.FC = () => {
 
       // Clear search params if deselecting
       if (isCurrentlySelected) {
-        handleFilter(null, option.type); // Clear the filter for this type
+        handleFilter(null); // Clear the filter for this type
       } else {
-        handleFilter(option.name, option.type); // Set the new filter
+        handleFilter(option.name); // Set the new filter
       }
 
       return newSelected;
