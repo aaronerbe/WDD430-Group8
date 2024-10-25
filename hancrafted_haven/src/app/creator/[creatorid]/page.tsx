@@ -35,7 +35,7 @@ export default async function CreatorPage({ params }: Params) {
       <div className="relative">
         <CreatorCard 
           creatorData={creatorData}
-          authUser
+          authUser={authUser}
         />
       </div>
 
