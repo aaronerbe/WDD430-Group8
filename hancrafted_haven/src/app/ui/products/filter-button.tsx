@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@headlessui/react";
 
 interface FilterButtonProps {
