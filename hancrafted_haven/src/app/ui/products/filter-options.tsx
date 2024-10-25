@@ -43,7 +43,7 @@ const FilterOptions: React.FC = () => {
   });
 
   const handleFilter = useDebouncedCallback(
-    (term: string | null, type: string) => {
+    (term: string | null, _type: string) => {
       const params = new URLSearchParams(searchParams);
 
       if (term) {
