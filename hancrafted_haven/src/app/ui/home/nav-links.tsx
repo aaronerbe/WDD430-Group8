@@ -4,8 +4,9 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { name: "Home", href: "/home" },
-  { name: "Categories", href: "/categories" },
+  { name: "Home", href: "/" },
+  { name: "Products", href: "/products" },
+  { name: "Login", href: "/login" },
 ];
 
 const NavLinks = () => {

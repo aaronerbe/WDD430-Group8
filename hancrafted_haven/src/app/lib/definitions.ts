@@ -66,3 +66,15 @@ export interface Review_ {
   rating: number;
   comment: string;
 }
+
+export interface CollectionDesc {
+  id: number;
+  user_id: number;
+  title: string;
+  description: string;
+}
+
+export interface CollectionProducts {
+  collection_id: number;
+  product_id: number;
+}

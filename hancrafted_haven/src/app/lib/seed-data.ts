@@ -149,6 +149,19 @@ const users = [
         password: '123456!aA', // This should be hashed in production
         type: 'admin'
     },
+
+
+    {
+        id: '16',
+        profile: '/profile-images/olgokepix.jpg',
+        name: 'Olagoke Amiola',
+        bio: "user",
+        email: 'olagoke@testemail.com',
+        password: '654321', // This should be hashed in production
+        type: 'admin'
+    },
+
+
 ];
 
 const products = [
@@ -1291,82 +1304,437 @@ const reviews = [
 ]
 
 // Collections Table
+//const collections = [
+//    {
+//        id: '1',
+//        user_id: users[0].id, // Jane Doe
+//        title: 'Handmade Treasures',
+//        description: 'A curated collection of unique handmade items, perfect for gift-giving.',
+//    },
+//    {
+//        id: '2',
+//        user_id: users[1].id, // John Smith
+//        title: 'Wooden Wonders',
+//        description: 'A selection of beautifully crafted wooden furniture and decor.',
+//    },
+//    {
+//        id: '3',
+//        user_id: users[2].id, // Emily Davis
+//        title: 'Jewelry Collection',
+//        description: 'An exquisite collection of handmade jewelry pieces.',
+//    },
+//    {
+//        id: '4',
+//        user_id: users[3].id, // Alex Johnson
+//        title: 'Eco-Friendly Living',
+//        description: 'Products that promote sustainability and a greener lifestyle.',
+//    },
+//];
 const collections = [
     {
         id: '1',
         user_id: users[0].id, // Jane Doe
-        title: 'Handmade Treasures',
-        description: 'A curated collection of unique handmade items, perfect for gift-giving.',
+        title: 'Artisanal Creations',
+        description: 'Explore a vibrant collection of artisanal products crafted by talented makers. From unique pottery to handwoven textiles, this collection showcases the beauty and creativity of handmade goods. Each piece tells a story and adds a touch of individuality to your home or wardrobe.',
     },
     {
         id: '2',
         user_id: users[1].id, // John Smith
-        title: 'Wooden Wonders',
-        description: 'A selection of beautifully crafted wooden furniture and decor.',
+        title: 'Crafted Comforts',
+        description: 'Dive into a world of comfort with our Crafted Comforts collection. Featuring a diverse array of handmade items that enhance your living space, this collection includes everything from cozy blankets to beautifully designed furniture. Each product is made with care, ensuring quality and style for your home.',
     },
     {
         id: '3',
         user_id: users[2].id, // Emily Davis
-        title: 'Jewelry Collection',
-        description: 'An exquisite collection of handmade jewelry pieces.',
+        title: 'Timeless Treasures',
+        description: 'Timeless Treasures is a curated selection of products that celebrate craftsmanship and artistry. This collection features an eclectic mix of handmade goods, ranging from exquisite jewelry to stunning home decor. Each piece is carefully crafted, making it a perfect gift for loved ones or a cherished addition to your collection.',
     },
     {
         id: '4',
         user_id: users[3].id, // Alex Johnson
-        title: 'Eco-Friendly Living',
-        description: 'Products that promote sustainability and a greener lifestyle.',
+        title: 'Sustainable Selections',
+        description: 'Our Sustainable Selections collection is dedicated to eco-friendly products that promote a greener lifestyle. This collection features a variety of items made from sustainable materials, designed to reduce environmental impact without sacrificing style. Perfect for those looking to make mindful choices in their daily lives.',
     },
 ];
 
+
+
 // Collection Products Linking Table
+// Collection Products Table
 const collectionProducts = [
-    // Products in Handmade Treasures
-    { collection_id: '1', product_id: products[1].id }, // Wooden Coffee Table (John Smith)
-    { collection_id: '1', product_id: products[2].id }, // Leaf Pendant Necklace (Emily Davis)
-    { collection_id: '1', product_id: products[3].id }, // Leather Messenger Bag (Emily Davis)
-    { collection_id: '1', product_id: products[5].id }, // Wooden Dining Chair (John Smith)
-    { collection_id: '1', product_id: products[6].id }, // Reclaimed Wood Bookshelf (John Smith)
-    { collection_id: '1', product_id: products[8].id }, // Bracelet (Emily Davis)
-    { collection_id: '1', product_id: products[9].id }, // Earrings (Emily Davis)
-    { collection_id: '1', product_id: products[10].id }, // Necklace (Emily Davis)
-    { collection_id: '1', product_id: products[4].id }, // Another Necklace (Alex Johnson)
-    { collection_id: '1', product_id: products[7].id }, // Eco-Friendly Yoga Mat (Alex Johnson)
+    {
+        collection_id: '1', // Artisanal Creations
+        product_id: '1', // Handcrafted Ceramic Mug
+    },
+    {
+        collection_id: '1', // Artisanal Creations
+        product_id: '2', // Hand-Painted Ceramic Plate
+    },
+    {
+        collection_id: '1', // Artisanal Creations
+        product_id: '5', // Handwoven Throw Blanket
+    },
+    {
+        collection_id: '1', // Artisanal Creations
+        product_id: '13', // Sterling Silver Leaf Pendant Necklace
+    },
+    {
+        collection_id: '1', // Artisanal Creations
+        product_id: '15', // Copper Wire Wrapped Earrings
+    },
+    {
+        collection_id: '1', // Artisanal Creations
+        product_id: '18', // Handcrafted Wall Hanging
+    },
 
-    // Products in Wooden Wonders
-    { collection_id: '2', product_id: products[0].id }, // Handmade Ceramic Mug (Jane Doe)
-    { collection_id: '2', product_id: products[4].id }, // Leather Messenger Bag (Emily Davis)
-    { collection_id: '2', product_id: products[9].id }, // Natural Coconut Shell Bowls (Alex Johnson)
-    { collection_id: '2', product_id: products[8].id }, // Organic Cotton Gym Bag (Alex Johnson)
-    { collection_id: '2', product_id: products[10].id }, // Another Product (Emily Davis)
-    { collection_id: '2', product_id: products[11].id }, // Another Product (Emily Davis)
-    { collection_id: '2', product_id: products[12].id }, // Another Product (Alex Johnson)
-    { collection_id: '2', product_id: products[13].id }, // Another Product (Alex Johnson)
-    { collection_id: '2', product_id: products[14].id }, // Another Product (Alex Johnson)
-    { collection_id: '2', product_id: products[15].id }, // Another Product (Alex Johnson)
+    {
+        collection_id: '2', // Crafted Comforts
+        product_id: '4', // Rustic Ceramic Serving Bowl
+    },
+    {
+        collection_id: '2', // Crafted Comforts
+        product_id: '6', // Textured Ceramic Coasters (Set of 4)
+    },
+    {
+        collection_id: '2', // Crafted Comforts
+        product_id: '7', // Reclaimed Wood Coffee Table
+    },
+    {
+        collection_id: '2', // Crafted Comforts
+        product_id: '8', // Handcrafted Wooden Bookshelf
+    },
+    {
+        collection_id: '2', // Crafted Comforts
+        product_id: '10', // Solid Oak Bar Stool
+    },
+    {
+        collection_id: '2', // Crafted Comforts
+        product_id: '9', // Rustic Wooden Dining Table
+    },
 
-    // Products in Jewelry Collection
-    { collection_id: '3', product_id: products[8].id }, // Bracelet (Emily Davis)
-    { collection_id: '3', product_id: products[9].id }, // Earrings (Emily Davis)
-    { collection_id: '3', product_id: products[2].id }, // Leaf Pendant Necklace (Emily Davis)
-    { collection_id: '3', product_id: products[10].id }, // Necklace (Emily Davis)
-    { collection_id: '3', product_id: products[11].id }, // Another Necklace (Alex Johnson)
-    { collection_id: '3', product_id: products[12].id }, // Another Product (Alex Johnson)
-    { collection_id: '3', product_id: products[13].id }, // Another Product (Alex Johnson)
-    { collection_id: '3', product_id: products[14].id }, // Another Product (Alex Johnson)
-    { collection_id: '3', product_id: products[15].id }, // Another Product (Alex Johnson)
-    { collection_id: '3', product_id: products[16].id }, // Another Product (Alex Johnson)
+    {
+        collection_id: '3', // Timeless Treasures
+        product_id: '3', // Unique Leather Journal
+    },
+    {
+        collection_id: '3', // Timeless Treasures
+        product_id: '12', // Wooden Wall Art
+    },
+    {
+        collection_id: '3', // Timeless Treasures
+        product_id: '13', // Sterling Silver Leaf Pendant Necklace
+    },
+    {
+        collection_id: '3', // Timeless Treasures
+        product_id: '14', // Gold Plated Bracelet with Gemstones
+    },
+    {
+        collection_id: '3', // Timeless Treasures
+        product_id: '19', // Eco-Friendly Yoga Mat
+    },
+    {
+        collection_id: '3', // Timeless Treasures
+        product_id: '11', // Reclaimed Wood Side Table
+    },
 
-    // Products in Eco-Friendly Living
-    { collection_id: '4', product_id: products[19].id }, // Eco-Friendly Yoga Mat (Alex Johnson)
-    { collection_id: '4', product_id: products[20].id }, // Handcrafted Wooden Meditation Bench (Alex Johnson)
-    { collection_id: '4', product_id: products[21].id }, // Organic Cotton Gym Bag (Alex Johnson)
-    { collection_id: '4', product_id: products[22].id }, // Natural Coconut Shell Bowls (Alex Johnson)
-    { collection_id: '4', product_id: products[23].id }, // Bamboo Water Bottle (Alex Johnson)
-    { collection_id: '4', product_id: products[1].id }, // Wooden Coffee Table (John Smith)
-    { collection_id: '4', product_id: products[2].id }, // Leaf Pendant Necklace (Emily Davis)
-    { collection_id: '4', product_id: products[4].id }, // Handmade Ceramic Mug (Jane Doe)
-    { collection_id: '4', product_id: products[5].id }, // Wooden Dining Chair (John Smith)
-    { collection_id: '4', product_id: products[6].id }, // Reclaimed Wood Bookshelf (John Smith)
+    {
+        collection_id: '4', // Sustainable Selections
+        product_id: '19', // Eco-Friendly Yoga Mat
+    },
+    {
+        collection_id: '4', // Sustainable Selections
+        product_id: '8', // Handcrafted Wooden Bookshelf
+    },
+    {
+        collection_id: '4', // Sustainable Selections
+        product_id: '10', // Solid Oak Bar Stool
+    },
+    {
+        collection_id: '4', // Sustainable Selections
+        product_id: '5', // Handwoven Throw Blanket
+    },
+    {
+        collection_id: '4', // Sustainable Selections
+        product_id: '15', // Copper Wire Wrapped Earrings
+    },
+    {
+        collection_id: '4', // Sustainable Selections
+        product_id: '2', // Hand-Painted Ceramic Plate
+    },
 ];
+
+
+
+
+
+
+//const collectionProducts = [
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '1', // Handcrafted Ceramic Mug
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '2', // Hand-Painted Ceramic Plate
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '4', // Rustic Ceramic Serving Bowl
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '13', // Sterling Silver Leaf Pendant Necklace
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '14', // Gold Plated Bracelet with Gemstones
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '19', // Eco-Friendly Yoga Mat
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '8', // Handcrafted Wooden Bookshelf
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '10', // Solid Oak Bar Stool
+//    },
+    
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '7', // Reclaimed Wood Coffee Table
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '9', // Rustic Wooden Dining Table
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '12', // Wooden Wall Art
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '11', // Reclaimed Wood Side Table
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '8', // Handcrafted Wooden Bookshelf
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '6', // Textured Ceramic Coasters (Set of 4)
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '4', // Rustic Ceramic Serving Bowl
+//    },
+    
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '13', // Sterling Silver Leaf Pendant Necklace
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '14', // Gold Plated Bracelet with Gemstones
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '15', // Copper Wire Wrapped Earrings
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '17', // Sterling Silver Cuff Bracelet
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '19', // Eco-Friendly Yoga Mat
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '1', // Handcrafted Ceramic Mug
+//    },
+    
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '19', // Eco-Friendly Yoga Mat
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '8', // Handcrafted Wooden Bookshelf
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '10', // Solid Oak Bar Stool
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '6', // Textured Ceramic Coasters (Set of 4)
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '7', // Reclaimed Wood Coffee Table
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '9', // Rustic Wooden Dining Table
+//    },
+//];
+
+
+
+
+//const collectionProducts = [
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '1',    // Handcrafted Ceramic Mug
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '2',    // Hand-Painted Ceramic Plate
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '3',    // Ceramic Planter Pot
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '4',    // Rustic Ceramic Serving Bowl
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '5',    // Handmade Ceramic Vase
+//    },
+//    {
+//        collection_id: '1', // Handmade Treasures
+//        product_id: '6',    // Textured Ceramic Coasters (Set of 4)
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '7',    // Reclaimed Wood Coffee Table
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '8',    // Handcrafted Wooden Bookshelf
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '9',    // Rustic Wooden Dining Table
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '10',   // Solid Oak Bar Stool
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '11',   // Reclaimed Wood Side Table
+//    },
+//    {
+//        collection_id: '2', // Wooden Wonders
+//        product_id: '12',   // Wooden Wall Art
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '13',   // Sterling Silver Leaf Pendant Necklace
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '14',   // Gold Plated Bracelet with Gemstones
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '15',   // Copper Wire Wrapped Earrings
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '16',   // Handmade Silver Ring with Turquoise Stone
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '17',   // Sterling Silver Cuff Bracelet
+//    },
+//    {
+//        collection_id: '3', // Jewelry Collection
+//        product_id: '18',   // Gold Vermeil Hoop Earrings
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '21',   // Organic Cotton Gym Bag
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '20',   // Handcrafted Wooden Meditation Bench
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '19',   // Eco-Friendly Yoga Mat
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '22',   // Natural Coconut Shell Bowls (Set of 2)
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '23',   // Bamboo Water Bottle
+//    },
+//    {
+//        collection_id: '4', // Eco-Friendly Living
+//        product_id: '24',   // Recycled Paper Journal
+//    },
+//];
+
+//const collectionProducts = [
+//    // Products in Handmade Treasures
+//    { 
+//        collection_id: '1', 
+//        product_id: products[1].id 
+//    }, // Wooden Coffee Table (John Smith)
+//    { collection_id: '1', product_id: products[2].id }, // Leaf Pendant Necklace (Emily Davis)
+//    { collection_id: '1', product_id: products[3].id }, // Leather Messenger Bag (Emily Davis)
+//    { collection_id: '1', product_id: products[5].id }, // Wooden Dining Chair (John Smith)
+//    { collection_id: '1', product_id: products[6].id }, // Reclaimed Wood Bookshelf (John Smith)
+//    { collection_id: '1', product_id: products[8].id }, // Bracelet (Emily Davis)
+//    { collection_id: '1', product_id: products[9].id }, // Earrings (Emily Davis)
+//    { collection_id: '1', product_id: products[10].id }, // Necklace (Emily Davis)
+//    { collection_id: '1', product_id: products[4].id }, // Another Necklace (Alex Johnson)
+//    { collection_id: '1', product_id: products[7].id }, // Eco-Friendly Yoga Mat (Alex Johnson)
+
+//    // Products in Wooden Wonders
+//    { collection_id: '2', product_id: products[0].id }, // Handmade Ceramic Mug (Jane Doe)
+//    { collection_id: '2', product_id: products[4].id }, // Leather Messenger Bag (Emily Davis)
+//    { collection_id: '2', product_id: products[9].id }, // Natural Coconut Shell Bowls (Alex Johnson)
+//    { collection_id: '2', product_id: products[8].id }, // Organic Cotton Gym Bag (Alex Johnson)
+//    { collection_id: '2', product_id: products[10].id }, // Another Product (Emily Davis)
+//    { collection_id: '2', product_id: products[11].id }, // Another Product (Emily Davis)
+//    { collection_id: '2', product_id: products[12].id }, // Another Product (Alex Johnson)
+//    { collection_id: '2', product_id: products[13].id }, // Another Product (Alex Johnson)
+//    { collection_id: '2', product_id: products[14].id }, // Another Product (Alex Johnson)
+//    { collection_id: '2', product_id: products[15].id }, // Another Product (Alex Johnson)
+
+//    // Products in Jewelry Collection
+//    { collection_id: '3', product_id: products[8].id }, // Bracelet (Emily Davis)
+//    { collection_id: '3', product_id: products[9].id }, // Earrings (Emily Davis)
+//    { collection_id: '3', product_id: products[2].id }, // Leaf Pendant Necklace (Emily Davis)
+//    { collection_id: '3', product_id: products[10].id }, // Necklace (Emily Davis)
+//    { collection_id: '3', product_id: products[11].id }, // Another Necklace (Alex Johnson)
+//    { collection_id: '3', product_id: products[12].id }, // Another Product (Alex Johnson)
+//    { collection_id: '3', product_id: products[13].id }, // Another Product (Alex Johnson)
+//    { collection_id: '3', product_id: products[14].id }, // Another Product (Alex Johnson)
+//    { collection_id: '3', product_id: products[15].id }, // Another Product (Alex Johnson)
+//    { collection_id: '3', product_id: products[16].id }, // Another Product (Alex Johnson)
+
+//    // Products in Eco-Friendly Living
+//    { collection_id: '4', product_id: products[19].id }, // Eco-Friendly Yoga Mat (Alex Johnson)
+//    { collection_id: '4', product_id: products[20].id }, //XX Handcrafted Wooden Meditation Bench (Alex Johnson)
+//    { collection_id: '4', product_id: products[21].id }, //XX Organic Cotton Gym Bag (Alex Johnson)
+//    { collection_id: '4', product_id: products[22].id }, //XX Natural Coconut Shell Bowls (Alex Johnson)
+//    { collection_id: '4', product_id: products[23].id }, //XX Bamboo Water Bottle (Alex Johnson)
+//    { collection_id: '4', product_id: products[1].id }, // Wooden Coffee Table (John Smith)
+//    { collection_id: '4', product_id: products[2].id }, // Leaf Pendant Necklace (Emily Davis)
+//    { collection_id: '4', product_id: products[4].id }, // Handmade Ceramic Mug (Jane Doe)
+//    { collection_id: '4', product_id: products[5].id }, // Wooden Dining Chair (John Smith)
+//    { collection_id: '4', product_id: products[6].id }, // Reclaimed Wood Bookshelf (John Smith)
+//];
 
 export { users, products, productImages, reviews, collections, collectionProducts};
