@@ -547,3 +547,39 @@ export async function fetchCollectionProducts(collectionId: number): Promise<Pro
     throw new Error("Failed to fetch collection product data.");
   }
 }
+
+export async function updateUserName(
+  userId: number,
+  name: string,
+) {
+  try {
+    const result = await sql`
+            UPDATE users
+            SET
+                name = ${name}
+            WHERE id = ${userId}
+        `;
+    console.log("Update User Name");
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to update User Name ");
+  }
+}
+
+export async function updateUserBio(
+  userId: number,
+  bio: string,
+) {
+  try {
+    const result = await sql`
+            UPDATE users
+            SET
+                bio = ${bio}
+            WHERE id = ${userId}
+        `;
+    console.log("Update User Bio");
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to update User Bio ");
+  }
+}
