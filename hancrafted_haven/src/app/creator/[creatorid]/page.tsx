@@ -5,10 +5,6 @@ import ProductCard from "../../ui/products/cards";
 import { fetchProductsByUser, fetchSingleImageData, fetchUserData, fetchCollectionDesc, fetchCollectionProducts } from "@/app/lib/data";
 //import Link from 'next/link';
 import CreatorCard from '@/app/ui/creator/CreatorCard'
-import { PencilIcon, PlusIcon } from '@heroicons/react/24/outline';
-
-
-
 
 interface Params {
   params: {
