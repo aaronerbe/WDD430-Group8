@@ -5,7 +5,7 @@ import { DisclosureButton, DisclosurePanel } from "@headlessui/react";
 
 const links = [
   { name: "Home", href: "/home" },
-  { name: "Products", href: "/search-results" },
+  { name: "Products", href: "/products" },
 ];
 
 const MobileNavLinks = () => {

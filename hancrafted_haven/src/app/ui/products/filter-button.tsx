@@ -11,7 +11,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({ text, selected }) => {
   return (
     <Button
       className={`px-2 border rounded-full ${
-        selected ? "bg-blue-500 text-white" : "bg-white text-black"
+        selected ? "bg-sky-900 text-white" : "bg-white text-black"
       }`}
     >
       {text}
