@@ -1,8 +1,10 @@
 'use client'
 import { User } from "@/app/lib/definitions";
 import Image from 'next/image';
-import { PencilIcon, PlusIcon } from '@heroicons/react/24/outline';
 import React, { useState } from 'react';
+import { PencilIcon} from '@heroicons/react/24/outline';
+//import { PencilIcon, PlusIcon } from '@heroicons/react/24/outline';
+
 
 
 const CreatorCard = ({
@@ -52,11 +54,29 @@ const CreatorCard = ({
                         width={400}
                         height={400}
                     />
+                    {/* //! TODO Need to change this to be an upload feature to upload a pic and update the profile URL */}
                     {authUser && (
                             <PencilIcon className="absolute right-4 h-5 w-5 text-white cursor-pointer" 
                                 onClick={() => setIsEditingProfilePic(true)}
                             />
                     )}
+                    
+                    {isEditingProfilePic ?(
+                    <div>
+                        <textarea
+                            value={profilePic}
+                            onChange={(e) => setProfilePic(e.target.value)}
+                            className="border border-gray-300 p-2 w-full"
+                        />
+                        <button onClick={handleProfilePicSave} className="mt-2 bg-blue-500 text-white p-2">
+                            Save
+                        </button>
+                    </div>
+                ) : (
+                    <p className="text-gray-700 max-w-md">
+                    </p>
+                )}
+                    
                 </div>
             </div>
             <div className="text-center md:text-left">
