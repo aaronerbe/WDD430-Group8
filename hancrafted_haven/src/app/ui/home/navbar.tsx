@@ -7,17 +7,14 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Search from "../search";
 import NavLinks from "./nav-links";
+import MobileNavLinks from "./mobile-nav-links";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import SmHHLogo from "../sm-hh-logo";
-import MobileNavLinks from "./mobile-nav-links";
-import { Suspense } from "react";
-
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav">
+    <Disclosure as="nav" className="border-b border-gray-200">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -44,11 +41,7 @@ export default function Navbar() {
                 <NavLinks />
               </div>
             </div>
-            <div className="flex flex-shrink-0 items-center">
-              <Suspense fallback={<div>Loading...</div>}>
-                <Search placeholder="Find a product..." />
-              </Suspense>
-            </div>
+            <div className="flex flex-shrink-0 items-center"></div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             {/* Profile dropdown */}
@@ -93,7 +86,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-
       <MobileNavLinks />
     </Disclosure>
   );

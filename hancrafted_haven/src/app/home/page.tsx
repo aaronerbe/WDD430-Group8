@@ -1,4 +1,4 @@
-import FeaturedProducts from "../ui/home/featured-categories";
+import FeaturedCategories from "../ui/home/featured-categories";
 import Banner from "../ui/home/banner";
 
 export default function HomePage() {
@@ -7,8 +7,7 @@ export default function HomePage() {
       <div className="mb-4">
         <Banner />
       </div>
-
-      <FeaturedProducts />
+      <FeaturedCategories />
     </main>
   );
 }

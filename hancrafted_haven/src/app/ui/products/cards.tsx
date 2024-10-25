@@ -11,7 +11,7 @@ export default async function ProductCard({
   return (
     <a
       href={`/creator/${product.user_id}/product/${product.id}`}
-      className="max-w-sm shadow-lg shadow-slate-500/50"
+      className="max-w-56 shadow-lg shadow-slate-500/50"
     >
       <div className="w-56">
         <div className="h-36 w-full">
