@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { Product, Image_, User, Review_ } from "@/app/lib/definitions";
+import { Product, Image_, User, Review_, CollectionDesc, CollectionProducts} from "@/app/lib/definitions";
 //import {redirect} from 'next/navigation'
 
 export async function fetchProductData(productId: number): Promise<Product> {
@@ -220,7 +220,8 @@ export async function fetchUserData(userId: number): Promise<User> {
     // Fetching the product by id
     const result = await sql`
             SELECT 
-                id, 
+                id,
+                profile, 
                 name, 
                 bio, 
                 email, 
@@ -484,5 +485,65 @@ export async function filterByPrice(lowPrice: number, highPrice: number): Promis
   } catch (error) {
       console.error('Database Error: ', error);
       throw new Error('Failed to fetch product data.');
+  }
+}
+
+
+export async function fetchCollectionDesc(userId: number): Promise<CollectionDesc> {
+  try {
+    const result = await sql`
+            SELECT 
+                id, 
+                user_id, 
+                title, 
+                description 
+            FROM collections 
+            WHERE user_id = ${userId}`;
+    const collectionDesc: CollectionDesc = {
+      id: result.rows[0].id,
+      user_id: result.rows[0].user_id,
+      title: result.rows[0].title,
+      description: result.rows[0].description,
+    };
+
+    return collectionDesc;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to fetch collection description data.");
+  }
+}
+
+export async function fetchCollectionProducts(collectionId: number): Promise<Product[]> {
+  try {
+    // Fetching the products by collection id
+    const result = await sql`
+      SELECT 
+        collection_id, 
+        product_id
+      FROM collection_products 
+      WHERE collection_id = ${collectionId}
+    `;
+
+    if (!result || !result.rows) {
+      throw new Error("No rows returned from the database");
+    }
+
+    const collectionTable: CollectionProducts[] = result.rows.map((row) => ({
+      collection_id: row.collection_id,
+      product_id: row.product_id,
+    }));
+
+    const products = await Promise.all(collectionTable.map(async (collection) => {
+      const productData = await fetchProductData(collection.product_id);
+      return {
+        ...productData,
+      };
+    }));
+
+    return products; // Return the new array of objects with product data included
+
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to fetch collection product data.");
   }
 }
