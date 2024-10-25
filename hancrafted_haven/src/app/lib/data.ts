@@ -553,7 +553,7 @@ export async function updateUserName(
   name: string,
 ) {
   try {
-    const result = await sql`
+    await sql`
             UPDATE users
             SET
                 name = ${name}
@@ -571,7 +571,7 @@ export async function updateUserBio(
   bio: string,
 ) {
   try {
-    const result = await sql`
+    await sql`
             UPDATE users
             SET
                 bio = ${bio}
