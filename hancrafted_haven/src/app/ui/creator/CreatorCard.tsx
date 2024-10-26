@@ -13,8 +13,8 @@ const CreatorCard = ({
     authUser
 }:{
     creatorData: User
-    authenticatedUserId: number
-    authUser: boolean
+    authenticatedUserId?: number
+    authUser?: boolean
 }) =>{
     const creatorImg = creatorData.profile || '/default-profile-image.jpg';
     let tempUserName = creatorData.name;

@@ -12,8 +12,8 @@ const ProductCard = ({
 }: {
   product: Product;
   image: Image_;
-  authenticatedUserId: number;
-  authUser: boolean;
+  authenticatedUserId?: number;
+  authUser?: boolean;
 }) => {
 
   const [productName, setProductName] = useState(product.name || ""); 
