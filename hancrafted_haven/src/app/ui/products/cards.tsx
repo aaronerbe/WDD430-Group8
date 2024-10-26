@@ -134,7 +134,7 @@ const ProductCard = ({
         <div className="relative max-w-56 min-h-[270px] shadow-lg shadow-slate-500/50">
           <a
             href={`/creator/${product.user_id}/product/${product.id}`}
-            className="w-56"
+            className="w-56 cursor-pointer"
           >
             <div className="h-36 w-full relative">
               <Image

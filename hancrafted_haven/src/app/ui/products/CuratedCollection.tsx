@@ -29,13 +29,15 @@ const CollectionCard = ({
     const [collectionTitle, setCollectionTitle] = useState(title)
     //const [isEditingDescription, setIsEditingDescription] = useState(false);
     const [collectionDescription, setCollectionDescription] = useState(description);    
-    const [collectionProducts, setCollectionProducts] = useState(products);
-    const [collectionImages, setCollectionImages] = useState(images);
+    //const [collectionProducts, setCollectionProducts] = useState(products);
+    //const [collectionImages, setCollectionImages] = useState(images);
     const [disableSubmit, setDisableSubmit] = useState(false)
 
     //! temporary till we start messing w/ changing products (maybe)
-    setCollectionProducts(products)
-    setCollectionImages(images)
+    const collectionProducts = products;
+    const collectionImages = images;
+    //setCollectionProducts(products)
+    //setCollectionImages(images)
 
     const validateInputs = () => {
         let errorMessage = "";
