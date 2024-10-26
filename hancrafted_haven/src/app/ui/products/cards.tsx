@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Image_, Product } from "@/app/lib/definitions";
 import React, { useState } from 'react';
 import { PencilIcon } from '@heroicons/react/24/outline';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCard = ({
   product,
@@ -21,7 +23,8 @@ const ProductCard = ({
   const [productDescription, setProductDescription] = useState(product.description || "");
   const [productCategory, setProductCategory] = useState(product.category || "")
   const [isEditingProductInfo, setIsEditingProductInfo] = useState(false);
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  //const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [disableSubmit, setDisableSubmit] = useState(false)
 
   const validateInputs = () => {
     let errorMessage = "";
@@ -46,7 +49,14 @@ const ProductCard = ({
     }
 
     if (errorMessage) {
-      window.alert(`Please fix the following errors:\n\n${errorMessage}`);
+      //window.alert(`Please fix the following errors:\n\n${errorMessage}`);
+      toast.error(`Please fix the following errors:\n\n${errorMessage}`, {
+        position: "top-right", // Use string directly for the position
+        autoClose: 5000, // Auto close after 5 seconds
+        closeOnClick: true,
+        draggable: true,
+        onClose: () => setDisableSubmit(false),
+      });
       return false;
     }
 
@@ -55,6 +65,7 @@ const ProductCard = ({
 
   const handleProductInfoSave = async (productId: number) => {
     if (!validateInputs()){
+      setDisableSubmit(true);
       return;
     }
 
@@ -89,6 +100,7 @@ const ProductCard = ({
 
   return (
     <div>
+      <ToastContainer/>
       {isEditingProductInfo ? (
         <div>
           <textarea
@@ -114,6 +126,7 @@ const ProductCard = ({
           <button
             onClick={() => handleProductInfoSave(product.id)}
             className="mt-2 bg-blue-500 text-white p-2"
+            disabled={disableSubmit}
           >
             Save
           </button>

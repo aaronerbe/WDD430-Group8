@@ -44,6 +44,9 @@ importers:
       react-dom:
         specifier: 19.0.0-rc-f38c22b244-20240704
         version: 19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704)
+      react-toastify:
+        specifier: ^10.0.6
+        version: 10.0.6(react-dom@19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704))(react@19.0.0-rc-f38c22b244-20240704)
       swr:
         specifier: ^2.2.5
         version: 2.2.5(react@19.0.0-rc-f38c22b244-20240704)
@@ -1707,6 +1710,12 @@ packages:
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react-toastify@10.0.6:
+    resolution: {integrity: sha512-yYjp+omCDf9lhZcrZHKbSq7YMuK0zcYkDFTzfRFgTXkTFHZ1ToxwAonzA4JI5CxA91JpjFLmwEsZEgfYfOqI1A==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
   react@19.0.0-rc-f38c22b244-20240704:
     resolution: {integrity: sha512-OP8O6Oc1rdR9IdIKJRKaL1PYd4eGkn6f88VqiygWyyG4P4RmPPix5pp7MatqSt9TnBOcVT+lBMGoVxRgUFeudQ==}
@@ -3884,6 +3893,12 @@ snapshots:
       scheduler: 0.25.0-rc-f38c22b244-20240704
 
   react-is@16.13.1: {}
+
+  react-toastify@10.0.6(react-dom@19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704))(react@19.0.0-rc-f38c22b244-20240704):
+    dependencies:
+      clsx: 2.1.1
+      react: 19.0.0-rc-f38c22b244-20240704
+      react-dom: 19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704)
 
   react@19.0.0-rc-f38c22b244-20240704: {}
 
