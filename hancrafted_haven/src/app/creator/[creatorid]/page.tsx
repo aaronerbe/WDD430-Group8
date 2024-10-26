@@ -5,6 +5,8 @@ import CollectionCard from "@/app/ui/products/CuratedCollection"
 import { fetchProductsByUser, fetchSingleImageData, fetchUserData, fetchCollectionDesc, fetchCollectionProducts } from "@/app/lib/data";
 import CreatorCard from '@/app/ui/creator/CreatorCard';
 import { ToastContainer} from 'react-toastify'
+//import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
+
 
 interface Params {
   params: {
@@ -49,6 +51,19 @@ export default async function CreatorPage({ params }: Params) {
       <div className="productsContainer grid grid-cols-1 max-w-[80%] justify-items-center">
         {/* Products By Creator */}
         <h3 className="col-span-full text-3xl font-bold mb-4 mx-auto">My Work</h3>
+        {authUser && 
+                <button
+                className="mt-2 bg-blue-500 text-white p-2 rounded mb-4"
+                aria-label="Edit Collection"
+                >
+                  <a
+                    href={`/create`}
+                    className="w-56 cursor-pointer"
+                  >
+                  Add New Product
+                  </a>
+                </button>
+              }
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-28 mx-auto justify-items-center">
           {userProducts.map((product, index) => (
             <ProductCard

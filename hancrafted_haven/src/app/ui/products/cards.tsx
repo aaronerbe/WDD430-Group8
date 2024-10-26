@@ -147,22 +147,25 @@ const ProductCard = ({
             </div>
           </a>
           <div className="px-6 py-4 bg-white flex flex-col justify-between h-full relative">
-            <div className="flex items-center justify-between mb-2 min-h-[50px]">
-              <h2 className="text-md text-gray-800 font-semibold">
-                {product.name}
-              </h2>
-              {authUser && 
-                <button
-                  onClick={() => {
-                    setIsEditingProductInfo(true);
-                  }}
+          <div className="flex items-center mb-2 min-h-[50px]">
+            <h2 className="text-md text-gray-800 font-semibold">
+              {product.name}
+            </h2>
+            {authUser && (
+              <button
+                onClick={() => {
+                  setIsEditingProductInfo(true);
+                }}
+                className="ml-auto"
+                aria-label="Edit Product"
+              >
+                <PencilIcon 
                   className="h-5 w-5 text-gray-500 cursor-pointer"
-                  aria-label="Edit Product"
-                >
-                  <PencilIcon />
-                </button>
-              }
-            </div>
+                />
+              </button>
+            )}
+          </div>
+
             <div className="border border-slate-200 w-full mb-2"></div>
             <div className="flex">
               <p className="text-gray-800 font-semibold mt-auto">
