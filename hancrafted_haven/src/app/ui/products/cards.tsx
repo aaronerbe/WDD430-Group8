@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Image_, Product } from "@/app/lib/definitions";
 import React, { useState } from 'react';
 import { PencilIcon } from '@heroicons/react/24/outline';
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCard = ({

@@ -1,10 +1,9 @@
 'use client'
-import { User, Product, Image_} from "@/app/lib/definitions";
-import Image from 'next/image';
+import {Product, Image_} from "@/app/lib/definitions";
 import React, { useState } from 'react';
 import { PencilIcon} from '@heroicons/react/24/outline';
 import ProductCard from "../../ui/products/cards";
-import { ToastContainer, toast } from 'react-toastify'
+import {toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -33,6 +32,10 @@ const CollectionCard = ({
     const [collectionProducts, setCollectionProducts] = useState(products);
     const [collectionImages, setCollectionImages] = useState(images);
     const [disableSubmit, setDisableSubmit] = useState(false)
+
+    //! temporary till we start messing w/ changing products (maybe)
+    setCollectionProducts(products)
+    setCollectionImages(images)
 
     const validateInputs = () => {
         let errorMessage = "";
