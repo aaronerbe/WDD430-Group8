@@ -1,8 +1,10 @@
 import React from "react";
 import "./creatorstyle.css";
 import ProductCard from "../../ui/products/cards";
+import CollectionCard from "@/app/ui/products/CuratedCollection"
 import { fetchProductsByUser, fetchSingleImageData, fetchUserData, fetchCollectionDesc, fetchCollectionProducts } from "@/app/lib/data";
 import CreatorCard from '@/app/ui/creator/CreatorCard';
+import { ToastContainer} from 'react-toastify'
 
 interface Params {
   params: {
@@ -32,6 +34,8 @@ export default async function CreatorPage({ params }: Params) {
 
   return (
     <div className="container mx-auto">
+      <ToastContainer/>
+
       {/* Creator Bio */}
       <div className="relative">
         <CreatorCard 
@@ -58,6 +62,20 @@ export default async function CreatorPage({ params }: Params) {
 
       {/* Curated Products */}
       <h3 className="col-span-full text-3xl font-bold mb-4">A Curated Collection</h3>
+
+      <CollectionCard
+        collectionId={collectionDesc.id}
+        title={collectionDesc.title}
+        description={collectionDesc.description}
+        products={collectionProducts}
+        images={collectionImages}
+        authenticatedUserId={creatorid}
+        authUser={authUser}
+      />
+        
+
+
+      {/*<h3 className="col-span-full text-3xl font-bold mb-4">A Curated Collection</h3>
       <div className="max-w-[80%] mb-4 text-center mx-auto">
         <h4 className="text-2xl font-bold">{collectionDesc.title}</h4>
         <p className="">{collectionDesc.description}</p>
@@ -72,7 +90,7 @@ export default async function CreatorPage({ params }: Params) {
             authUser={false} // Hardcode to not allow editing these product cards
           />
         ))}
-      </div>
+      </div>*/}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-// /app/api/addReview/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { addReview } from '@/app/lib/data';
 

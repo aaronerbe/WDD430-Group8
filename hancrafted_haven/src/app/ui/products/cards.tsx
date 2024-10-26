@@ -100,7 +100,6 @@ const ProductCard = ({
 
   return (
     <div>
-      <ToastContainer/>
       {isEditingProductInfo ? (
         <div>
           <textarea

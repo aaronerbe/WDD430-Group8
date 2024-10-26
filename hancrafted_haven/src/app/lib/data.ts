@@ -583,3 +583,25 @@ export async function updateUserBio(
     throw new Error("Failed to update User Bio ");
   }
 }
+
+export async function editCollectionData(
+  id: number,
+  userId: number,
+  title: string,
+  description: string,
+) {
+  try {
+    await sql`
+            UPDATE collections
+            SET
+                id = ${id},
+                user_id = ${userId},
+                title = ${title},
+                description = ${description}
+            WHERE id = ${id} AND user_id = ${userId}
+        `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to update collections table ");
+  }
+}
