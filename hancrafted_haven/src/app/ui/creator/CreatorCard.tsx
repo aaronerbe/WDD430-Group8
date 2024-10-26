@@ -136,8 +136,8 @@ const CreatorCard = ({
                         </button>
                     </div>
                 ) : (
-                    <div className="flex items-center space-x-2 mb-2">
-                        <h1 className="text-3xl font-bold mb-4">{userName}</h1>
+                    <div className="flex flex-col items-center md:flex-row md:items-start space-x-2 mb-2">
+                        <h1 className="text-3xl font-bold mb-4 text-center md:text-left">{userName}</h1>
                         {authUser && (
                             <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 
                                 onClick={() => setIsEditingUserName(true)}
@@ -148,7 +148,7 @@ const CreatorCard = ({
                 )}
 
                 {/* About Me Bio */}
-                <div className="flex items-center space-x-2 mb-2">
+                <div className="flex flex-col items-center md:flex-row md:items-start space-x-2 mb-2">
                     <h2 className="text-xl font-semibold">About Me</h2>
                     {authUser && (
                         <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 

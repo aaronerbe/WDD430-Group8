@@ -85,7 +85,7 @@ const ProductDetail = ({
                     <div className="flex-1">
                         <p className="text-3xl font-semibold  mb-8">
                             <Link href={`/creator/${user.id}`}>
-                                {user.name}
+                                By {user.name}
                             </Link>
                         </p>
                         <div>

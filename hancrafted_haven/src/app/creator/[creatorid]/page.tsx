@@ -46,34 +46,35 @@ export default async function CreatorPage({ params }: Params) {
       </div>
 
       <br /> <br />
-      {/* Products By Creator */}
-      <h3 className="col-span-full text-3xl font-bold mb-4">My Work</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-28">
-        {userProducts.map((product, index) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            image={userImages[index]} // Pass the corresponding image
-            authenticatedUserId={creatorid}
-            authUser={authUser}
-          />
-        ))}
-      </div>
+      <div className="productsContainer grid grid-cols-1 max-w-[80%] justify-items-center">
+        {/* Products By Creator */}
+        <h3 className="col-span-full text-3xl font-bold mb-4 mx-auto">My Work</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-28 mx-auto justify-items-center">
+          {userProducts.map((product, index) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              image={userImages[index]} // Pass the corresponding image
+              authenticatedUserId={creatorid}
+              authUser={authUser}
+            />
+          ))}
+        </div>
 
-      {/* Curated Products */}
-      <h3 className="col-span-full text-3xl font-bold mb-4">A Curated Collection</h3>
+        {/* Curated Products */}
+        <h3 className="col-span-full text-3xl font-bold mb-4 mx-auto">A Curated Collection</h3>
 
-      <CollectionCard
-        collectionId={collectionDesc.id}
-        title={collectionDesc.title}
-        description={collectionDesc.description}
-        products={collectionProducts}
-        images={collectionImages}
-        authenticatedUserId={creatorid}
-        authUser={authUser}
-      />
+        <CollectionCard
+          collectionId={collectionDesc.id}
+          title={collectionDesc.title}
+          description={collectionDesc.description}
+          products={collectionProducts}
+          images={collectionImages}
+          authenticatedUserId={creatorid}
+          authUser={authUser}
+        />
         
-
+      </div>
 
       {/*<h3 className="col-span-full text-3xl font-bold mb-4">A Curated Collection</h3>
       <div className="max-w-[80%] mb-4 text-center mx-auto">

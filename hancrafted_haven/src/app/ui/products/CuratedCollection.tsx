@@ -132,13 +132,13 @@ const CollectionCard = ({
                         </div>
                         <p className="">{collectionDescription}</p>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20 justify-items-center sm:max-w-[100%] md:max-w-[100%] lg:max-w-[100%] xl:max-w-[100%] 2xl:max-w-[80%] mx-auto">
                         {collectionProducts.map((product, index) => (
                         <ProductCard
                             key={product.id}
                             product={product}
-                            image={collectionImages[index]} // Pass the corresponding image
-                            authenticatedUserId={authenticatedUserId} // Pass the authenticated user ID
+                            image={collectionImages[index]}
+                            authenticatedUserId={authenticatedUserId} 
                             authUser={false} // Hardcode to not allow editing these product cards
                         />
                         ))}
