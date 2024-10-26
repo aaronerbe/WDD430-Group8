@@ -22,11 +22,6 @@ const ProductCard = ({
   const [productCategory, setProductCategory] = useState(product.category || "")
   const [isEditingProductInfo, setIsEditingProductInfo] = useState(false);
 
-  let tempProductName = productName;
-  let tempProductPrice = productPrice;
-  let tempProductDescription = productDescription
-  let tempProductCategory = productCategory
-
   const handleProductInfoSave = async (productId: number) => {
     try {
       const response = await fetch('/api/updateProductInfo', {
@@ -44,25 +39,15 @@ const ProductCard = ({
         }),
       });
       if (!response.ok) {
-        //Doing this so if it fails, we can reset the info back to what it was originally for rendering instantly (so it doesn't render the bad values that didn't set in db)
         throw new Error('Failed to update product info');
       }
       setIsEditingProductInfo(false);
-      setProductName(productName);
-      setProductPrice(productPrice);
-      setProductDescription(productDescription);
-      setProductCategory(productCategory);
-      window.location.reload();
-      tempProductName = productName;
-      tempProductPrice = productPrice;
-      tempProductDescription = productDescription
-      tempProductCategory = productCategory
+      product.name = productName; 
+      product.price = parseFloat(productPrice);
+      product.description = productDescription;
+      product.category = productCategory;
     } catch (error) {
       console.error('Failed to update product info:', error);
-      setProductName(tempProductName)
-      setProductPrice(tempProductPrice)
-      setProductDescription(tempProductDescription)
-      setProductCategory(tempProductCategory)
     }
   };
 
@@ -113,32 +98,30 @@ const ProductCard = ({
               />
             </div>
           </a>
-            <div className="px-6 py-4 bg-white flex flex-col justify-between h-full relative">
-              <div className="flex items-center justify-between mb-2 min-h-[50px]">
-                <h2 className="text-md text-gray-800 font-semibold">
-                  {product.name}
-                </h2>
-                {authUser && 
-                  <button
-                    //onClick={(e) => {
-                    onClick={() => {
-                      //e.stopPropagation(); // Prevent link from being followed
-                      setIsEditingProductInfo(true);
-                    }}
-                    className="h-5 w-5 text-gray-500 cursor-pointer"
-                    aria-label="Edit Product"
-                  >
+          <div className="px-6 py-4 bg-white flex flex-col justify-between h-full relative">
+            <div className="flex items-center justify-between mb-2 min-h-[50px]">
+              <h2 className="text-md text-gray-800 font-semibold">
+                {product.name}
+              </h2>
+              {authUser && 
+                <button
+                  onClick={() => {
+                    setIsEditingProductInfo(true);
+                  }}
+                  className="h-5 w-5 text-gray-500 cursor-pointer"
+                  aria-label="Edit Product"
+                >
                   <PencilIcon />
                 </button>
-                }
-              </div>
-              <div className="border border-slate-200 w-full mb-2"></div>
-              <div className="flex">
-                <p className="text-gray-800 font-semibold mt-auto">
-                  ${product.price}
-                </p>
-              </div>
+              }
             </div>
+            <div className="border border-slate-200 w-full mb-2"></div>
+            <div className="flex">
+              <p className="text-gray-800 font-semibold mt-auto">
+                ${product.price}
+              </p>
+            </div>
+          </div>
         </div>
       )}
     </div>
