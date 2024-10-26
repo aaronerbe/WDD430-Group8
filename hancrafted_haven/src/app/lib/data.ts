@@ -605,3 +605,43 @@ export async function editCollectionData(
     throw new Error("Failed to update collections table ");
   }
 }
+
+export async function addToCollection(
+  collection_id: number,
+  product_id: number,
+) {
+  console.log("Attempting to add to collection with collection_id:", collection_id, "and product_id:", product_id);
+  
+  try {
+    await sql`
+      INSERT INTO collection_products (
+        collection_id,
+        product_id
+      )
+      VALUES (
+        ${collection_id},
+        ${product_id}
+      )
+      RETURNING *
+    `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to add new collection entry");
+  }
+}
+
+
+export async function removeFromCollection(
+  collection_id: number,
+  product_id: number,
+) {
+  try {
+      await sql`
+          DELETE from collection_products
+          WHERE collection_id = ${collection_id} AND product_id = ${product_id}
+      `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error(`Failed to remove from collection`);
+  }
+}

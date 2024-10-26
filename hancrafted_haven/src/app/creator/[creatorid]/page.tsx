@@ -63,6 +63,19 @@ export default async function CreatorPage({ params }: Params) {
 
         {/* Curated Products */}
         <h3 className="col-span-full text-3xl font-bold mb-4 mx-auto">A Curated Collection</h3>
+        {authUser && 
+                <button
+                className="mt-2 bg-blue-500 text-white p-2 rounded"
+                aria-label="Edit Collection"
+                >
+                  <a
+                    href={`/edit-collection/${creatorid}/${authUser}`}
+                    className="w-56 cursor-pointer"
+                  >
+                  Edit Collection
+                  </a>
+                </button>
+              }
 
         <CollectionCard
           collectionId={collectionDesc.id}
