@@ -21,8 +21,43 @@ const ProductCard = ({
   const [productDescription, setProductDescription] = useState(product.description || "");
   const [productCategory, setProductCategory] = useState(product.category || "")
   const [isEditingProductInfo, setIsEditingProductInfo] = useState(false);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  const validateInputs = () => {
+    let errorMessage = "";
+
+    if (!productName.trim()) {
+      errorMessage += "Product Name is required.\n";
+    }
+
+    if (!productDescription.trim()) {
+      errorMessage += "Product Description is required.\n";
+    }
+
+    if (!productCategory.trim()) {
+      errorMessage += "Product Category is required.\n";
+    }
+
+    const priceNumber = parseFloat(productPrice);
+    if (isNaN(priceNumber) || priceNumber < 0) {
+      errorMessage += "Price must be a valid positive number.\n";
+    } else if (!/^\d+(\.\d{1,2})?$/.test(productPrice)) {
+      errorMessage += "Price must be in the format of a dollar amount (e.g., 12.34).\n";
+    }
+
+    if (errorMessage) {
+      window.alert(`Please fix the following errors:\n\n${errorMessage}`);
+      return false;
+    }
+
+    return true;
+  };
 
   const handleProductInfoSave = async (productId: number) => {
+    if (!validateInputs()){
+      return;
+    }
+
     try {
       const response = await fetch('/api/updateProductInfo', {
         method: 'POST',
@@ -41,6 +76,7 @@ const ProductCard = ({
       if (!response.ok) {
         throw new Error('Failed to update product info');
       }
+      // Update state directly without reloading the page
       setIsEditingProductInfo(false);
       product.name = productName; 
       product.price = parseFloat(productPrice);
