@@ -44,7 +44,7 @@ export async function editProductData(
   try {
     //Update Product Data
     //only allow updating name, description, price, category
-    const result = await sql`
+    await sql`
             UPDATE products
             SET
                 name = ${name},
@@ -53,7 +53,7 @@ export async function editProductData(
                 category = ${category}
             WHERE id = ${productId} AND user_id = ${userId}
         `;
-    console.log("Update product:", result);
+    console.log("Update product:");
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Failed to update product table ");

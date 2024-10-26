@@ -3,8 +3,6 @@ import Image from "next/image";
 import { Image_, Product } from "@/app/lib/definitions";
 import React, { useState } from 'react';
 import { PencilIcon } from '@heroicons/react/24/outline';
-import { revalidatePath } from 'next/cache';
-
 
 const ProductCard = ({
   product,
