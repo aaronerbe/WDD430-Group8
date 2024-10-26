@@ -1,10 +1,8 @@
-//import Image from "next/image";
 import React from "react";
 import "./creatorstyle.css";
 import ProductCard from "../../ui/products/cards";
 import { fetchProductsByUser, fetchSingleImageData, fetchUserData, fetchCollectionDesc, fetchCollectionProducts } from "@/app/lib/data";
-//import Link from 'next/link';
-import CreatorCard from '@/app/ui/creator/CreatorCard'
+import CreatorCard from '@/app/ui/creator/CreatorCard';
 
 interface Params {
   params: {
@@ -12,22 +10,25 @@ interface Params {
   };
 }
 
-
 export default async function CreatorPage({ params }: Params) {
-  const authUser = true;  //just setting this for now for a trigger to make edit in place work.
+  const authUser = true;  // Just setting this for now for a trigger to make edit in place work.
+  const { creatorid } = params;
 
-  const {creatorid} = params;
-  const userProducts = await fetchProductsByUser(Number(creatorid));
-  const creatorData = await fetchUserData(creatorid)
-  const collectionDesc = await fetchCollectionDesc(creatorid)
-  const collectionProducts = await fetchCollectionProducts(collectionDesc.id)
-  //console.log(collectionProducts)
+  // Fetch data in parallel using Promise.all
+  const [userProducts, creatorData, collectionDesc] = await Promise.all([
+    fetchProductsByUser(Number(creatorid)),
+    fetchUserData(creatorid),
+    fetchCollectionDesc(creatorid),
+  ]);
 
-  const getImage = async (productId: number) => {
-    const productImage = await fetchSingleImageData(productId);
-    return productImage[0];
-  };
+  // Fetch collection products based on the collection description
+  const collectionProducts = await fetchCollectionProducts(collectionDesc.id);
 
+  // Fetch images for user products
+  const userImages = await Promise.all(userProducts.map(product => fetchSingleImageData(product.id).then(images => images[0])));
+  
+  // Fetch images for collection products
+  const collectionImages = await Promise.all(collectionProducts.map(product => fetchSingleImageData(product.id).then(images => images[0])));
 
   return (
     <div className="container mx-auto">
@@ -42,35 +43,33 @@ export default async function CreatorPage({ params }: Params) {
 
       <br /> <br />
       {/* Products By Creator */}
-      <h3 className="col-span-full text-2xl font-bold mb-4">Products By {creatorData.name}        
-      </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
-        {userProducts.map(async (product) => (
+      <h3 className="col-span-full text-3xl font-bold mb-4">My Work</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-28">
+        {userProducts.map((product, index) => (
           <ProductCard
             key={product.id}
             product={product}
-            image={await getImage(product.id)}
+            image={userImages[index]} // Pass the corresponding image
+            authenticatedUserId={creatorid}
+            authUser={authUser}
           />
         ))}
       </div>
 
       {/* Curated Products */}
-      <h3 className="col-span-full text-2xl font-bold mb-4">
-          {collectionDesc.title}
-      </h3>
-        <div className=" max-w-[80%] mb-4 text-center mx-auto">
-          <h4 className="font-bold">
-            A Curated Collection by {creatorData.name}</h4>
-          <p className="">
-            {collectionDesc.description}
-          </p>
-        </div>
+      <h3 className="col-span-full text-3xl font-bold mb-4">A Curated Collection</h3>
+      <div className="max-w-[80%] mb-4 text-center mx-auto">
+        <h4 className="text-2xl font-bold">{collectionDesc.title}</h4>
+        <p className="">{collectionDesc.description}</p>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
-        {collectionProducts.map(async (product) => (
+        {collectionProducts.map((product, index) => (
           <ProductCard
             key={product.id}
             product={product}
-            image={await getImage(product.id)}
+            image={collectionImages[index]} // Pass the corresponding image
+            authenticatedUserId={creatorid} // Pass the authenticated user ID
+            authUser={false} // Hardcode to not allow editing these product cards
           />
         ))}
       </div>

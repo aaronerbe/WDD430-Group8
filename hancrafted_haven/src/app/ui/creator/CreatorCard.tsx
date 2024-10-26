@@ -17,8 +17,6 @@ const CreatorCard = ({
     authUser: boolean
 }) =>{
     const creatorImg = creatorData.profile || '/default-profile-image.jpg';
-    //const creatorBio = creatorData.bio;
-    //const creatorName = creatorData.name;
     let tempUserName = creatorData.name;
     let tempBioText = creatorData.bio;
 
@@ -59,6 +57,7 @@ const CreatorCard = ({
             tempUserName=userName;
         } catch (error) {
             console.error('Failed to add update user name:', error);
+            setUserName(tempUserName)
         }
     };
 
@@ -138,7 +137,6 @@ const CreatorCard = ({
                     </div>
                 ) : (
                     <div className="flex items-center space-x-2 mb-2">
-                        {/*<h1 className="text-3xl font-bold mb-4">{creatorName}</h1>*/}
                         <h1 className="text-3xl font-bold mb-4">{userName}</h1>
                         {authUser && (
                             <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 
