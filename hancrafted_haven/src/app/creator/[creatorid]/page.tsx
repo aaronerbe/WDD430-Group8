@@ -5,7 +5,6 @@ import CollectionCard from "@/app/ui/products/CuratedCollection"
 import { fetchProductsByUser, fetchSingleImageData, fetchUserData, fetchCollectionDesc, fetchCollectionProducts } from "@/app/lib/data";
 import CreatorCard from '@/app/ui/creator/CreatorCard';
 import { ToastContainer} from 'react-toastify'
-//import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
 
 
 interface Params {
@@ -15,6 +14,9 @@ interface Params {
 }
 
 export default async function CreatorPage({ params }: Params) {
+
+  //! todo check if the creatorid is a creator, if not, 404 it.
+  
   const authUser = true;  // Just setting this for now for a trigger to make edit in place work.
   const { creatorid } = params;
 

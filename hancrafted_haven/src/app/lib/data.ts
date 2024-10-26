@@ -101,6 +101,28 @@ export async function addProduct(
   }
 }
 
+export async function deleteProduct(
+  productId: number,
+  userId: number
+) {
+  try {
+    //DELETE From Collections first
+    await removeFromCollectionByProductId(productId)
+    //Then DELETE from Images
+    await removeImagesByProductId(productId)
+    //Then Delete Reviews
+    await removeReviewsByProductId(productId)
+    //THEN Delete from Products
+      await sql`
+          DELETE from products
+          WHERE id = ${productId} AND user_id = ${userId}
+      `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error(`Failed to remove Product`);
+  }
+}
+
 export async function fetchImagesData(productId: number): Promise<Image_[]> {
   try {
     // Fetching the product by id
@@ -161,7 +183,7 @@ export async function editImagesData(
     if (deleteImageUrl && deleteImageUrl.length > 0) {
       for (const imageUrl of deleteImageUrl) {
         await sql`
-                    DELETE from productImages
+                    DELETE from product_images
                     WHERE product_id = ${productId} AND image_url = ${imageUrl}
                 `;
         console.log("removed ", imageUrl);
@@ -171,7 +193,7 @@ export async function editImagesData(
     if (addImageUrl && addImageUrl.length > 0) {
       for (const imageUrl of addImageUrl) {
         await sql`
-                    INSERT INTO productImages (
+                    INSERT INTO product_images (
                         product_id, 
                         image_url
                     )
@@ -196,7 +218,7 @@ export async function addImages(productId: number, addImageUrl: string[]) {
     if (addImageUrl && addImageUrl.length > 0) {
       for (const imageUrl of addImageUrl) {
         const result = await sql`
-                    INSERT INTO productImages (
+                    INSERT INTO product_images (
                         product_id, 
                         image_url
                     )
@@ -212,6 +234,21 @@ export async function addImages(productId: number, addImageUrl: string[]) {
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error(`Failed to add new image ${addImageUrl}`);
+  }
+}
+
+export async function removeImagesByProductId(
+  product_id: number,
+) {
+  //REMOVES ALL MATCHING IMAGES BY PRODUCTID
+  try {
+      await sql`
+          DELETE from product_images
+          WHERE product_id = ${product_id}
+      `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error(`Failed to remove images`);
   }
 }
 
@@ -362,6 +399,21 @@ export async function addReview(
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Failed to create review ");
+  }
+}
+
+export async function removeReviewsByProductId(
+  product_id: number,
+) {
+  //REMOVES ALL MATCHING IMAGES BY PRODUCTID
+  try {
+      await sql`
+          DELETE from reviews
+          WHERE product_id = ${product_id}
+      `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error(`Failed to remove reviews`);
   }
 }
 
@@ -639,6 +691,20 @@ export async function removeFromCollection(
       await sql`
           DELETE from collection_products
           WHERE collection_id = ${collection_id} AND product_id = ${product_id}
+      `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error(`Failed to remove from collection`);
+  }
+}
+export async function removeFromCollectionByProductId(
+  product_id: number,
+) {
+  //REMOVES ALL MATCHING PRODUCTS FROM ALL COLLECTIONS
+  try {
+      await sql`
+          DELETE from collection_products
+          WHERE product_id = ${product_id}
       `;
   } catch (error) {
     console.error("Database Error: ", error);
