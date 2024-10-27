@@ -262,7 +262,8 @@ export async function fetchUserData(userId: number): Promise<User> {
                 name, 
                 bio, 
                 email, 
-                password 
+                password,
+                type
             FROM users 
             WHERE id = ${userId}`;
 

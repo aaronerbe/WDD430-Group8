@@ -23,8 +23,10 @@ export default async function CreatorPage({ params }: Params) {
   const { creatorid } = params;
   const creatorData = await fetchUserData(creatorid)
   // Fetch data in parallel using Promise.all
-  const userType = creatorData.type
-  if(userType != 'creator' && userType != 'admin'){
+  console.log(creatorData)
+  const userType = creatorData?.type;
+  console.log('user type: ', userType)
+  if (!userType || !['creator', 'admin'].includes(userType.toLowerCase())) {
     return (notFound())
   }
 
