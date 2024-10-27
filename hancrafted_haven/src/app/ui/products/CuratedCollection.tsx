@@ -5,6 +5,7 @@ import { PencilIcon} from '@heroicons/react/24/outline';
 import ProductCard from "../../ui/products/cards";
 import {toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import Tooltip from '@/app/ui/interface/Tooltip'
 
 
 const CollectionCard = ({
@@ -125,9 +126,11 @@ const CollectionCard = ({
                         <div className="flex items-center justify-center mb-2">
                             <h4 className="ml-4 text-2xl font-bold items-center relative">{collectionTitle}</h4>
                             {authUser && (
-                                <PencilIcon className="ml-4 h-5 w-5 text-gray-500 cursor-pointer" 
-                                    onClick={() => setIsEditingCollectionInfo(true)}
-                                />
+                                <Tooltip text="Edit Collection Name and Description">
+                                    <PencilIcon className="ml-4 h-5 w-5 text-gray-500 cursor-pointer" 
+                                        onClick={() => setIsEditingCollectionInfo(true)}
+                                    />
+                                </Tooltip>
                             )}
                         </div>
                         <p className="">{collectionDescription}</p>

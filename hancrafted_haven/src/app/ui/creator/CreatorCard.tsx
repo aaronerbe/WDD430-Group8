@@ -3,9 +3,7 @@ import { User } from "@/app/lib/definitions";
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { PencilIcon} from '@heroicons/react/24/outline';
-//import { PencilIcon, PlusIcon } from '@heroicons/react/24/outline';
-
-
+import Tooltip from '@/app/ui/interface/Tooltip'
 
 const CreatorCard = ({
     creatorData,
@@ -98,7 +96,7 @@ const CreatorCard = ({
                     />
                     {/* //! TODO Need to change this to be an upload feature to upload a pic and update the profile URL */}
                     {authUser && (
-                            <PencilIcon className="absolute right-4 h-5 w-5 text-white cursor-pointer" 
+                            <PencilIcon className="absolute right-4 h-5 w-5 text-transparent cursor-pointer" //temporarily making transparent until (if) we get function to change profile pics.  
                                 onClick={() => setIsEditingProfilePic(true)}
                             />
                     )}
@@ -139,9 +137,11 @@ const CreatorCard = ({
                     <div className="flex flex-col items-center md:flex-row md:items-start space-x-2 mb-2">
                         <h1 className="text-3xl font-bold mb-4 text-center md:text-left">{userName}</h1>
                         {authUser && (
-                            <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 
-                                onClick={() => setIsEditingUserName(true)}
-                            />
+                            <Tooltip text="Edit Name">
+                                <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 
+                                    onClick={() => setIsEditingUserName(true)}
+                                />
+                            </Tooltip>
                         )}
                     </div>
 
@@ -151,9 +151,11 @@ const CreatorCard = ({
                 <div className="flex flex-col items-center md:flex-row md:items-start space-x-2 mb-2">
                     <h2 className="text-xl font-semibold">About Me</h2>
                     {authUser && (
-                        <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 
-                            onClick={() => setIsEditingBio(true)}
-                        />
+                        <Tooltip text="Edit About Me">
+                            <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 
+                                onClick={() => setIsEditingBio(true)}
+                            />
+                        </Tooltip>
                     )}
                 </div>
                 {isEditingBio ?(

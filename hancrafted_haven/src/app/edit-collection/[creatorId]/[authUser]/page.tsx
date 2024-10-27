@@ -1,12 +1,9 @@
 //import React, { Suspense } from "react";
-import ProductCard from "../../../ui/products/EditCollectionCards";
+import EditCollectionCard from "../../../ui/products/EditCollectionCards";
 //import Search from "../ui/search";
 import { fetchSearchResults, fetchSingleImageData } from "../../../lib/data";
 import { fetchCollectionDesc, fetchCollectionProducts } from "@/app/lib/data";
 import { notFound } from "next/navigation";
-
-//import FilterOptions from "../ui/products/filter-options";
-
 
 interface Params {
   params: {
@@ -19,16 +16,9 @@ export default async function SearchResultsPage({params}: Params){
   const {creatorId, authUser} = params
   const query = "";
   const searchResults = await fetchSearchResults(query);
-
-    // Fetch data in parallel using Promise.all
-  const [ collectionDesc] = await Promise.all([
-    fetchCollectionDesc(creatorId),
-  ]);
-  // Fetch collection products based on the collection description
+  const collectionDesc = await fetchCollectionDesc(creatorId);
   const collectionProducts = await fetchCollectionProducts(collectionDesc.id);
   const collectionId = collectionDesc.id
-  //console.log('collectionDesc:', collectionDesc)
-  //console.log('collectionId', collectionId)
 
   const getImage = async (productId: number) => {
     const productImage = await fetchSingleImageData(productId);
@@ -40,7 +30,7 @@ export default async function SearchResultsPage({params}: Params){
   }
 
   return (
-    <div className="container mx-auto flex flex-col items-center">
+    <div className="container mx-auto flex flex-col items-center mb-20">
       <button
         className="mt-8 mb-0 bg-blue-500 text-white p-2 rounded"
         aria-label="Edit Collection"        
@@ -61,7 +51,7 @@ export default async function SearchResultsPage({params}: Params){
 
           return (
             <div key={product.id} className="relative">
-              <ProductCard
+              <EditCollectionCard
                 product={product}
                 image={image}
                 isInCollection={isInCollection}

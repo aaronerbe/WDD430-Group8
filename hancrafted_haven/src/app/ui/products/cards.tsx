@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { PencilIcon, MinusIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import Tooltip from '@/app/ui/interface/Tooltip'
 
 const ProductCard = ({
   product,
@@ -171,7 +172,7 @@ const ProductCard = ({
               </div>
             </a>
             <div className="px-6 py-4 bg-white flex flex-col justify-between h-full relative">
-            <div className="flex items-center mb-2 min-h-[80px]">
+            <div className="flex items-center mb-2 min-h-[100px]">
               <h2 className="text-md text-gray-800 font-semibold">
                 {product.name}
               </h2>
@@ -184,9 +185,11 @@ const ProductCard = ({
                     className="ml-auto"
                     aria-label="Edit Product"
                   >
-                    <PencilIcon 
-                      className="h-5 w-5 text-gray-500 cursor-pointer"
-                    />
+                    <Tooltip text="Edit Product Information">
+                      <PencilIcon 
+                        className="h-5 w-5 text-gray-500 cursor-pointer"
+                      />
+                    </Tooltip>
                   </button>
                   <button
                     className="h-5 w-5 text-gray-500 cursor-pointer"
@@ -195,7 +198,9 @@ const ProductCard = ({
                       handleDeleteProduct(product.id)
                     }}
                   >
-                    <MinusIcon className="h-5 w-5 text-red-500 cursor-pointer" />
+                    <Tooltip text="Permanently Delete Product">
+                      <MinusIcon className="h-5 w-5 text-red-500 cursor-pointer" />
+                    </Tooltip>
                   </button>
                 </div>
               )}

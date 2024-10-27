@@ -4,8 +4,10 @@ import { Image_, Product } from "@/app/lib/definitions";
 import React, { useState, useEffect } from 'react';
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
 import 'react-toastify/dist/ReactToastify.css';
+import Tooltip from '@/app/ui/interface/Tooltip'
 
-const ProductCard = ({
+
+const EditCollectionCard = ({
   product,
   image,
   isInCollection,
@@ -72,10 +74,10 @@ const ProductCard = ({
         {isInCollectionState && (
         <div className="selectedCard absolute inset-0 bg-gray-600 opacity-50 z-10 pointer-events-none rounded-t-lg"></div>
         )}
-        <a
+        {/*<a
           href={`/creator/${product.user_id}/product/${product.id}`}
           className="w-56 cursor-pointer"
-        >
+        >*/}
           <div className="h-36 w-full relative">
             <Image
               className="rounded-t-lg w-full h-full object-cover border-none"
@@ -85,10 +87,10 @@ const ProductCard = ({
               height={500}
             />
           </div>
-        </a>
+        {/*</a>*/}
         <div className="px-6 py-4 bg-white flex flex-col justify-between h-full">
           <div className="flex items-center justify-between mb-2 min-h-[50px]">
-            <h2 className="text-md text-gray-800 font-semibold">
+            <h2 className="text-md text-gray-800 font-semibold min-h-[80px]">
               {product.name}
             </h2>
             <button
@@ -103,9 +105,13 @@ const ProductCard = ({
               }}
             >
               {isInCollectionState ? (
-                <MinusIcon className="h-5 w-5 text-red-500 cursor-pointer relative z-20" />
+                <Tooltip text="Remove Product From Collection">
+                  <MinusIcon className="h-5 w-5 text-red-500 cursor-pointer relative z-20" />
+                </Tooltip>
               ) : (
-                <PlusIcon className="h-5 w-5 text-green-500 cursor-pointer" />
+                <Tooltip text="Add Product To Collection">
+                  <PlusIcon className="h-5 w-5 text-green-500 cursor-pointer" />
+                </Tooltip>
               )}
             </button>
           </div>
@@ -121,4 +127,4 @@ const ProductCard = ({
   );
 }
 
-export default ProductCard;
+export default EditCollectionCard;
