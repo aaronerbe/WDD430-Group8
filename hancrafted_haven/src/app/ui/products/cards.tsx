@@ -171,7 +171,7 @@ const ProductCard = ({
               </div>
             </a>
             <div className="px-6 py-4 bg-white flex flex-col justify-between h-full relative">
-            <div className="flex items-center mb-2 min-h-[50px]">
+            <div className="flex items-center mb-2 min-h-[80px]">
               <h2 className="text-md text-gray-800 font-semibold">
                 {product.name}
               </h2>

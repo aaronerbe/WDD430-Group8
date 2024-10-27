@@ -70,7 +70,7 @@ const ProductCard = ({
     <div>
       <div className="relative max-w-56 min-h-[270px] shadow-lg shadow-slate-500/50">
         {isInCollectionState && (
-          <div className="absolute inset-0 bg-gray-500 opacity-50 z-10 pointer-events-none rounded-lg"></div>
+        <div className="selectedCard absolute inset-0 bg-gray-500 opacity-50 z-10 pointer-events-none rounded-t-lg"></div>
         )}
         <a
           href={`/creator/${product.user_id}/product/${product.id}`}
@@ -86,12 +86,14 @@ const ProductCard = ({
             />
           </div>
         </a>
-        <div className="px-6 py-4 bg-white flex flex-col justify-between h-full relative">
+        <div className="px-6 py-4 bg-white flex flex-col justify-between h-full">
           <div className="flex items-center justify-between mb-2 min-h-[50px]">
             <h2 className="text-md text-gray-800 font-semibold">
               {product.name}
             </h2>
             <button
+              className="h-5 w-5 text-gray-500 cursor-pointer relative z-20"
+              aria-label="Toggle Collection"
               onClick={() => {
                 if (isInCollectionState) {
                   handleRemoveFromCollection(product.id);
@@ -99,11 +101,9 @@ const ProductCard = ({
                   handleAddToCollection(product.id);
                 }
               }}
-              className="h-5 w-5 text-gray-500 cursor-pointer"
-              aria-label="Toggle Collection"
             >
               {isInCollectionState ? (
-                <MinusIcon className="h-5 w-5 text-red-500 cursor-pointer" />
+                <MinusIcon className="h-5 w-5 text-red-500 cursor-pointer relative z-20" />
               ) : (
                 <PlusIcon className="h-5 w-5 text-green-500 cursor-pointer" />
               )}
