@@ -5,6 +5,8 @@ import CollectionCard from "@/app/ui/products/CuratedCollection"
 import { fetchProductsByUser, fetchSingleImageData, fetchUserData, fetchCollectionDesc, fetchCollectionProducts } from "@/app/lib/data";
 import CreatorCard from '@/app/ui/creator/CreatorCard';
 import { ToastContainer} from 'react-toastify'
+import { notFound } from "next/navigation";
+
 
 
 interface Params {
@@ -16,25 +18,25 @@ interface Params {
 export default async function CreatorPage({ params }: Params) {
 
   //! todo check if the creatorid is a creator, if not, 404 it.
-  
+
   const authUser = true;  // Just setting this for now for a trigger to make edit in place work.
   const { creatorid } = params;
-
+  const creatorData = await fetchUserData(creatorid)
   // Fetch data in parallel using Promise.all
-  const [userProducts, creatorData, collectionDesc] = await Promise.all([
+  const userType = creatorData.type
+  if(userType != 'creator' && userType != 'admin'){
+    return (notFound())
+  }
+
+  const [userProducts, collectionDesc] = await Promise.all([
     fetchProductsByUser(Number(creatorid)),
-    fetchUserData(creatorid),
     fetchCollectionDesc(creatorid),
   ]);
-
-  // Fetch collection products based on the collection description
   const collectionProducts = await fetchCollectionProducts(collectionDesc.id);
-
-  // Fetch images for user products
   const userImages = await Promise.all(userProducts.map(product => fetchSingleImageData(product.id).then(images => images[0])));
-  
-  // Fetch images for collection products
   const collectionImages = await Promise.all(collectionProducts.map(product => fetchSingleImageData(product.id).then(images => images[0])));
+
+
 
   return (
     <div className="container mx-auto">
