@@ -70,7 +70,7 @@ const ProductCard = ({
     <div>
       <div className="relative max-w-56 min-h-[270px] shadow-lg shadow-slate-500/50">
         {isInCollectionState && (
-        <div className="selectedCard absolute inset-0 bg-gray-500 opacity-50 z-10 pointer-events-none rounded-t-lg"></div>
+        <div className="selectedCard absolute inset-0 bg-gray-600 opacity-50 z-10 pointer-events-none rounded-t-lg"></div>
         )}
         <a
           href={`/creator/${product.user_id}/product/${product.id}`}
