@@ -44,7 +44,7 @@ export async function editProductData(
   try {
     //Update Product Data
     //only allow updating name, description, price, category
-    const result = await sql`
+    await sql`
             UPDATE products
             SET
                 name = ${name},
@@ -53,7 +53,7 @@ export async function editProductData(
                 category = ${category}
             WHERE id = ${productId} AND user_id = ${userId}
         `;
-    console.log("Update product:", result);
+    console.log("Update product:");
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Failed to update product table ");
@@ -98,6 +98,28 @@ export async function addProduct(
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Failed to create product ");
+  }
+}
+
+export async function deleteProduct(
+  productId: number,
+  userId: number
+) {
+  try {
+    //DELETE From Collections first
+    await removeFromCollectionByProductId(productId)
+    //Then DELETE from Images
+    await removeImagesByProductId(productId)
+    //Then Delete Reviews
+    await removeReviewsByProductId(productId)
+    //THEN Delete from Products
+      await sql`
+          DELETE from products
+          WHERE id = ${productId} AND user_id = ${userId}
+      `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error(`Failed to remove Product`);
   }
 }
 
@@ -161,7 +183,7 @@ export async function editImagesData(
     if (deleteImageUrl && deleteImageUrl.length > 0) {
       for (const imageUrl of deleteImageUrl) {
         await sql`
-                    DELETE from productImages
+                    DELETE from product_images
                     WHERE product_id = ${productId} AND image_url = ${imageUrl}
                 `;
         console.log("removed ", imageUrl);
@@ -171,7 +193,7 @@ export async function editImagesData(
     if (addImageUrl && addImageUrl.length > 0) {
       for (const imageUrl of addImageUrl) {
         await sql`
-                    INSERT INTO productImages (
+                    INSERT INTO product_images (
                         product_id, 
                         image_url
                     )
@@ -196,7 +218,7 @@ export async function addImages(productId: number, addImageUrl: string[]) {
     if (addImageUrl && addImageUrl.length > 0) {
       for (const imageUrl of addImageUrl) {
         const result = await sql`
-                    INSERT INTO productImages (
+                    INSERT INTO product_images (
                         product_id, 
                         image_url
                     )
@@ -215,6 +237,21 @@ export async function addImages(productId: number, addImageUrl: string[]) {
   }
 }
 
+export async function removeImagesByProductId(
+  product_id: number,
+) {
+  //REMOVES ALL MATCHING IMAGES BY PRODUCTID
+  try {
+      await sql`
+          DELETE from product_images
+          WHERE product_id = ${product_id}
+      `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error(`Failed to remove images`);
+  }
+}
+
 export async function fetchUserData(userId: number): Promise<User> {
   try {
     // Fetching the product by id
@@ -225,7 +262,8 @@ export async function fetchUserData(userId: number): Promise<User> {
                 name, 
                 bio, 
                 email, 
-                password 
+                password,
+                type
             FROM users 
             WHERE id = ${userId}`;
 
@@ -362,6 +400,21 @@ export async function addReview(
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Failed to create review ");
+  }
+}
+
+export async function removeReviewsByProductId(
+  product_id: number,
+) {
+  //REMOVES ALL MATCHING IMAGES BY PRODUCTID
+  try {
+      await sql`
+          DELETE from reviews
+          WHERE product_id = ${product_id}
+      `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error(`Failed to remove reviews`);
   }
 }
 
@@ -545,5 +598,117 @@ export async function fetchCollectionProducts(collectionId: number): Promise<Pro
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Failed to fetch collection product data.");
+  }
+}
+
+export async function updateUserName(
+  userId: number,
+  name: string,
+) {
+  try {
+    await sql`
+            UPDATE users
+            SET
+                name = ${name}
+            WHERE id = ${userId}
+        `;
+    console.log("Update User Name");
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to update User Name ");
+  }
+}
+
+export async function updateUserBio(
+  userId: number,
+  bio: string,
+) {
+  try {
+    await sql`
+            UPDATE users
+            SET
+                bio = ${bio}
+            WHERE id = ${userId}
+        `;
+    console.log("Update User Bio");
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to update User Bio ");
+  }
+}
+
+export async function editCollectionData(
+  id: number,
+  userId: number,
+  title: string,
+  description: string,
+) {
+  try {
+    await sql`
+            UPDATE collections
+            SET
+                id = ${id},
+                user_id = ${userId},
+                title = ${title},
+                description = ${description}
+            WHERE id = ${id} AND user_id = ${userId}
+        `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to update collections table ");
+  }
+}
+
+export async function addToCollection(
+  collection_id: number,
+  product_id: number,
+) {
+  console.log("Attempting to add to collection with collection_id:", collection_id, "and product_id:", product_id);
+  
+  try {
+    await sql`
+      INSERT INTO collection_products (
+        collection_id,
+        product_id
+      )
+      VALUES (
+        ${collection_id},
+        ${product_id}
+      )
+      RETURNING *
+    `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to add new collection entry");
+  }
+}
+
+
+export async function removeFromCollection(
+  collection_id: number,
+  product_id: number,
+) {
+  try {
+      await sql`
+          DELETE from collection_products
+          WHERE collection_id = ${collection_id} AND product_id = ${product_id}
+      `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error(`Failed to remove from collection`);
+  }
+}
+export async function removeFromCollectionByProductId(
+  product_id: number,
+) {
+  //REMOVES ALL MATCHING PRODUCTS FROM ALL COLLECTIONS
+  try {
+      await sql`
+          DELETE from collection_products
+          WHERE product_id = ${product_id}
+      `;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error(`Failed to remove from collection`);
   }
 }

@@ -38,7 +38,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
     };
 
     return (
-    <div className="flex flex-col items-start">
+    <div className="flex flex-col items-start bg-black">
             {imageUrls.length > 0 ? (
                 <div className="min-h-[500px] relative aspect-w-1 aspect-h-1 w-full max-w-full md:h-auto">
                     <Image

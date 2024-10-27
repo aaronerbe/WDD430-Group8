@@ -3,20 +3,20 @@ import { User } from "@/app/lib/definitions";
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { PencilIcon} from '@heroicons/react/24/outline';
-//import { PencilIcon, PlusIcon } from '@heroicons/react/24/outline';
-
-
+import Tooltip from '@/app/ui/interface/Tooltip'
 
 const CreatorCard = ({
     creatorData,
+    authenticatedUserId,
     authUser
 }:{
     creatorData: User
-    authUser: boolean
+    authenticatedUserId?: number
+    authUser?: boolean
 }) =>{
     const creatorImg = creatorData.profile || '/default-profile-image.jpg';
-    const creatorBio = creatorData.bio;
-    const creatorName = creatorData.name;
+    let tempUserName = creatorData.name;
+    let tempBioText = creatorData.bio;
 
     const [isEditingProfilePic, setIsEditingProfilePic] = useState(false);
     const [profilePic, setProfilePic] = useState(creatorData.profile)
@@ -32,15 +32,55 @@ const CreatorCard = ({
         console.log(profilePic)
         // Call an API
     };
-    const handleUserNameSave = () => {
-        setIsEditingUserName(false);
-        console.log(userName)
-        // Call an API
+
+
+    const handleUserNameSave = async () => {
+        try {
+            const response = await fetch('/api/updateUserName', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: authenticatedUserId,
+                    name: userName,
+                }),
+            });
+            if (!response.ok) {
+                setUserName(tempUserName)
+                throw new Error('Failed to udpate user name');
+            }    
+            setIsEditingUserName(false);
+            setUserName(userName);
+            tempUserName=userName;
+        } catch (error) {
+            console.error('Failed to add update user name:', error);
+            setUserName(tempUserName)
+        }
     };
-    const handleBioSave = () => {
-        setIsEditingBio(false);
-        console.log(bioText)
-        // Call an API
+
+    const handleBioSave = async () => {
+        try {
+            const response = await fetch('/api/updateUserBio', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: authenticatedUserId,
+                    bio: bioText,
+                }),
+            });
+            if (!response.ok) {
+                setBioText(tempBioText)
+                throw new Error('Failed to udpate user name');
+            }    
+            setIsEditingBio(false);
+            setBioText(bioText);
+            tempBioText=bioText;
+        } catch (error) {
+            console.error('Failed to add update user name:', error);
+        }
     };
 
     return (
@@ -50,13 +90,13 @@ const CreatorCard = ({
                     <Image
                         className="rounded-full object-cover"
                         src={creatorImg}
-                        alt={`Image of ${creatorName}`}
+                        alt={'Image of ${userName}'}
                         width={400}
                         height={400}
                     />
                     {/* //! TODO Need to change this to be an upload feature to upload a pic and update the profile URL */}
                     {authUser && (
-                            <PencilIcon className="absolute right-4 h-5 w-5 text-white cursor-pointer" 
+                            <PencilIcon className="absolute right-4 h-5 w-5 text-transparent cursor-pointer" //temporarily making transparent until (if) we get function to change profile pics.  
                                 onClick={() => setIsEditingProfilePic(true)}
                             />
                     )}
@@ -94,24 +134,28 @@ const CreatorCard = ({
                         </button>
                     </div>
                 ) : (
-                    <div className="flex items-center space-x-2 mb-2">
-                        <h1 className="text-3xl font-bold mb-4">{creatorName}</h1>
+                    <div className="flex flex-col items-center md:flex-row md:items-start space-x-2 mb-2">
+                        <h1 className="text-3xl font-bold mb-4 text-center md:text-left">{userName}</h1>
                         {authUser && (
-                            <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 
-                                onClick={() => setIsEditingUserName(true)}
-                            />
+                            <Tooltip text="Edit Name">
+                                <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 
+                                    onClick={() => setIsEditingUserName(true)}
+                                />
+                            </Tooltip>
                         )}
                     </div>
 
                 )}
 
                 {/* About Me Bio */}
-                <div className="flex items-center space-x-2 mb-2">
+                <div className="flex flex-col items-center md:flex-row md:items-start space-x-2 mb-2">
                     <h2 className="text-xl font-semibold">About Me</h2>
                     {authUser && (
-                        <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 
-                            onClick={() => setIsEditingBio(true)}
-                        />
+                        <Tooltip text="Edit About Me">
+                            <PencilIcon className="h-5 w-5 text-gray-500 cursor-pointer" 
+                                onClick={() => setIsEditingBio(true)}
+                            />
+                        </Tooltip>
                     )}
                 </div>
                 {isEditingBio ?(
@@ -127,7 +171,7 @@ const CreatorCard = ({
                     </div>
                 ) : (
                     <p className="text-gray-700 max-w-md">
-                        {creatorBio || "This creator has not added a bio yet."}
+                        {bioText || "This creator has not added a bio yet."}
                     </p>
                 )}
 
