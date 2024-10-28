@@ -17,8 +17,6 @@ const options: Option[] = [
   { name: "Kitchenware", type: "Category" },
   { name: "Fitness", type: "Category" },
   { name: "Jewelry", type: "Category" },
-  { name: "Low to high", type: "Price" },
-  { name: "High to low", type: "Price" },
 ];
 
 // Function to group options by type
@@ -39,7 +37,6 @@ const FilterOptions: React.FC = () => {
     [key: string]: string | null;
   }>({
     Category: null,
-    Price: null,
   });
 
   const handleFilter = useDebouncedCallback((term: string | null) => {
