@@ -5,7 +5,7 @@ import { Button } from "@/app/ui/button";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Image from "next/image"; // Import the Image component
+import Image from "next/image";
 
 const Form = ({ productId }: { productId?: number }) => {
   const [image, setImage] = useState<File | null>(null);
@@ -81,8 +81,8 @@ const Form = ({ productId }: { productId?: number }) => {
             src={imagePreview}
             alt="Preview"
             className="rounded-lg shadow-lg object-cover"
-            height={128} // Set a fixed height for the preview
-            width={256} // Set a fixed width for the preview
+            height={128}
+            width={256} 
           />
           <button
             type="button"

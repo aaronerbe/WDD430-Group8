@@ -13,8 +13,6 @@ interface Params {
 
 export default async function Page({ params }: Params) {
   const { productId } = params;
-  // change later
-  const authUser: number = 0;
 
   try {
     //FETCH DATA (server side) and pass it to the component (client side)
