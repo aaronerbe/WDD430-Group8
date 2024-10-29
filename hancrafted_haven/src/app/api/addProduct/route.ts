@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
       price,
       category
     );
+    console.log(`Created: ${productId}`)
     return NextResponse.json({ message: "Product successfully created." });
   } catch (error) {
     console.error("Failed to create product:", error);

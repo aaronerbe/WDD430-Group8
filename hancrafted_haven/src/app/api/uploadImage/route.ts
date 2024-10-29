@@ -3,9 +3,7 @@ import fs from "fs";
 import path from "path";
 import { addImage } from "@/app/lib/data";
 
-// Define the route handler
 export async function POST(req: Request) {
-  // Check if the request is a form submission
   if (!req.body) {
     return NextResponse.json(
       { error: "No form data provided" },
