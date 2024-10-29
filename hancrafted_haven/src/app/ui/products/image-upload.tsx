@@ -1,65 +1,45 @@
-// import React, { useState, useRef } from "react";
-// import Image from "next/image";
+"use client";
 
-const ImageUpload: React.FC = () => {
-  //   const [image, setImage] = useState<File | null>(null);
-  //   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  //   const fileInputRef = useRef<HTMLInputElement>(null);
+import { useState } from "react";
 
-  //   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     const file = event.target.files?.[0];
+interface ImageUploadProps {
+  onImageChange: (file: File | null) => void;
+}
 
-  //     if (file) {
-  //       setImage(file);
-  //       const reader = new FileReader();
-  //       reader.onload = () => {
-  //         setPreviewUrl(reader.result as string);
-  //       };
-  //       reader.readAsDataURL(file);
-  //     }
-  //   };
+const ImageUpload: React.FC<ImageUploadProps> = ({ onImageChange }) => {
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  //   const handleUpload = async () => {
-  //     if (image) {
-  //       const formData = new FormData();
-  //       formData.append('image', image);
-
-  //       try {
-  //         const response = await fetch('/api/upload', {
-  //           method: 'POST',
-  //           body: formData
-  //         });
-
-  //         if (!response.ok) {
-  //           throw new Error('Image upload failed');
-  //         }
-
-  //         // Handle successful upload
-  //         console.log('Image uploaded successfully');
-  //         setImage(null);
-  //         setPreviewUrl(null);
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     }
-  //   };
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] || null;
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+        onImageChange(file);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImagePreview(null);
+      onImageChange(null);
+    }
+  };
 
   return (
     <div>
-      {/* <input
+      <input
         type="file"
         accept="image/*"
-        ref={fileInputRef}
         onChange={handleImageChange}
-        style={{ display: 'none' }}
+        className="mt-2"
+        required
       />
-      <button onClick={() => fileInputRef.current?.click()}>Choose Image</button>
-      {previewUrl && (
-        <Image src={previewUrl} alt="Preview" width={200} height={200} />
+      {imagePreview && (
+        <img
+          src={imagePreview}
+          alt="Preview"
+          className="mt-2 max-w-full h-auto"
+        />
       )}
-      <button onClick={handleUpload} disabled={!image}>
-        Upload
-      </button> */}
     </div>
   );
 };
