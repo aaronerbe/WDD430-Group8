@@ -1,5 +1,12 @@
 import { sql } from "@vercel/postgres";
-import { Product, Image_, User, Review_, CollectionDesc, CollectionProducts} from "@/app/lib/definitions";
+import {
+  Product,
+  Image_,
+  User,
+  Review_,
+  CollectionDesc,
+  CollectionProducts,
+} from "@/app/lib/definitions";
 //import {redirect} from 'next/navigation'
 
 export async function fetchProductData(productId: number): Promise<Product> {
@@ -101,19 +108,16 @@ export async function addProduct(
   }
 }
 
-export async function deleteProduct(
-  productId: number,
-  userId: number
-) {
+export async function deleteProduct(productId: number, userId: number) {
   try {
     //DELETE From Collections first
-    await removeFromCollectionByProductId(productId)
+    await removeFromCollectionByProductId(productId);
     //Then DELETE from Images
-    await removeImagesByProductId(productId)
+    await removeImagesByProductId(productId);
     //Then Delete Reviews
-    await removeReviewsByProductId(productId)
+    await removeReviewsByProductId(productId);
     //THEN Delete from Products
-      await sql`
+    await sql`
           DELETE from products
           WHERE id = ${productId} AND user_id = ${userId}
       `;
@@ -212,12 +216,9 @@ export async function editImagesData(
   }
 }
 
-export async function addImages(productId: number, addImageUrl: string[]) {
+export async function addImage(productId: number, imageUrl: string) {
   try {
-    //Add Image Data
-    if (addImageUrl && addImageUrl.length > 0) {
-      for (const imageUrl of addImageUrl) {
-        const result = await sql`
+    const result = await sql`
                     INSERT INTO product_images (
                         product_id, 
                         image_url
@@ -228,21 +229,17 @@ export async function addImages(productId: number, addImageUrl: string[]) {
                     )
                     RETURNING *
                 `;
-        console.log("Added ", result);
-      }
-    }
+    console.log("Added ", result);
   } catch (error) {
     console.error("Database Error: ", error);
-    throw new Error(`Failed to add new image ${addImageUrl}`);
+    throw new Error(`Failed to add new image ${imageUrl}`);
   }
 }
 
-export async function removeImagesByProductId(
-  product_id: number,
-) {
+export async function removeImagesByProductId(product_id: number) {
   //REMOVES ALL MATCHING IMAGES BY PRODUCTID
   try {
-      await sql`
+    await sql`
           DELETE from product_images
           WHERE product_id = ${product_id}
       `;
@@ -403,12 +400,10 @@ export async function addReview(
   }
 }
 
-export async function removeReviewsByProductId(
-  product_id: number,
-) {
+export async function removeReviewsByProductId(product_id: number) {
   //REMOVES ALL MATCHING IMAGES BY PRODUCTID
   try {
-      await sql`
+    await sql`
           DELETE from reviews
           WHERE product_id = ${product_id}
       `;
@@ -432,30 +427,30 @@ export async function fetchSearchResults(query: string): Promise<Product[]> {
         WHERE
         name ILIKE ${`%${query}%`} OR
         price::text ILIKE ${`%${query}%`} OR
-        category ILIKE ${`%${query}%`}`
-/*         product.id::text ILIKE ${`%${query}%`} OR
+        category ILIKE ${`%${query}%`}`;
+    /*         product.id::text ILIKE ${`%${query}%`} OR
         product.user_id::text ILIKE ${`%${query}%`} OR */
 
     const products: Product[] = result.rows.map((row) => ({
-        id: row.id,
-        user_id: row.user_id,
-        name: row.name,
-        description: row.description,
-        price: row.price,
-        category: row.category,
-      }));
+      id: row.id,
+      user_id: row.user_id,
+      name: row.name,
+      description: row.description,
+      price: row.price,
+      category: row.category,
+    }));
 
     return products;
   } catch (error) {
-      console.error('Database Error: ', error);
-      throw new Error('Failed to fetch product data.');
+    console.error("Database Error: ", error);
+    throw new Error("Failed to fetch product data.");
   }
 }
 
-export async function fetchUserCreatorData(){
+export async function fetchUserCreatorData() {
   try {
-      // Fetching the product by id
-      const result = await sql`
+    // Fetching the product by id
+    const result = await sql`
           SELECT 
               id, 
               name, 
@@ -465,21 +460,21 @@ export async function fetchUserCreatorData(){
           FROM users 
           WHERE type = 'creator'`;
 
-      // have to break out the query result into structured format
-      const user: User = {
-          id: result.rows[0].id,
-          name: result.rows[0].name,
-          profile: result.rows[0].profile,
-          bio: result.rows[0].bio,
-          email: result.rows[0].email,
-          password: result.rows[0].password,
-          type: result.rows[0].type
-      };
+    // have to break out the query result into structured format
+    const user: User = {
+      id: result.rows[0].id,
+      name: result.rows[0].name,
+      profile: result.rows[0].profile,
+      bio: result.rows[0].bio,
+      email: result.rows[0].email,
+      password: result.rows[0].password,
+      type: result.rows[0].type,
+    };
 
-      return user; 
+    return user;
   } catch (error) {
-      console.error('Database Error: ', error);
-      throw new Error('Failed to fetch user data.');
+    console.error("Database Error: ", error);
+    throw new Error("Failed to fetch user data.");
   }
 }
 
@@ -507,7 +502,9 @@ export async function fetchCollectionDesc(userId: number): Promise<CollectionDes
   }
 }
 
-export async function fetchCollectionProducts(collectionId: number): Promise<Product[]> {
+export async function fetchCollectionProducts(
+  collectionId: number
+): Promise<Product[]> {
   try {
     // Fetching the products by collection id
     const result = await sql`
@@ -527,25 +524,23 @@ export async function fetchCollectionProducts(collectionId: number): Promise<Pro
       product_id: row.product_id,
     }));
 
-    const products = await Promise.all(collectionTable.map(async (collection) => {
-      const productData = await fetchProductData(collection.product_id);
-      return {
-        ...productData,
-      };
-    }));
+    const products = await Promise.all(
+      collectionTable.map(async (collection) => {
+        const productData = await fetchProductData(collection.product_id);
+        return {
+          ...productData,
+        };
+      })
+    );
 
     return products; // Return the new array of objects with product data included
-
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Failed to fetch collection product data.");
   }
 }
 
-export async function updateUserName(
-  userId: number,
-  name: string,
-) {
+export async function updateUserName(userId: number, name: string) {
   try {
     await sql`
             UPDATE users
@@ -560,10 +555,7 @@ export async function updateUserName(
   }
 }
 
-export async function updateUserBio(
-  userId: number,
-  bio: string,
-) {
+export async function updateUserBio(userId: number, bio: string) {
   try {
     await sql`
             UPDATE users
@@ -582,7 +574,7 @@ export async function editCollectionData(
   id: number,
   userId: number,
   title: string,
-  description: string,
+  description: string
 ) {
   try {
     await sql`
@@ -602,10 +594,15 @@ export async function editCollectionData(
 
 export async function addToCollection(
   collection_id: number,
-  product_id: number,
+  product_id: number
 ) {
-  console.log("Attempting to add to collection with collection_id:", collection_id, "and product_id:", product_id);
-  
+  console.log(
+    "Attempting to add to collection with collection_id:",
+    collection_id,
+    "and product_id:",
+    product_id
+  );
+
   try {
     await sql`
       INSERT INTO collection_products (
@@ -624,13 +621,12 @@ export async function addToCollection(
   }
 }
 
-
 export async function removeFromCollection(
   collection_id: number,
-  product_id: number,
+  product_id: number
 ) {
   try {
-      await sql`
+    await sql`
           DELETE from collection_products
           WHERE collection_id = ${collection_id} AND product_id = ${product_id}
       `;
@@ -639,12 +635,10 @@ export async function removeFromCollection(
     throw new Error(`Failed to remove from collection`);
   }
 }
-export async function removeFromCollectionByProductId(
-  product_id: number,
-) {
+export async function removeFromCollectionByProductId(product_id: number) {
   //REMOVES ALL MATCHING PRODUCTS FROM ALL COLLECTIONS
   try {
-      await sql`
+    await sql`
           DELETE from collection_products
           WHERE product_id = ${product_id}
       `;
