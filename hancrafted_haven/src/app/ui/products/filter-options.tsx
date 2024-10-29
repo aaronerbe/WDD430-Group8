@@ -31,12 +31,13 @@ const FilterOptions: React.FC = () => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const groupedOptions = groupOptionsByType(options);
+  const initialCategory = searchParams.get("query");
 
   // State to track selected options per category
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: string]: string | null;
   }>({
-    Category: null,
+    Category: initialCategory || null,
   });
 
   const handleFilter = useDebouncedCallback((term: string | null) => {
