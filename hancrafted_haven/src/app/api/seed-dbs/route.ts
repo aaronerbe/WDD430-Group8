@@ -126,9 +126,8 @@ export async function GET() {
             //console.log(user.profile)
             const hashedPassword = await bcrypt.hash(user.password, 10);
             await client.sql`
-                INSERT INTO users (id, profile, name, bio, email, password, type) 
+                INSERT INTO users (profile, name, bio, email, password, type) 
                 VALUES (
-                    ${user.id}, 
                     ${user.profile},
                     ${user.name}, 
                     ${user.bio},  
@@ -144,8 +143,13 @@ export async function GET() {
         console.log('Inserting products...');
         for (const product of products) {
             await client.sql`
-                INSERT INTO products (id, user_id, name, description, price, category)
-                VALUES (${product.id}, ${product.user_id}, ${product.name}, ${product.description}, ${product.price}, ${product.category})
+                INSERT INTO products (user_id, name, description, price, category)
+                VALUES (
+                    ${product.user_id}, 
+                    ${product.name}, 
+                    ${product.description}, 
+                    ${product.price}, 
+                    ${product.category})
                 ON CONFLICT (id) DO NOTHING;
             `;
             console.log(`Inserted product: ${product.name}`);
@@ -155,8 +159,10 @@ export async function GET() {
         console.log('Inserting product images...');
         for (const image of productImages) {
             await client.sql`
-                INSERT INTO product_images (id, product_id, image_url)
-                VALUES (${image.id}, ${image.product_id}, ${image.image_url})
+                INSERT INTO product_images (product_id, image_url)
+                VALUES (
+                    ${image.product_id}, 
+                    ${image.image_url})
                 ON CONFLICT (id) DO NOTHING;
             `;
             console.log(`Inserted image for product ID: ${image.product_id}`);
@@ -166,8 +172,12 @@ export async function GET() {
         console.log('Inserting reviews...');
         for (const review of reviews) {
             await client.sql`
-                INSERT INTO reviews (id, product_id, user_id, rating, comment)
-                VALUES (${review.id}, ${review.product_id}, ${review.user_id}, ${review.rating}, ${review.comment})
+                INSERT INTO reviews (product_id, user_id, rating, comment)
+                VALUES (
+                    ${review.product_id}, 
+                    ${review.user_id}, 
+                    ${review.rating}, 
+                    ${review.comment})
                 ON CONFLICT (id) DO NOTHING;
             `;
             console.log(`Inserted review for product ID: ${review.product_id}`);
@@ -177,8 +187,11 @@ export async function GET() {
         console.log('Inserting collections...');
         for (const collection of collections) {
             await client.sql`
-                INSERT INTO collections (id, user_id, title, description)
-                VALUES (${collection.id}, ${collection.user_id}, ${collection.title}, ${collection.description})
+                INSERT INTO collections (user_id, title, description)
+                VALUES (
+                    ${collection.user_id}, 
+                    ${collection.title}, 
+                    ${collection.description})
                 ON CONFLICT (id) DO NOTHING;
             `;
             console.log(`Inserted collection: ${collection.title}`);
@@ -189,7 +202,9 @@ export async function GET() {
         for (const collectionProduct of collectionProducts) {
             await client.sql`
                 INSERT INTO collection_products (collection_id, product_id)
-                VALUES (${collectionProduct.collection_id}, ${collectionProduct.product_id})
+                VALUES (
+                    ${collectionProduct.collection_id}, 
+                    ${collectionProduct.product_id})
                 ON CONFLICT (collection_id, product_id) DO NOTHING;
             `;
             console.log(`Inserted collection product for collection ID: ${collectionProduct.collection_id} and product ID: ${collectionProduct.product_id}`);
@@ -197,20 +212,21 @@ export async function GET() {
 
         // Reset the sequence for the tables.  needed so autoincrement id doesn't try to start over w/ 1 and conflict
         await client.sql`
-            SELECT setval('users_id_seq', (SELECT COALESCE(MAX(id), 1) FROM users), false);
+        SELECT setval('users_id_seq', (SELECT COALESCE(MAX(id) + 1, 1) FROM users), false);
         `;
         await client.sql`
-            SELECT setval('products_id_seq', (SELECT COALESCE(MAX(id), 1) FROM products), false);
+            SELECT setval('products_id_seq', (SELECT COALESCE(MAX(id) + 1, 1) FROM products), false);
         `;
         await client.sql`
-            SELECT setval('product_images_id_seq', (SELECT COALESCE(MAX(id), 1) FROM product_images), false);
+            SELECT setval('product_images_id_seq', (SELECT COALESCE(MAX(id) + 1, 1) FROM product_images), false);
         `;
         await client.sql`
-            SELECT setval('reviews_id_seq', (SELECT COALESCE(MAX(id), 1) FROM reviews), false);
+            SELECT setval('reviews_id_seq', (SELECT COALESCE(MAX(id) + 1, 1) FROM reviews), false);
         `;
         await client.sql`
-            SELECT setval('collections_id_seq', (SELECT COALESCE(MAX(id), 1) FROM collections), false);
-        `;    
+            SELECT setval('collections_id_seq', (SELECT COALESCE(MAX(id) + 1, 1) FROM collections), false);
+        `;
+        
 
         // Commit transaction
         await client.sql`COMMIT`;

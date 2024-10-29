@@ -66,7 +66,7 @@ export default async function ProductDetailsPage({ params }: Params) {
           product={productData}
           images={imageData}
           user={creatorData}
-          reviews={reviewData}
+          initialReviews={reviewData}
           authUser={authUser}
           reviewCheck={reviewCheck}
         />
