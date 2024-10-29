@@ -149,19 +149,6 @@ const users = [
         password: '123456!aA', // This should be hashed in production
         type: 'admin'
     },
-
-
-    {
-        id: '16',
-        profile: '/profile-images/olgokepix.jpg',
-        name: 'Olagoke Amiola',
-        bio: "user",
-        email: 'olagoke@testemail.com',
-        password: '654321', // This should be hashed in production
-        type: 'admin'
-    },
-
-
 ];
 
 const products = [

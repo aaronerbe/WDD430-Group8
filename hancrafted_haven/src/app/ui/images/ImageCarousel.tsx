@@ -38,35 +38,43 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
     };
 
     return (
-    <div className="flex flex-col items-start">
-            {imageUrls.length > 0 ? (
-                <div className="min-h-[500px] relative aspect-w-1 aspect-h-1 w-full max-w-full md:h-auto">
-                    <Image
-                        src={useDefaultImage ? defaultImageUrl : imageUrls[currentIndex]}
-                        alt={`Image ${currentIndex}`}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        style={{ objectFit: 'contain' }}
-                        onError={handleImageError}
-                        priority
-                    />
-                    {/* Left arrow button */}
-                    <button 
-                        onClick={handlePrevImage}
-                        aria-label="Previous Image"
-                        className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-r focus:outline-none"
-                    >
-                        &#9664; {/* Left arrow symbol */}
-                    </button>
-                    {/* Right arrow button */}
-                    <button 
-                        onClick={handleNextImage}
-                        aria-label="Next Image"
-                        className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-l focus:outline-none"
-                    >
-                        &#9654; {/* Right arrow symbol */}
-                    </button>
-                </div>
+        <div className="relative flex flex-col items-start bg-black overflow-hidden">
+        {/* Added a blurred background effect to fill in space when pics don't match container size*/}
+        <div
+            className="absolute inset-0 bg-cover bg-center blur-md scale-110 opacity-50 z-0"
+            style={{
+                backgroundImage: `url(${useDefaultImage ? defaultImageUrl : imageUrls[currentIndex]})`,
+                filter: 'blur(10px)',
+            }}
+        />
+        {imageUrls.length > 0 ? (
+            <div className="min-h-[500px] relative aspect-w-1 aspect-h-1 w-full max-w-full md:h-auto">
+                <Image
+                    src={useDefaultImage ? defaultImageUrl : imageUrls[currentIndex]}
+                    alt={`Image ${currentIndex}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    style={{ objectFit: 'contain' }}
+                    onError={handleImageError}
+                    priority
+                />
+                {/* Left arrow button */}
+                <button 
+                    onClick={handlePrevImage}
+                    aria-label="Previous Image"
+                    className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-r focus:outline-none"
+                >
+                    &#9664; {/* Left arrow symbol */}
+                </button>
+                {/* Right arrow button */}
+                <button 
+                    onClick={handleNextImage}
+                    aria-label="Next Image"
+                    className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-l focus:outline-none"
+                >
+                    &#9654; {/* Right arrow symbol */}
+                </button>
+            </div>
             ) : (
                 <p>Loading...</p>
             )}
