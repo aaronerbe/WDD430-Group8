@@ -12,7 +12,7 @@ const ProductDetail = ({
     product,
     images,
     user,
-    reviews,
+    initialReviews,
     //products,
     authUser,
     reviewCheck
@@ -20,16 +20,16 @@ const ProductDetail = ({
     product: Product; 
     images: Image_[]; 
     user: User; 
-    reviews: Review_[];
+    initialReviews: Review_[];
     //products: Product[];  //null incase there are no other products
     authUser: number;       //! hardcoded from page.tsx for addReview 
     reviewCheck: boolean    //! check is valid but uses hardcoded authUser from page.tsx
 }) => { 
     //console.log('user has reviewed check: ', reviewCheck)
-    console.log(user.id)
+    //console.log(user.id)
+    const [reviews, setReviews]= useState(initialReviews);
     const [isFormOpen, setIsFormOpen] = useState(false);
     
-    //Had to do this since this is a client side and cannot access the env variables to be able to write to the db.  Calls an api instead which handles it for us.
     const handleAddReview = async (rating: number, comment: string) => {
         try {
             const response = await fetch('/api/addReview', {
@@ -46,7 +46,10 @@ const ProductDetail = ({
             });
             if (!response.ok) {
                 throw new Error('Failed to add review');
-            }    
+            }   
+            const data = await response.json(); 
+            const newReviews = data.reviews;
+            setReviews(newReviews);
             setIsFormOpen(false);
         } catch (error) {
             console.error('Failed to add review:', error);
