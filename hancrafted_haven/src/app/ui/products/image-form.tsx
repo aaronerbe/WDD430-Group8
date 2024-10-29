@@ -5,6 +5,7 @@ import { Button } from "@/app/ui/button";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Image from "next/image"; // Import the Image component
 
 const Form = ({ productId }: { productId?: number }) => {
   const [image, setImage] = useState<File | null>(null);
@@ -29,7 +30,6 @@ const Form = ({ productId }: { productId?: number }) => {
 
     if (!image) return;
 
-    // Ensure productId is defined
     if (typeof productId === "undefined") {
       toast.error("Product ID is required.");
       return;
@@ -49,12 +49,9 @@ const Form = ({ productId }: { productId?: number }) => {
         throw new Error("Failed to upload image.");
       }
 
-      const result = await response.json();
       toast.success("Image uploaded successfully!");
       handleRemoveImage();
       setShowConfirmation(true);
-      setImage(null);
-      setImagePreview(null);
     } catch (error) {
       toast.error("Error uploading image: " + error);
     }
@@ -80,12 +77,12 @@ const Form = ({ productId }: { productId?: number }) => {
       />
       {imagePreview && (
         <div className="relative mb-4">
-          {" "}
-          {/* Changed to relative */}
-          <img
+          <Image
             src={imagePreview}
             alt="Preview"
-            className="rounded-lg shadow-lg object-cover h-32 w-full"
+            className="rounded-lg shadow-lg object-cover"
+            height={128} // Set a fixed height for the preview
+            width={256} // Set a fixed width for the preview
           />
           <button
             type="button"
@@ -98,7 +95,6 @@ const Form = ({ productId }: { productId?: number }) => {
         </div>
       )}
 
-      {/* Show the upload button only if not confirming another image */}
       {!showConfirmation && (
         <div className="flex justify-end">
           <Button
@@ -110,14 +106,13 @@ const Form = ({ productId }: { productId?: number }) => {
         </div>
       )}
 
-      {/* Confirmation message with buttons displayed side by side */}
       {showConfirmation && (
         <div className="mt-4 text-center">
           <p className="mb-2">Would you like to upload another image?</p>
           <div className="flex justify-center">
             <Button
               onClick={handleUploadAnother}
-              className="bg-blue-500 hover:bg-blue-600 text-white mr-2" // Add margin to separate buttons
+              className="bg-blue-500 hover:bg-blue-600 text-white mr-2"
             >
               Yes
             </Button>
