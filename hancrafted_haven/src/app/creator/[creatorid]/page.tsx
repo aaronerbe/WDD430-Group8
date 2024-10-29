@@ -17,8 +17,6 @@ interface Params {
 
 export default async function CreatorPage({ params }: Params) {
 
-  //! todo check if the creatorid is a creator, if not, 404 it.
-
   const authUser = true;  // Just setting this for now for a trigger to make edit in place work.
   const { creatorid } = params;
   const creatorData = await fetchUserData(creatorid)

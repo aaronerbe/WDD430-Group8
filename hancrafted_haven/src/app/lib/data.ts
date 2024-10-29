@@ -478,70 +478,7 @@ export async function fetchUserCreatorData() {
   }
 }
 
-export async function filterByCategory(category: string): Promise<Product[]> {
-  try {
-    const result = await sql`
-        SELECT 
-            id, 
-            user_id, 
-            name, 
-            description, 
-            price, 
-            category 
-        FROM products
-        WHERE category = ${`%${category}%`}`;
-
-    const products: Product[] = result.rows.map((row) => ({
-      id: row.id,
-      user_id: row.user_id,
-      name: row.name,
-      description: row.description,
-      price: row.price,
-      category: row.category,
-    }));
-
-    return products;
-  } catch (error) {
-    console.error("Database Error: ", error);
-    throw new Error("Failed to fetch product data.");
-  }
-}
-
-export async function filterByPrice(
-  lowPrice: number,
-  highPrice: number
-): Promise<Product[]> {
-  try {
-    const result = await sql`
-        SELECT 
-            id, 
-            user_id, 
-            name, 
-            description, 
-            price, 
-            category 
-        FROM products
-        WHERE price >= ${`%${lowPrice}%`} AND price <= ${`%${highPrice}%`}`;
-
-    const products: Product[] = result.rows.map((row) => ({
-      id: row.id,
-      user_id: row.user_id,
-      name: row.name,
-      description: row.description,
-      price: row.price,
-      category: row.category,
-    }));
-
-    return products;
-  } catch (error) {
-    console.error("Database Error: ", error);
-    throw new Error("Failed to fetch product data.");
-  }
-}
-
-export async function fetchCollectionDesc(
-  userId: number
-): Promise<CollectionDesc> {
+export async function fetchCollectionDesc(userId: number): Promise<CollectionDesc> {
   try {
     const result = await sql`
             SELECT 
