@@ -667,6 +667,29 @@ export async function removeFromCollectionByProductId(
   }
 }
 
+//export async function authenticate(
+//  prevState: string | undefined,
+//  formData: FormData
+//): Promise<{ userId: number } | string | undefined> {
+//  try {
+//    const response = await signIn('credentials', {
+//      redirect: false,
+//      email: formData.get('email') as string,
+//      password: formData.get('password') as string,
+//    });
+
+//    if (response?.ok && response.user) {
+//      return { userId: response.user.id };
+//    } else {
+//      return 'Invalid credentials.';
+//    }
+//  } catch (error) {
+//    console.error('Login error:', error);
+//    return 'Something went wrong.';
+//  }
+//}
+
+
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
