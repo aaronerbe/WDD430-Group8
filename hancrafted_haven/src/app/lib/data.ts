@@ -1,5 +1,8 @@
+'use server'
 import { sql } from "@vercel/postgres";
 import { Product, Image_, User, Review_, CollectionDesc, CollectionProducts} from "@/app/lib/definitions";
+import { signIn } from '@/auth'
+import { AuthError } from 'next-auth';
 //import {redirect} from 'next/navigation'
 
 export async function fetchProductData(productId: number): Promise<Product> {
@@ -282,6 +285,16 @@ export async function fetchUserData(userId: number): Promise<User> {
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Failed to fetch user data.");
+  }
+}
+
+export async function fetchUserByEmail(email: string): Promise<User | undefined> {
+  try {
+    const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
+    return user.rows[0];
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    throw new Error('Failed to fetch user.');
   }
 }
 
@@ -651,5 +664,24 @@ export async function removeFromCollectionByProductId(
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error(`Failed to remove from collection`);
+  }
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+      await signIn('credentials', formData);
+  } catch (error) {
+      if (error instanceof AuthError) {
+          switch (error.type) {
+          case 'CredentialsSignin':
+              return 'Invalid credentials.';
+          default:
+              return 'Something went wrong.';
+          }
+  }
+  throw error;
   }
 }

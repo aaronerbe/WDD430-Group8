@@ -11,6 +11,7 @@ import NavLinks from "./nav-links";
 import MobileNavLinks from "./mobile-nav-links";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import SmHHLogo from "../sm-hh-logo";
+import { signOut } from '@/auth';
 
 export default function Navbar() {
   return (
@@ -74,12 +75,19 @@ export default function Navbar() {
                   </a>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
+                  <form
+                    action={async () => {
+                      'use server';
+                      await signOut();
+                    }}
                   >
-                    Sign out
-                  </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
+                    >
+                      Sign out
+                    </a>
+                  </form>
                 </MenuItem>
               </MenuItems>
             </Menu>
