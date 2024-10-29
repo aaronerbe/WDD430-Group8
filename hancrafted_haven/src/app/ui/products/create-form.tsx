@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { Button } from "@/app/ui/button";
 import Link from "next/link";
@@ -164,10 +165,6 @@ const Form = ({ authenticatedUserId }: { authenticatedUserId?: number }) => {
             ))}
           </select>
         </div>
-        {/* <div>
-          <label>Uplaod an image</label>
-          <ImageUpload />
-        </div> */}
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link
