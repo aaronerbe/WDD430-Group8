@@ -30,7 +30,7 @@ export default async function SearchResultsPage({
   };
 
   return (
-    <div className="container mx-auto flex flex-col items-center">
+    <div className="container mx-auto flex flex-col items-center mb-20">
       <div className="m-8">
         <Suspense fallback={<div>Loading...</div>}>
           <Search placeholder="Search for a product..." />

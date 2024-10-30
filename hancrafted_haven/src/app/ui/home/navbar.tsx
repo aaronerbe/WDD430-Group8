@@ -9,10 +9,31 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import NavLinks from "./nav-links";
 import MobileNavLinks from "./mobile-nav-links";
-import { UserCircleIcon } from "@heroicons/react/24/outline";
+//import { UserCircleIcon } from "@heroicons/react/24/outline";
 import SmHHLogo from "../sm-hh-logo";
+import { signOut } from '@/auth';
+import { signIn } from "@/auth"
+import UserAvatar from '@/app/components/UserAvatar'
+import { auth } from "@/auth";
+import { getUserByEmail } from "@/app/lib/data";
+import { User } from "@/app/lib/definitions"; 
 
-export default function Navbar() {
+
+
+
+
+export default async function Navbar() {
+  const session = await auth();
+
+  //new session logic
+  let authUserId: number = -1
+  if (session && session.user && session.user.email) {
+    const userData: User | null = await getUserByEmail(session.user.email);
+    if (userData) {
+      authUserId = userData.id;
+    }
+  }
+
   return (
     <Disclosure as="nav" className="border-b border-gray-200">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -50,7 +71,10 @@ export default function Navbar() {
                 <MenuButton className="relative flex rounded-full text-sm focus:outline-none ">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
-                  <UserCircleIcon className="h-8 w-8" />
+                  {/*<UserCircleIcon className="h-8 w-8" />*/}
+                  <div  className = "h-8 w-8">
+                    <UserAvatar/>
+                  </div>
                 </MenuButton>
               </div>
               <MenuItems
@@ -58,13 +82,28 @@ export default function Navbar() {
                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
                 <MenuItem>
+                {authUserId === -1 ? (
+                  <form
+                    action={async () => {
+                        "use server"
+                        await signIn()
+                    }}
+                    >
+                    <button type="submit">Sign in</button>
+                  </form>
+                ) : (
                   <a
-                    href="/login"
+                    href={`/creator/${authUserId}`}
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
                   >
                     Your Profile
                   </a>
+                )}
+
                 </MenuItem>
+                {/*<MenuItem>
+                  
+                </MenuItem>*/}
                 <MenuItem>
                   <a
                     href="#"
@@ -74,12 +113,14 @@ export default function Navbar() {
                   </a>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
+                <form
+                  action={async () => {
+                      "use server"
+                      await signOut()
+                  }}
                   >
-                    Sign out
-                  </a>
+                  <button type="submit">Sign Out</button>
+                  </form>
                 </MenuItem>
               </MenuItems>
             </Menu>

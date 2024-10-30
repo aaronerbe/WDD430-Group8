@@ -23,6 +23,7 @@ const EditCollectionCard = ({
   useEffect(() => {
     setIsInCollectionState(isInCollection);
   }, [isInCollection]);
+  const defaultImg = '/product-images/default_image.jpg'
 
   const handleAddToCollection = async (productId: number) => {
     try {
@@ -81,7 +82,7 @@ const EditCollectionCard = ({
           <div className="h-36 w-full relative">
             <Image
               className="rounded-t-lg w-full h-full object-cover border-none"
-              src={image.image_url}
+              src={image?.image_url || defaultImg}
               alt={`Picture of ${product.name}`}
               width={500}
               height={500}

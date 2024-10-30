@@ -1,3 +1,4 @@
+"use server";
 import { sql } from "@vercel/postgres";
 import {
   Product,
@@ -7,6 +8,10 @@ import {
   CollectionDesc,
   CollectionProducts,
 } from "@/app/lib/definitions";
+import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
+import bcrypt from 'bcryptjs';
+
 //import {redirect} from 'next/navigation'
 
 export async function fetchProductData(productId: number): Promise<Product> {
@@ -104,7 +109,7 @@ export async function addProduct(
     return result.rows[0].id; //gives back the id of the new product
   } catch (error) {
     console.error("Database Error: ", error);
-    throw new Error("Failed to create product ");
+    throw new Error("Failed to create product");
   }
 }
 
@@ -282,6 +287,18 @@ export async function fetchUserData(userId: number): Promise<User> {
   }
 }
 
+export async function fetchUserByEmail(
+  email: string
+): Promise<User | undefined> {
+  try {
+    const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
+    return user.rows[0];
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+    throw new Error("Failed to fetch user.");
+  }
+}
+
 export async function fetchReviewData(productId: number): Promise<Review_[]> {
   try {
     // Fetching the product by id
@@ -312,6 +329,10 @@ export async function checkExistingReview(
   productId: number,
   userId: number
 ): Promise<boolean> {
+  //if userId = -1 (meaning not logged in) then return True so the addReview option isn't avaialble to them until they login
+  if (userId === -1){
+    return true
+  }
   try {
     //check if any reviews for the product from the user
     const result = await sql`
@@ -447,6 +468,39 @@ export async function fetchSearchResults(query: string): Promise<Product[]> {
   }
 }
 
+export async function createUser(
+  name: string,
+  email: string,
+  password: string
+): Promise<number> {
+  console.log("Creating user: ", {
+    name,
+    email,
+  });
+  try {
+    const result = await sql`
+    INSERT INTO users (
+    name,
+    email,
+    password,
+    type
+    )
+    VALUES (
+    ${name},
+    ${email},
+    ${password},
+    ${"user"}
+    )
+    RETURNING id;
+    `;
+    return result.rows[0].id;
+  } catch (error) {
+    console.error("Databse Error: ", error);
+    throw new Error("Failed to create user");
+
+  }
+}
+
 export async function fetchUserCreatorData() {
   try {
     // Fetching the product by id
@@ -478,7 +532,9 @@ export async function fetchUserCreatorData() {
   }
 }
 
-export async function fetchCollectionDesc(userId: number): Promise<CollectionDesc> {
+export async function fetchCollectionDesc(
+  userId: number
+): Promise<CollectionDesc> {
   try {
     const result = await sql`
             SELECT 
@@ -645,5 +701,88 @@ export async function removeFromCollectionByProductId(product_id: number) {
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error(`Failed to remove from collection`);
+  }
+}
+
+//export async function authenticate(
+//  prevState: string | undefined,
+//  formData: FormData
+//): Promise<{ userId: number } | string | undefined> {
+//  try {
+//    const response = await signIn('credentials', {
+//      redirect: false,
+//      email: formData.get('email') as string,
+//      password: formData.get('password') as string,
+//    });
+
+//    if (response?.ok && response.user) {
+//      return { userId: response.user.id };
+//    } else {
+//      return 'Invalid credentials.';
+//    }
+//  } catch (error) {
+//    console.error('Login error:', error);
+//    return 'Something went wrong.';
+//  }
+//}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid credentials.";
+        default:
+          return "Something went wrong.";
+      }
+    }
+    throw error;
+  }
+}
+
+
+export async function getUserFromDb(email: string, password: string): Promise<User | null> {
+  try {
+    // Fetch user from the database by email
+    const result = await sql<User>`SELECT * FROM users WHERE email = ${email}`;
+    const user = result.rows[0];
+
+    if (!user) {
+      console.log('User not found');
+      return null;
+    }
+
+    // Verify the password using bcrypt
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      console.log('Invalid password');
+      return null;
+    }
+
+    // Return the user object if everything checks out
+    return user;
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    return null;
+  }
+}
+
+
+export async function getUserByEmail(email: string): Promise<User | null> {
+  try {
+    // Fetch user from the database by email
+    const result = await sql<User>`SELECT * FROM users WHERE email = ${email}`;
+    const user = result.rows[0];
+
+    return user;
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    return null;
   }
 }

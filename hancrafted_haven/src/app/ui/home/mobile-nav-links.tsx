@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { DisclosureButton, DisclosurePanel } from "@headlessui/react";
 
 const links = [
-  { name: "Home", href: "/home" },
+  { name: "Home", href: "/" },
   { name: "Products", href: "/products" },
 ];
 
