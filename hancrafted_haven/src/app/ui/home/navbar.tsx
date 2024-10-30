@@ -90,38 +90,44 @@ export default async function Navbar() {
                         await signIn();
                       }}
                     >
-                      <button type="submit">Sign in</button>
-                    </form>
-                  ) : (
-                    <a
-                      href={`/creator/${authUserId}`}
-                      className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
-                    >
-                      Your Profile
-                    </a>
-                  )}
-                </MenuItem>
-                {/*<MenuItem>
-                  
-                </MenuItem>*/}
-                <MenuItem>
+                    <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-200 w-full text-left" type="submit">Sign in</button>
+                  </form>
+                ) : (
                   <a
-                    href="#"
+                    href={`/creator/${authUserId}`}
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
                   >
-                    Settings
+                    Your Profile
                   </a>
+                )}
                 </MenuItem>
+
+
                 <MenuItem>
-                  <form
-                    action={async () => {
-                      "use server";
-                      await signOut();
-                    }}
-                  >
-                    <button type="submit">Sign Out</button>
+                  <form>
+                    {authUserId === -1 &&
+                        <a
+                        href={`/register`}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-200"
+                      >
+                        Create Account
+                      </a>}
                   </form>
                 </MenuItem>
+
+                  {authUserId > 0 &&
+                    <MenuItem>
+                      <form
+                          action={async () => {
+                            "use server"
+                            await signOut()
+                          }}
+                          
+                          >
+                          <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-200 w-full text-left" type="submit">Sign Out</button>
+                        </form>
+                    </MenuItem>
+                  }
               </MenuItems>
             </Menu>
           </div>

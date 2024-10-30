@@ -547,7 +547,7 @@ export async function fetchUserCreatorData() {
 export async function fetchCollectionDesc(
   userId: number
 ): Promise<CollectionDesc> {
-  try {
+  //try {
     const result = await sql`
             SELECT 
                 id, 
@@ -556,18 +556,28 @@ export async function fetchCollectionDesc(
                 description 
             FROM collections 
             WHERE user_id = ${userId}`;
-    const collectionDesc: CollectionDesc = {
-      id: result.rows[0].id,
-      user_id: result.rows[0].user_id,
-      title: result.rows[0].title,
-      description: result.rows[0].description,
-    };
 
-    return collectionDesc;
-  } catch (error) {
-    console.error("Database Error: ", error);
-    throw new Error("Failed to fetch collection description data.");
-  }
+    if (result.rows.length > 0){
+      const collectionDesc: CollectionDesc = {
+        id: result.rows[0].id,
+        user_id: result.rows[0].user_id,
+        title: result.rows[0].title,
+        description: result.rows[0].description,
+      };
+      return collectionDesc;
+    }
+    const collectionDesc: CollectionDesc = {
+      id: -1,
+      user_id: userId,
+      title: '',
+      description: ''
+    }
+    return collectionDesc
+
+  //} catch (error) {
+  //  console.error("Database Error: ", error);
+  //  throw new Error("Failed to fetch collection description data.");
+  //}
 }
 
 export async function fetchCollectionProducts(
