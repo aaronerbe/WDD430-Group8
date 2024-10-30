@@ -18,8 +18,18 @@ export default function PriceFilter() {
   // Function to update the URL with the price params
   const updateQueryParams = (newMinPrice: number, newMaxPrice: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("minPrice", newMinPrice.toString());
-    params.set("maxPrice", newMaxPrice.toString());
+    if (newMinPrice !== initialMin) {
+      params.set("minPrice", newMinPrice.toString());
+    } else {
+      params.delete("minPrice");
+    }
+  
+    if (newMaxPrice !== initialMax) {
+      params.set("maxPrice", newMaxPrice.toString());
+    } else {
+      params.delete("maxPrice");
+    }
+  
     router.replace(`${pathname}?${params.toString()}`);
   };
 
