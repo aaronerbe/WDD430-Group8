@@ -10,6 +10,8 @@ import {
 } from "@/app/lib/definitions";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
+import bcrypt from 'bcryptjs';
+
 //import {redirect} from 'next/navigation'
 
 export async function fetchProductData(productId: number): Promise<Product> {
@@ -740,5 +742,47 @@ export async function authenticate(
       }
     }
     throw error;
+  }
+}
+
+
+export async function getUserFromDb(email: string, password: string): Promise<User | null> {
+  try {
+    // Fetch user from the database by email
+    const result = await sql<User>`SELECT * FROM users WHERE email = ${email}`;
+    const user = result.rows[0];
+
+    if (!user) {
+      console.log('User not found');
+      return null;
+    }
+
+    // Verify the password using bcrypt
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      console.log('Invalid password');
+      return null;
+    }
+
+    // Return the user object if everything checks out
+    return user;
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    return null;
+  }
+}
+
+
+export async function getUserByEmail(email: string): Promise<User | null> {
+  try {
+    // Fetch user from the database by email
+    const result = await sql<User>`SELECT * FROM users WHERE email = ${email}`;
+    const user = result.rows[0];
+
+    return user;
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    return null;
   }
 }

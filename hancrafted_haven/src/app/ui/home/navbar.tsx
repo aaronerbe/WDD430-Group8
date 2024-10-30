@@ -9,9 +9,12 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import NavLinks from "./nav-links";
 import MobileNavLinks from "./mobile-nav-links";
-import { UserCircleIcon } from "@heroicons/react/24/outline";
+//import { UserCircleIcon } from "@heroicons/react/24/outline";
 import SmHHLogo from "../sm-hh-logo";
 import { signOut } from '@/auth';
+import { signIn } from "@/auth"
+import UserAvatar from '@/app/components/UserAvatar'
+
 
 export default function Navbar() {
   return (
@@ -51,7 +54,10 @@ export default function Navbar() {
                 <MenuButton className="relative flex rounded-full text-sm focus:outline-none ">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
-                  <UserCircleIcon className="h-8 w-8" />
+                  {/*<UserCircleIcon className="h-8 w-8" />*/}
+                  <div  className = "h-8 w-8">
+                    <UserAvatar/>
+                  </div>
                 </MenuButton>
               </div>
               <MenuItems
@@ -67,6 +73,16 @@ export default function Navbar() {
                   </a>
                 </MenuItem>
                 <MenuItem>
+                  <form
+                    action={async () => {
+                        "use server"
+                        await signIn()
+                    }}
+                    >
+                    <button type="submit">Sign in</button>
+                  </form>
+                </MenuItem>
+                <MenuItem>
                   <a
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
@@ -75,18 +91,13 @@ export default function Navbar() {
                   </a>
                 </MenuItem>
                 <MenuItem>
-                  <form
-                    action={async () => {
-                      'use server';
-                      await signOut();
-                    }}
+                <form
+                  action={async () => {
+                      "use server"
+                      await signOut()
+                  }}
                   >
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
-                    >
-                      Sign out
-                    </a>
+                  <button type="submit">Sign Out</button>
                   </form>
                 </MenuItem>
               </MenuItems>

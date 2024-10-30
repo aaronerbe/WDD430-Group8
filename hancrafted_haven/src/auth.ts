@@ -1,44 +1,63 @@
-import NextAuth from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
-import { authConfig } from './auth.config';
-import { z } from 'zod';
-import { sql } from '@vercel/postgres';
-import type { User } from '@/app/lib/definitions';
-import bcrypt from 'bcrypt';
-    
-async function getUser(email: string): Promise<User | undefined> {
-    try {
-        const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
-        return user.rows[0];
-    } catch (error) {
-        console.error('Failed to fetch user:', error);
-        throw new Error('Failed to fetch user.');
-    }
-    }
-    
-    export const { auth, signIn, signOut } = NextAuth({
-    ...authConfig,
-    providers: [
-        Credentials({
-            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment*/
-            // @ts-ignore
-            async authorize(credentials) {
-                const parsedCredentials = z
-                .object({ email: z.string().email(), password: z.string().min(6) })
-                .safeParse(credentials);
-        
-                if (parsedCredentials.success) {
-                    const { email, password } = parsedCredentials.data;
-                    const user = await getUser(email);
-                    if (!user) return null;
-                    const passwordsMatch = await bcrypt.compare(password, user.password);
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import { ZodError } from "zod";
+import { signInSchema } from "@/app/lib/zod";
+import { getUserFromDb } from "@/app/lib/data";
+import type { User } from "@/app/lib/definitions"; // Import your User type
+import bcrypt from "bcryptjs";
 
-                    if (passwordsMatch) return user;
-                }
+export const { handlers, auth, signIn, signOut } = NextAuth({
+providers: [
+    Credentials({
+    credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+    },
+    /* eslint-disable-next-line @typescript-eslint/ban-ts-comment*/
+    // @ts-ignore
+    authorize: async (credentials) => {
+        try {
+        const { email, password } = await signInSchema.parseAsync(credentials);
 
-                console.log('Invalid credentials');
-                return null;
-            },
-        }),
-    ],
+        // Fetch user data from the database
+        const userData = await getUserFromDb(email, password);
+
+        // Check if the user exists
+        if (!userData) {
+            console.log("User not found.");
+            return null;
+        }
+
+        // Verify password using bcrypt
+        const passwordsMatch = await bcrypt.compare(password, userData.password);
+
+        if (!passwordsMatch) {
+            console.log("Invalid password.");
+            return null;
+        }
+
+        // Ensure the user object matches the `User` type
+        const user: User = {
+            id: userData.id,
+            name: userData.name,
+            profile: userData.profile,
+            bio: userData.bio,
+            email: userData.email,
+            password: userData.password,
+            type: userData.type,
+        };
+
+        console.log("User authenticated:", user);
+        return user; // Return the validated user object
+        } catch (error) {
+        if (error instanceof ZodError) {
+            console.log("Invalid credentials format.");
+            return null;
+        }
+        console.error("Error during authorization:", error);
+        return null;
+        }
+    },
+    }),
+],
 });

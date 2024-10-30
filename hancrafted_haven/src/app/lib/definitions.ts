@@ -48,6 +48,17 @@ export interface User {
   type: UserType;
 }
 
+export interface AuthUser {
+  id: string;
+  name: string;
+  profile: string;
+  bio: string;
+  email: string;
+  password: string;
+  type: UserType;
+  emailVerified: Date | null; // Add emailVerified property
+}
+
 //!NOTE When you create or manipulate a User object, you would do it like this:
 //const newUser: User = {
 //    id: 1,
