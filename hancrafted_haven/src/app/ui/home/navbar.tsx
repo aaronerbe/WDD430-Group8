@@ -11,26 +11,26 @@ import NavLinks from "./nav-links";
 import MobileNavLinks from "./mobile-nav-links";
 //import { UserCircleIcon } from "@heroicons/react/24/outline";
 import SmHHLogo from "../sm-hh-logo";
-import { signOut } from '@/auth';
-import { signIn } from "@/auth"
-import UserAvatar from '@/app/components/UserAvatar'
+import { signOut } from "@/auth";
+import { signIn } from "@/auth";
+import UserAvatar from "@/app/components/UserAvatar";
+import Btn from "../update-type-btn";
 import { auth } from "@/auth";
 import { getUserByEmail } from "@/app/lib/data";
-import { User } from "@/app/lib/definitions"; 
-
-
-
-
+import { User } from "@/app/lib/definitions";
 
 export default async function Navbar() {
   const session = await auth();
 
   //new session logic
-  let authUserId: number = -1
+  let authUserId: number = -1;
+  let userType: string = "";
   if (session && session.user && session.user.email) {
     const userData: User | null = await getUserByEmail(session.user.email);
+
     if (userData) {
       authUserId = userData.id;
+      userType = userData.type;
     }
   }
 
@@ -66,14 +66,15 @@ export default async function Navbar() {
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             {/* Profile dropdown */}
+            {userType === "user" && <Btn authenticatedUserId={authUserId} />}
             <Menu as="div" className="relative ml-3">
               <div>
                 <MenuButton className="relative flex rounded-full text-sm focus:outline-none ">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
                   {/*<UserCircleIcon className="h-8 w-8" />*/}
-                  <div  className = "h-8 w-8">
-                    <UserAvatar/>
+                  <div className="h-8 w-8">
+                    <UserAvatar />
                   </div>
                 </MenuButton>
               </div>
@@ -82,24 +83,23 @@ export default async function Navbar() {
                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
                 <MenuItem>
-                {authUserId === -1 ? (
-                  <form
-                    action={async () => {
-                        "use server"
-                        await signIn()
-                    }}
+                  {authUserId === -1 ? (
+                    <form
+                      action={async () => {
+                        "use server";
+                        await signIn();
+                      }}
                     >
-                    <button type="submit">Sign in</button>
-                  </form>
-                ) : (
-                  <a
-                    href={`/creator/${authUserId}`}
-                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
-                  >
-                    Your Profile
-                  </a>
-                )}
-
+                      <button type="submit">Sign in</button>
+                    </form>
+                  ) : (
+                    <a
+                      href={`/creator/${authUserId}`}
+                      className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
+                    >
+                      Your Profile
+                    </a>
+                  )}
                 </MenuItem>
                 {/*<MenuItem>
                   
@@ -113,13 +113,13 @@ export default async function Navbar() {
                   </a>
                 </MenuItem>
                 <MenuItem>
-                <form
-                  action={async () => {
-                      "use server"
-                      await signOut()
-                  }}
+                  <form
+                    action={async () => {
+                      "use server";
+                      await signOut();
+                    }}
                   >
-                  <button type="submit">Sign Out</button>
+                    <button type="submit">Sign Out</button>
                   </form>
                 </MenuItem>
               </MenuItems>

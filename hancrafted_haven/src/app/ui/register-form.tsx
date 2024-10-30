@@ -7,7 +7,7 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "./button";
 
 const Register: React.FC = () => {
-  const router = useRouter(); 
+  const router = useRouter();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -36,7 +36,7 @@ const Register: React.FC = () => {
     const data = await res.json();
     if (res.ok) {
       setSuccess(data.message);
-      router.push("/login");
+      router.push("/");
     } else {
       setError(data.error);
     }
