@@ -16,7 +16,7 @@ interface Params {
 }
 
 export default async function SearchResultsPage({params}: Params){
-  const {creatorId, authUser} = params
+  const {creatorId} = params
   const query = "";
   const searchResults = await fetchSearchResults(query);
   const collectionDesc = await fetchCollectionDesc(creatorId);
