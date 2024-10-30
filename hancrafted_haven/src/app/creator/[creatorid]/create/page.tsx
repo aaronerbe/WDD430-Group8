@@ -1,7 +1,15 @@
-import Form from "../ui/products/create-form";
+import Form from "../../../ui/products/create-form";
 import { merriweather } from "@/app/ui/fonts";
 
-export default async function Page() {
+interface Params {
+  params: {
+    creatorid: number;
+  };
+}
+
+export default async function Page({ params }: Params) {
+  const { creatorid } = params;
+
   return (
     <main className="flex justify-center m-2">
       <div className="max-w-xl w-full">
@@ -9,7 +17,7 @@ export default async function Page() {
           <h3>Add a new product:</h3>
         </div>
         <div className="w-full h-[1px] bg-gray-800 mt-4"></div>
-        <Form authenticatedUserId={0}/>
+        <Form authenticatedUserId={creatorid} />
       </div>
     </main>
   );

@@ -7,8 +7,6 @@ import CreatorCard from '@/app/ui/creator/CreatorCard';
 import { ToastContainer} from 'react-toastify'
 import { notFound } from "next/navigation";
 
-
-
 interface Params {
   params: {
     creatorid: number;
@@ -59,7 +57,7 @@ export default async function CreatorPage({ params }: Params) {
                 aria-label="Edit Collection"
                 >
                   <a
-                    href={`/create`}
+                    href={`/creator/${creatorid}/create`}
                     className="w-56 cursor-pointer"
                   >
                   Add New Product

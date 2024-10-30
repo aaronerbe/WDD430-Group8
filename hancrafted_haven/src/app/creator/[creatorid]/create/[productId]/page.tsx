@@ -1,5 +1,5 @@
 import { fetchProductData } from "@/app/lib/data";
-import Form from "../../ui/products/image-form";
+import Form from "@/app/ui/products/image-form";
 import { merriweather } from "@/app/ui/fonts";
 import { Product } from "@/app/lib/definitions";
 import { notFound } from "next/navigation";

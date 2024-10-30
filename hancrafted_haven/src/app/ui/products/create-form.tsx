@@ -61,7 +61,7 @@ const Form = ({ authenticatedUserId }: { authenticatedUserId?: number }) => {
     }
 
     try {
-      const response = await fetch("api/addProduct", {
+      const response = await fetch("../../api/addProduct", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,12 +79,12 @@ const Form = ({ authenticatedUserId }: { authenticatedUserId?: number }) => {
         throw new Error("Failed to create product");
       }
 
-      const data = await response.json(); // Get the response data
-      const { productId } = data; // Adjust according to your API response
+      const data = await response.json();
+      const productId = data.productId;
 
       toast.success("Product successfully created!");
 
-      router.push(`/create/${productId}`);
+      router.push(`create/${productId}`);
 
       setName("");
       setDescription("");
@@ -168,7 +168,7 @@ const Form = ({ authenticatedUserId }: { authenticatedUserId?: number }) => {
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link
-          href="/home"
+          href="/"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
           Cancel
