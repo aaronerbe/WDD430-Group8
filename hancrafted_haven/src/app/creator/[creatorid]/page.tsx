@@ -52,22 +52,22 @@ export default async function CreatorPage({ params }: Params) {
   ]);
   const collectionProducts = await fetchCollectionProducts(collectionDesc.id);
 
-  if (collectionDesc.id){
-    <h3 className="col-span-full text-3xl font-bold mb-4 mx-auto">My Work</h3>
-        {authUser && 
-                <button
-                className="mt-2 bg-blue-500 text-white p-2 rounded mb-4"
-                aria-label="Edit Collection"
-                >
-                  <a
-                    href={`/creator/${creatorid}/create`}
-                    className="w-56 cursor-pointer"
-                  >
-                  Add New Product
-                  </a>
-                </button>
-              }
-  }
+  //if (collectionDesc.id){
+  //  <h3 className="col-span-full text-3xl font-bold mb-4 mx-auto">My Work</h3>
+  //      {authUser && 
+  //              <button
+  //              className="mt-2 bg-blue-500 text-white p-2 rounded mb-4"
+  //              aria-label="Edit Collection"
+  //              >
+  //                <a
+  //                  href={`/creator/${creatorid}/create`}
+  //                  className="w-56 cursor-pointer"
+  //                >
+  //                Add New Product
+  //                </a>
+  //              </button>
+  //            }
+  //}
   const userImages = await Promise.all(userProducts.map(product => fetchSingleImageData(product.id).then(images => images[0])));
   const collectionImages = await Promise.all(collectionProducts.map(product => fetchSingleImageData(product.id).then(images => images[0])));
 
