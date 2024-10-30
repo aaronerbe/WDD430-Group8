@@ -501,6 +501,18 @@ export async function createUser(
   }
 }
 
+export async function updateUserType(userId: number) {
+  try {
+    await sql`
+    UPDATE users SET type = ${"creator"} WHERE id = ${userId}
+    `;
+    console.log("Updated account type to creator")
+  } catch (error) {
+    console.error("Database Error:", error)
+    throw new Error("Failed to update user type")
+  }
+}
+
 export async function fetchUserCreatorData() {
   try {
     // Fetching the product by id
