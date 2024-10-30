@@ -1,11 +1,21 @@
+import { 
+  fetchProductsByUser, 
+  fetchSingleImageData, 
+  fetchUserData, 
+  fetchCollectionDesc, 
+  fetchCollectionProducts,
+  getUserByEmail
+} from "@/app/lib/data";
 import React from "react";
 import "./creatorstyle.css";
 import ProductCard from "../../ui/products/cards";
 import CollectionCard from "@/app/ui/products/CuratedCollection"
-import { fetchProductsByUser, fetchSingleImageData, fetchUserData, fetchCollectionDesc, fetchCollectionProducts } from "@/app/lib/data";
 import CreatorCard from '@/app/ui/creator/CreatorCard';
 import { ToastContainer} from 'react-toastify'
 import { notFound } from "next/navigation";
+import {auth} from "@/auth";
+import { User } from "@/app/lib/definitions";
+
 
 
 
@@ -17,7 +27,6 @@ interface Params {
 
 export default async function CreatorPage({ params }: Params) {
 
-  const authUser = true;  // Just setting this for now for a trigger to make edit in place work.
   const { creatorid } = params;
   const creatorData = await fetchUserData(creatorid)
   // Fetch data in parallel using Promise.all
@@ -26,6 +35,19 @@ export default async function CreatorPage({ params }: Params) {
     return (notFound())
   }
 
+    //new session logic
+    let authUser: boolean = false;
+    let authenticatedUserId = -1
+    const session = await auth();
+  
+    if (session?.user?.email) {  
+      const userData: User | null = await getUserByEmail(session.user.email);
+      if (userData && userData.id === Number(creatorid)) {
+        console.log('User is authenticated for this creator');
+        authenticatedUserId = creatorid;
+        authUser = true;
+      }
+    }
   const [userProducts, collectionDesc] = await Promise.all([
     fetchProductsByUser(Number(creatorid)),
     fetchCollectionDesc(creatorid),
@@ -44,7 +66,7 @@ export default async function CreatorPage({ params }: Params) {
       <div className="relative">
         <CreatorCard 
           creatorData={creatorData}
-          authenticatedUserId={creatorid}
+          authenticatedUserId={authenticatedUserId}
           authUser={authUser}
         />
       </div>
@@ -72,7 +94,7 @@ export default async function CreatorPage({ params }: Params) {
               key={product.id}
               product={product}
               image={userImages[index]} // Pass the corresponding image
-              authenticatedUserId={creatorid}
+              authenticatedUserId={authenticatedUserId}
               authUser={authUser}
             />
           ))}
@@ -100,28 +122,11 @@ export default async function CreatorPage({ params }: Params) {
           description={collectionDesc.description}
           products={collectionProducts}
           images={collectionImages}
-          authenticatedUserId={creatorid}
+          authenticatedUserId={authenticatedUserId}
           authUser={authUser}
         />
         
       </div>
-
-      {/*<h3 className="col-span-full text-3xl font-bold mb-4">A Curated Collection</h3>
-      <div className="max-w-[80%] mb-4 text-center mx-auto">
-        <h4 className="text-2xl font-bold">{collectionDesc.title}</h4>
-        <p className="">{collectionDesc.description}</p>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
-        {collectionProducts.map((product, index) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            image={collectionImages[index]} // Pass the corresponding image
-            authenticatedUserId={creatorid} // Pass the authenticated user ID
-            authUser={false} // Hardcode to not allow editing these product cards
-          />
-        ))}
-      </div>*/}
     </div>
   );
 };

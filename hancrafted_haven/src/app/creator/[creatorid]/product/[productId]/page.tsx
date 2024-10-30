@@ -26,7 +26,6 @@ interface Params {
 
 export default async function ProductDetailsPage({ params }: Params) {
   const { productId } = params;
-  //! hardcoding authenticated user until we have that and can extract it
 
   //new session logic
   let authUserId: number = -1

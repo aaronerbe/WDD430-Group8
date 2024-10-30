@@ -24,12 +24,13 @@ export const authConfig = {
       return session;
     },
 
-    //THIS IS PREVENTING ANYONE FROM ACCESS ANY PAGES
+    ////THIS IS PREVENTING ANYONE FROM ACCESS ANY PAGES
     //authorized({ auth, request: { nextUrl } }) {
     //  const isLoggedIn = !!auth?.user;
 
     //  // Check if the user is on the root page
-    //  if (nextUrl.pathname === "/") {
+    //  if (nextUrl.pathname === "/edit-collection/") {
+        
     //    return true; // Allow access to the root page for everyone
     //  }
 

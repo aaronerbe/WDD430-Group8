@@ -2,8 +2,11 @@
 import EditCollectionCard from "../../../ui/products/EditCollectionCards";
 //import Search from "../ui/search";
 import { fetchSearchResults, fetchSingleImageData } from "../../../lib/data";
-import { fetchCollectionDesc, fetchCollectionProducts } from "@/app/lib/data";
+import { fetchCollectionDesc, fetchCollectionProducts, getUserByEmail } from "@/app/lib/data";
 import { notFound } from "next/navigation";
+import {auth} from "@/auth";
+import { User } from "@/app/lib/definitions";
+
 
 interface Params {
   params: {
@@ -19,15 +22,28 @@ export default async function SearchResultsPage({params}: Params){
   const collectionDesc = await fetchCollectionDesc(creatorId);
   const collectionProducts = await fetchCollectionProducts(collectionDesc.id);
   const collectionId = collectionDesc.id
+  const defaultImageUrl = "/product-images/default_image.jpg";
+
+
+  const session = await auth();
+  let authUserId = -1;
+
+  if (session?.user?.email) {
+    const userData: User | null = await getUserByEmail(session.user.email);
+    if (userData) {
+      authUserId = userData.id;
+    }
+  }
+  
+  if (Number(authUserId) === -1 || Number(authUserId) !== Number(creatorId)) {
+    return notFound(); // Redirect to 404 if unauthorized
+  }
 
   const getImage = async (productId: number) => {
     const productImage = await fetchSingleImageData(productId);
     return productImage[0];
   };
 
-  if(!authUser){
-    notFound()
-  }
 
   return (
     <div className="container mx-auto flex flex-col items-center mb-20">
@@ -47,7 +63,7 @@ export default async function SearchResultsPage({params}: Params){
           const isInCollection = collectionProducts.some(
             (collectionProduct) => collectionProduct.id === product.id
           );
-          const image = await getImage(product.id);
+          const image = await getImage(product.id) || defaultImageUrl;
 
           return (
             <div key={product.id} className="relative">
