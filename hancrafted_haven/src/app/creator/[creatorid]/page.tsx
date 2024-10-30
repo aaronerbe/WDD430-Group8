@@ -101,7 +101,7 @@ export default async function CreatorPage({ params }: Params) {
         </div>
 
         {/* Curated Products */}
-        <h3 className="col-span-full text-3xl font-bold mb-4 mx-auto">A Curated Collection</h3>
+        <h3 className="col-span-full text-3xl font-bold mb-4 mx-auto text-center">A Curated Collection</h3>
         {authUser && 
                 <button
                 className="mt-2 bg-blue-500 text-white p-2 rounded"
