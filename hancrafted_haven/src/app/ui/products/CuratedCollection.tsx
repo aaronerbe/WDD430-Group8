@@ -125,7 +125,7 @@ const CollectionCard = ({
                     <div className="max-w-[80%] mb-4 text-center mx-auto">
                         <div className="flex items-center justify-center mb-2">
                             <h4 className="ml-4 text-2xl font-bold items-center relative">{collectionTitle}</h4>
-                            {authUser && (
+                            {authUser && (collectionId !== -1) && (
                                 <Tooltip text="Edit Collection Name and Description">
                                     <PencilIcon className="ml-4 h-5 w-5 text-gray-500 cursor-pointer" 
                                         onClick={() => setIsEditingCollectionInfo(true)}
