@@ -3,7 +3,7 @@
 import { useDebouncedCallback } from "use-debounce";
 import { useSearchParams, useRouter } from "next/navigation";
 import FilterButton from "./filter-button";
-import { Suspense, useState } from "react";
+import { Suspense, useState, useEffect } from "react";
 
 interface Option {
   name: string;
@@ -51,6 +51,13 @@ const FilterOptions: React.FC = () => {
 
     replace(`/products?${params.toString()}`);
   }, 300);
+
+  useEffect(() => {
+    setSelectedOptions((prev) => ({
+      ...prev,
+      Category: initialCategory || null,
+    }));
+  }, [initialCategory]);
 
   const handleOptionSelect = (option: Option) => {
     setSelectedOptions((prev) => {
