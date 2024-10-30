@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
-import { User } from "@/app/lib/definitions"; // Import your custom User type
-import { getUserByEmail } from "@/app/lib/data"; // Ensure this fetch function works
-import { UserCircleIcon } from "@heroicons/react/24/outline"; // Icon import
+import { User } from "@/app/lib/definitions"; 
+import { getUserByEmail } from "@/app/lib/data"; 
+import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Image from 'next/image'
 
 export default async function UserAvatar() {

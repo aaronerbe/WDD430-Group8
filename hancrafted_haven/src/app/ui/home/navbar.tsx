@@ -14,9 +14,26 @@ import SmHHLogo from "../sm-hh-logo";
 import { signOut } from '@/auth';
 import { signIn } from "@/auth"
 import UserAvatar from '@/app/components/UserAvatar'
+import { auth } from "@/auth";
+import { getUserByEmail } from "@/app/lib/data";
+import { User } from "@/app/lib/definitions"; 
 
 
-export default function Navbar() {
+
+
+
+export default async function Navbar() {
+  const session = await auth();
+
+  //new session logic
+  let authUserId: number = -1
+  if (session && session.user && session.user.email) {
+    const userData: User | null = await getUserByEmail(session.user.email);
+    if (userData) {
+      authUserId = userData.id;
+    }
+  }
+
   return (
     <Disclosure as="nav" className="border-b border-gray-200">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -65,14 +82,7 @@ export default function Navbar() {
                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
                 <MenuItem>
-                  <a
-                    href="/login"
-                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
-                  >
-                    Your Profile
-                  </a>
-                </MenuItem>
-                <MenuItem>
+                {authUserId === -1 ? (
                   <form
                     action={async () => {
                         "use server"
@@ -81,7 +91,19 @@ export default function Navbar() {
                     >
                     <button type="submit">Sign in</button>
                   </form>
+                ) : (
+                  <a
+                    href={`/creator/${authUserId}`}
+                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-slate-200"
+                  >
+                    Your Profile
+                  </a>
+                )}
+
                 </MenuItem>
+                {/*<MenuItem>
+                  
+                </MenuItem>*/}
                 <MenuItem>
                   <a
                     href="#"
