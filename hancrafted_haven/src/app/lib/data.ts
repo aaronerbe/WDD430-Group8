@@ -221,12 +221,9 @@ export async function editImagesData(
   }
 }
 
-export async function addImages(productId: number, addImageUrl: string[]) {
+export async function addImage(productId: number, imageUrl: string) {
   try {
-    //Add Image Data
-    if (addImageUrl && addImageUrl.length > 0) {
-      for (const imageUrl of addImageUrl) {
-        const result = await sql`
+    const result = await sql`
                     INSERT INTO product_images (
                         product_id, 
                         image_url
@@ -237,12 +234,10 @@ export async function addImages(productId: number, addImageUrl: string[]) {
                     )
                     RETURNING *
                 `;
-        console.log("Added ", result);
-      }
-    }
+    console.log("Added ", result);
   } catch (error) {
     console.error("Database Error: ", error);
-    throw new Error(`Failed to add new image ${addImageUrl}`);
+    throw new Error(`Failed to add new image ${imageUrl}`);
   }
 }
 
@@ -502,6 +497,7 @@ export async function createUser(
   } catch (error) {
     console.error("Databse Error: ", error);
     throw new Error("Failed to create user");
+
   }
 }
 
