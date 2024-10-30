@@ -86,7 +86,6 @@ export async function addProduct(
     price,
     category,
   });
-  //given a userId + product information, create a new entry in product table.
   try {
     // Perform the insert operation
     const result = await sql`
@@ -106,7 +105,8 @@ export async function addProduct(
             )
             RETURNING id;
         `;
-    return result.rows[0].id; //gives back the id of the new product
+        console.log(`Result: ${result.rows[0].id}`)
+    return result.rows[0].id; 
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Failed to create product");

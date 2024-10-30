@@ -2,12 +2,14 @@
 
 import React, { useState } from "react";
 import { Button } from "@/app/ui/button";
-import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-const Form = ({ productId }: { productId?: number }) => {
+const Form = ({ productId }: { productId?: number;  }) => {
+  const router = useRouter();
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -61,14 +63,15 @@ const Form = ({ productId }: { productId?: number }) => {
     setShowConfirmation(false);
   };
 
+  const handleRouterPush = () => {
+    router.push(`/product/${productId}`)
+  }
+
   return (
     <form
       onSubmit={handleSubmit}
       className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg"
     >
-      <h1 className="text-2xl font-bold mb-4 text-center">
-        Upload Image for Product ID: {productId}
-      </h1>
       <input
         type="file"
         accept="image/*"
@@ -97,12 +100,12 @@ const Form = ({ productId }: { productId?: number }) => {
 
       {!showConfirmation && (
         <div className="flex justify-end">
-          <Button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white"
+          <Link
+            href="/products"
+            className="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-1"
           >
             Upload Image
-          </Button>
+          </Link>
         </div>
       )}
 
@@ -116,12 +119,12 @@ const Form = ({ productId }: { productId?: number }) => {
             >
               Yes
             </Button>
-            <Link
-              href={`/products/${productId}`}
+            <Button
+              onClick={handleRouterPush}
               className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded"
             >
               No
-            </Link>
+              </Button>
           </div>
         </div>
       )}
