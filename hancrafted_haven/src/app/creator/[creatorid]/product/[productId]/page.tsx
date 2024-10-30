@@ -5,15 +5,17 @@ import {
   fetchReviewData,
   fetchProductsByUser,
   checkExistingReview,
-  fetchSingleImageData
+  fetchSingleImageData,
+  getUserByEmail
 } from "@/app/lib/data";
 import ProductDetail from "@/app/ui/products/ProductDetail";
 import { Product, Image_, User } from "@/app/lib/definitions";
 import { notFound } from "next/navigation";
-//import {redirect} from 'next/navigation'
 import OtherProducts from '@/app/ui/products/OtherProducts'
 import "@/app/creator/[creatorid]/creatorstyle.css";
 import Link from 'next/link';
+import {auth} from "@/auth";
+
 
 interface Params {
   params: {
@@ -25,8 +27,18 @@ interface Params {
 export default async function ProductDetailsPage({ params }: Params) {
   const { productId } = params;
   //! hardcoding authenticated user until we have that and can extract it
-  const authUser: number = 15;
 
+  //new session logic
+  let authUserId: number = -1
+  const session = await auth();
+  if (session && session.user && session.user.email) {
+    const userData: User | null = await getUserByEmail(session.user.email);
+    if (userData) {
+      authUserId = userData.id; // Assign the user ID if userData exists
+    }
+  }
+  
+  console.log('authUserId',authUserId)
   try {
     //FETCH DATA (server side) and pass it to the component (client side)
     const productData: Product = await fetchProductData(productId);
@@ -43,7 +55,7 @@ export default async function ProductDetailsPage({ params }: Params) {
     const [imageData, reviewData, reviewCheck, otherProductData] = await Promise.all([
       fetchImagesData(productId),
       fetchReviewData(productId),
-      checkExistingReview(productId, authUser),
+      checkExistingReview(productId, authUserId),
       fetchProductsByUser(creatorData.id)
     ]);
 
@@ -67,7 +79,7 @@ export default async function ProductDetailsPage({ params }: Params) {
           images={imageData}
           user={creatorData}
           initialReviews={reviewData}
-          authUser={authUser}
+          authUserId={authUserId}
           reviewCheck={reviewCheck}
         />
         {/* if no 'other products', skips the title.  The component handles returning null if it's empty as well */}

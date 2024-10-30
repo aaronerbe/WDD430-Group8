@@ -13,20 +13,16 @@ const ProductDetail = ({
     images,
     user,
     initialReviews,
-    //products,
-    authUser,
+    authUserId,
     reviewCheck
 }: {
     product: Product; 
     images: Image_[]; 
     user: User; 
     initialReviews: Review_[];
-    //products: Product[];  //null incase there are no other products
-    authUser: number;       //! hardcoded from page.tsx for addReview 
-    reviewCheck: boolean    //! check is valid but uses hardcoded authUser from page.tsx
+    authUserId: number;
+    reviewCheck: boolean
 }) => { 
-    //console.log('user has reviewed check: ', reviewCheck)
-    //console.log(user.id)
     const [reviews, setReviews]= useState(initialReviews);
     const [isFormOpen, setIsFormOpen] = useState(false);
     
@@ -39,7 +35,7 @@ const ProductDetail = ({
                 },
                 body: JSON.stringify({
                     productId: product.id,
-                    userId: authUser,
+                    userId: authUserId,
                     rating,
                     comment,
                 }),
@@ -112,7 +108,7 @@ const ProductDetail = ({
                                 pointerEvents: isFormOpen ? 'none' : 'auto' 
                             }}>
                             {!isFormOpen && !reviewCheck && 
-                                <button //will only show the button if form isn't open and reviewCheck confirms authUser hasn't already submitted a review.
+                                <button //will only show the button if form isn't open and reviewCheck confirms authUserId hasn't already submitted a review.
                                     onClick={() => setIsFormOpen(true)}
                                     className="flex flex-col items-center border border-gray-300 rounded-md p-2 hover:bg-gray-100 transition duration-150 ease-in-out z-index-0"
                                 >

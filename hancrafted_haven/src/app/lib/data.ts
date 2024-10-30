@@ -334,6 +334,10 @@ export async function checkExistingReview(
   productId: number,
   userId: number
 ): Promise<boolean> {
+  //if userId = -1 (meaning not logged in) then return True so the addReview option isn't avaialble to them until they login
+  if (userId === -1){
+    return true
+  }
   try {
     //check if any reviews for the product from the user
     const result = await sql`
